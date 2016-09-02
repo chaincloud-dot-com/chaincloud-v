@@ -1,0 +1,83 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.chaincloud.chaincloudv">
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.READ_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_SMS"></uses-permission>
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:name=".ChainCloudVApplication_"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.MainActivity_"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.AddressDetailActivity_"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.AddressHistoryActivity_"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.TxDetailActivity_"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.SettingTokenActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.SettingChannelActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.SettingPasswdActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.SettingVDomainActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.AddressBatchActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.chaincloud.chaincloudv.activity.AddressActivity_"
+            android:screenOrientation="portrait" />
+
+        <service android:name="com.chaincloud.chaincloudv.service.SMSServiceImpl_" />
+
+        <service android:name="com.chaincloud.chaincloudv.service.WorkService_" />
+
+        <service android:name="com.chaincloud.chaincloudv.service.AddressService_" />
+    </application>
+
+</manifest>

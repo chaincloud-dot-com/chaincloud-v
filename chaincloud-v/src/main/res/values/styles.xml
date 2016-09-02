@@ -1,0 +1,55 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorPrimary">@color/bg</item>
+    </style>
+
+    <style name="DialogCentered.Animation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_out</item>
+    </style>
+
+    <style name="DialogCentered" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimAmount">0.8</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowAnimationStyle">@style/DialogCentered.Animation</item>
+    </style>
+
+    <style name="ProgressBarMaterial.Drawable.CircularProgress" parent="@style/Material.Drawable.CircularProgress">
+        <item name="cpd_inAnimDuration">@android:integer/config_longAnimTime</item>
+        <item name="cpd_strokeColor">@color/red</item>
+        <item name="cpd_strokeColors">@array/material_colors</item>
+        <item name="cpd_inStepColors">@array/material_in_colors</item>
+    </style>
+
+    <style name="ProgressBarMaterial">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="pv_autostart">true</item>
+        <item name="pv_circular">true</item>
+        <item name="pv_progressStyle">@style/ProgressBarMaterial.Drawable.CircularProgress</item>
+        <item name="pv_progressMode">indeterminate</item>
+    </style>
+
+    <style name="ButtonDialogListItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/background_touchable</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/black_text_selector</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="list_seperator">
+        <item name="android:background">@color/transparent_dark_slight</item>
+    </style>
+</resources>

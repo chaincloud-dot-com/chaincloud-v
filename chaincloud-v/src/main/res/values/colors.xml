@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="white">#FFFFFF</color>
+    <color name="bg">#ff425e7a</color>
+    <color name="transparent">#00000000</color>
+    <color name="account_group">#ffE1EBF2</color>
+    <color name="account_group_pressed">#ffCEE2F5</color>
+    <color name="fab_color_shadow">#44000000</color>
+    <color name="text_field_text_color">#ff333333</color>
+    <color name="red">#ce3926</color>
+    <color name="blue">#55bbeb</color>
+    <color name="yellow">#e1ffba26</color>
+    <color name="green">#4AB95F</color>
+    <color name="red_transparent_vivid">#66ce3926</color>
+    <color name="red_transparent">#33ce3926</color>
+    <color name="card_separator_color">#ffcccccc</color>
+    <color name="gray_dark">#5F5F5F</color>
+    <color name="fab_color_pressed">#007787</color>
+    <color name="transparent_dark_slight">#22000000</color>
+    <color name="scanner_result_dots">#c099cc00</color>
+    <color name="black">#000000</color>
+    <color name="address_alias_color">#ff666666</color>
+    <color name="gray">#939393</color>
+    <color name="transparent_dark">#99000000</color>
+
+    <!-- material -->
+    <array name="material_colors">
+        <item>@color/red</item>
+        <item>@color/blue</item>
+        <item>@color/yellow</item>
+        <item>@color/green</item>
+    </array>
+    <array name="material_in_colors">
+        <item>@color/red_transparent_vivid</item>
+        <item>@color/red_transparent</item>
+    </array>
+</resources>

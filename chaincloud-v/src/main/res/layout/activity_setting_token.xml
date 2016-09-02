@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:background="@drawable/title_bar_bg"
+        android:paddingBottom="3dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:background="@drawable/tab_button_background"
+            android:duplicateParentState="true"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/ibtn_back"
+                android:layout_width="49dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/tab_button_background"
+                android:src="@drawable/title_bar_back" />
+
+            <ImageView
+                android:layout_width="2dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/title_bar_seperator" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:gravity="center"
+                android:shadowColor="@color/text_field_text_color"
+                android:shadowDx="1"
+                android:shadowDy="-1"
+                android:shadowRadius="0.5"
+                android:text="设置token"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_token_vtest"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="vtest的token"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/et_token_hot"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="热发款的token"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/et_token_cold"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="冷收款的token"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="保存"/>
+
+</LinearLayout>
