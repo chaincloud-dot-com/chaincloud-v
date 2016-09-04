@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.chaincloud.chaincloudv.api.Api;
@@ -315,11 +316,15 @@ public class WorkService extends Service {
         try {
             String passwd = preference.passwdTransfer().get();
 
-            byte[] decrypt = new EncryptedData(encryptTx.vtestInfo).decrypt(passwd);
+            String decryptStr;
+            if (!TextUtils.isEmpty(passwd)) {
+                byte[] decrypt = new EncryptedData(encryptTx.vtestInfo).decrypt(passwd);
 
-            TxResult.Info info = gson.fromJson(new String(decrypt), TxResult.Info.class);
-
-            encryptTx.info = info;
+                decryptStr = new String(decrypt);
+            }else {
+                decryptStr = encryptTx.vtestInfo;
+            }
+            encryptTx.info = gson.fromJson(decryptStr, TxResult.Info.class);
 
             return encryptTx;
         }catch (Exception e){
