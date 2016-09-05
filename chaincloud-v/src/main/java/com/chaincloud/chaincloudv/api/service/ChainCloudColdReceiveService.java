@@ -25,7 +25,8 @@ public interface ChainCloudColdReceiveService {
     List<Address> getAddressBatch(@Path("batch_index") Integer batchIndex);
 
     @GET("/open/tx")
-    List<Tx> getTxs(@Nullable @Query("tx_hash") String sinceTxHash);
+    List<Tx> getTxs(@Nullable @Query("tx_hash") String sinceTxHash,
+                    @Query("order") String order);
 
     @GET("/open/tx/detail/{tx_hash}")
     Tx getDetail(@NonNull @Path("tx_hash") String txHash);

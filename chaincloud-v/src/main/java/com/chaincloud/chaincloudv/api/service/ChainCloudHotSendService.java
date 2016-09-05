@@ -34,7 +34,8 @@ public interface ChainCloudHotSendService {
                                 @Query("since_address") String sinceAddress);
 
     @GET("/open/tx")
-    List<Tx> getTxs(@Nullable @Query("tx_hash") String sinceTxHash);
+    List<Tx> getTxs(@Nullable @Query("tx_hash") String sinceTxHash,
+                    @Query("order") String order );
 
     @FormUrlEncoded
     @POST("/open/tx/request")

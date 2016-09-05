@@ -164,9 +164,9 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
             }
 
             if (isHot) {
-                txs = chainCloudHotSendService.getTxs(sinceTxHash);
+                txs = chainCloudHotSendService.getTxs(sinceTxHash, "desc");
             }else {
-                txs = chainCloudColdReceiveService.getTxs(sinceTxHash);
+                txs = chainCloudColdReceiveService.getTxs(sinceTxHash, "desc");
             }
 
             if(txs != null && txs.size() > 0){
