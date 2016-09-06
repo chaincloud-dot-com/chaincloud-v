@@ -62,10 +62,10 @@ public class Api {
         }
     }
 
-//    public static final String ChainCloudHotSendDomain = "https://chaincloud-api.getcai.com";
-//    public static final String ChainCloudColdReceiveDomain = "https://chaincloud-api.getcai.com";
-    public static final String ChainCloudHotSendDomain = "http://192.168.1.222:5000";
-    public static final String ChainCloudColdReceiveDomain = "http://192.168.1.222:5000";
+    public static final String ChainCloudHotSendDomain = "https://chaincloud-api.getcai.com";
+    public static final String ChainCloudColdReceiveDomain = "https://chaincloud-api.getcai.com";
+//    public static final String ChainCloudHotSendDomain = "http://192.168.1.222:5000";
+//    public static final String ChainCloudColdReceiveDomain = "http://192.168.1.222:5000";
     public static final String ChainCloudHotSendApiRootPath = "/api/v1/";
     public static final String ChainCloudColdReiceveApiRootPath = "/api/v1/";
     public static final String ChainCloudHotSendApiEndpoint = ChainCloudHotSendDomain + ChainCloudHotSendApiRootPath;
