@@ -1,0 +1,84 @@
+<resources>
+    <!-- network setting -->
+    <string name="setting.network.name">网络设置</string>
+    <string name="setting.network.hs.name">比特派热发款服务器</string>
+    <string name="setting.network.cr.name">比特派冷收款服务器</string>
+    <string name="setting.network.vtest.name">客户服务器</string>
+
+    <string name="app_name">ChainCloud-V</string>
+    <string name="setting_version">ChainCloud-V v%1$s</string>
+    <string name="tab_message">消息</string>
+    <string name="tab_account">账户</string>
+    <string name="tab_setting">设置</string>
+    <string name="address_balance">余额</string>
+    <string name="activity_name_address_detail">详情</string>
+    <string name="tx_out_status_unspent_name">未花费</string>
+    <string name="tx_out_status_spent_name">已花费</string>
+    <string name="just_now">刚刚</string>
+    <string name="receive_btc">来自比特币地址</string>
+    <string name="send_btc">去向比特币地址</string>
+    <string name="close">关闭</string>
+    <string name="address_history_receive">收款历史地址</string>
+    <string name="address_history_change">找零历史地址</string>
+    <string name="address_hot_check">热钱包地址</string>
+    <string name="address_cold_check">冷钱包地址</string>
+    <string name="loading">加载中</string>
+    <string name="me_address_copied">地址已复制</string>
+    <string name="tx.detail.title">交易详情</string>
+    <string name="tx.time">交易时间</string>
+    <string name="tx.confirmations">确认数</string>
+    <string name="tx.hash">交易哈希</string>
+    <string name="tx.value">交易金额</string>
+    <string name="tx.fee">手续费</string>
+    <string name="tx.input">交易Inputs</string>
+    <string name="tx.output">交易Outputs</string>
+    <string name="tx_detail_view_on_blockchain_tx">在blockchain.info查看</string>
+    <string name="data_ok">ok</string>
+    <string name="tx_ok">ok</string>
+    <string name="tx_not">交易还没被处理</string>
+    <string name="tx_fail">交易失败</string>
+    <string name="tx_empty">没有要处理的交易</string>
+    <string name="balance_no">余额不足</string>
+    <string name="address_batch_index">第%1$s批地址</string>
+    <string name="account_hotsend">热发款账户</string>
+    <string name="account_cold_receive">冷收款账户</string>
+    <string name="address_hot_send">热发款地址</string>
+    <string name="address_cold_receive">冷收款地址</string>
+    <string name="unable_access_network">无法访问网络！</string>
+    <string name="token_expired">token过期！</string>
+    <string name="user_not_found">此用户id不存在！</string>
+    <string name="server_exception">服务器异常</string>
+    <string name="dialog_setted">已设置</string>
+    <string name="dialog_sms_permiss_confirm"><![CDATA[请在 设置->应用 里手动打开 读短信 写短信 的权限！]]></string>
+    <string name="dialog_close_loop_confirm">确定关闭Loop吗？</string>
+    <string name="dialog_export_log_confirm">确认导出log到外存？</string>
+
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_ok">确定</string>
+    <string name="setting_phone_number">设置手机号</string>
+    <string name="setting_phone_number1_hint">chaincloud手机号1</string>
+    <string name="setting_phone_number2_hint">chaincloud手机号2</string>
+    <string name="setting_phone_admin_hint">管理员手机号</string>
+    <string name="save">保存</string>
+    <string name="establish_channel">建立通道</string>
+    <string name="setting_passwd">设置传输密码</string>
+    <string name="setting_passwd_hint">传输密码</string>
+    <string name="setting_export_log">导出日志</string>
+    <string name="setting_vweb_domain">VWEB域名</string>
+    <string name="setting_channel">设置channel</string>
+    <string name="setting_token">设置token</string>
+    <string name="message_test_once">测试一条数据</string>
+    <string name="message_stop_loop">结束Loop</string>
+    <string name="message_start_loop">开始Loop</string>
+    <string name="message_unbund">取消绑定</string>
+    <string name="message_bund">绑定服务</string>
+    <string name="message_newest_channelid">最新vc通道ID：</string>
+    <string name="setting_token_cold">冷收款的token</string>
+    <string name="setting_token_hot">热发款的token</string>
+    <string name="setting_token_vtest">vtest的token</string>
+    <string name="setting_address_check_stop">停止Loop地址校验</string>
+    <string name="setting_address_check_start">开始Loop地址校验</string>
+    <string name="setting_domain_vweb">VWeb域名</string>
+
+
+</resources>

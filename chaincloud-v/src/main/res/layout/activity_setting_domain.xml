@@ -38,7 +38,7 @@
                 android:shadowDx="1"
                 android:shadowDy="-1"
                 android:shadowRadius="0.5"
-                android:text="设置VWeb域名"
+                android:text="@string/setting_vweb_domain"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -49,7 +49,7 @@
         android:id="@+id/et_domain"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="VWeb域名"
+        android:hint="@string/setting_domain_vweb"
         android:inputType="textUri"
         android:layout_marginTop="30dp"/>
 
@@ -57,17 +57,17 @@
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="保存"/>
+        android:text="@string/save"/>
 
     <Button
         android:id="@+id/btn_loop_address_check"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="开始Loop地址校验"/>
+        android:text="@string/setting_address_check_start"/>
 
     <Button
         android:id="@+id/btn_unloop_address_check"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="停止Loop地址校验"/>
+        android:text="@string/setting_address_check_stop"/>
 </LinearLayout>

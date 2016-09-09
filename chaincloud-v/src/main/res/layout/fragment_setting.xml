@@ -22,7 +22,7 @@
             android:layout_marginTop="20dp"
             android:paddingLeft="10dp"
             android:background="@color/white"
-            android:text="设置token" />
+            android:text="@string/setting_token" />
 
         <View
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:background="@color/white"
-            android:text="设置channel" />
+            android:text="@string/setting_channel" />
 
         <View
             android:layout_width="match_parent"
@@ -52,7 +52,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:background="@color/white"
-            android:text="设置密码" />
+            android:text="@string/setting_passwd" />
 
         <View
             android:layout_width="match_parent"
@@ -67,7 +67,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:background="@color/white"
-            android:text="VWEB域名" />
+            android:text="@string/setting_vweb_domain" />
 
         <View
             android:layout_width="match_parent"
@@ -82,7 +82,7 @@
             android:gravity="center_vertical"
             android:paddingLeft="10dp"
             android:background="@color/white"
-            android:text="导出日志" />
+            android:text="@string/setting_export_log" />
 
         <ImageView
             android:layout_width="wrap_content"

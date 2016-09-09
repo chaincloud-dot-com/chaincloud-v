@@ -97,7 +97,7 @@ public class AddressActivity extends Activity {
 
 
     private void initTitle() {
-        tvTitle.setText("第" + (batchIndex + 1) + "批地址");
+        tvTitle.setText(String.format(getString(R.string.address_batch_index), batchIndex + 1));
     }
 
     private void initLv() {

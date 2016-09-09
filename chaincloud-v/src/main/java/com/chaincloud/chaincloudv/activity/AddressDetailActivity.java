@@ -261,18 +261,18 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
     private void showNetException(RetrofitError error) {
         switch (error.getKind()) {
             case NETWORK:
-                showPrompt("无法访问网络！");
+                showPrompt(getString(R.string.unable_access_network));
                 break;
             case HTTP:
                 switch (error.getResponse().getStatus()) {
                     case 403:
-                        showPrompt("token过期！");
+                        showPrompt(getString(R.string.token_expired));
                         break;
                     case 404:
-                        showPrompt("此用户id不存在！");
+                        showPrompt(getString(R.string.user_not_found));
                         break;
                     default:
-                        showPrompt("服务器异常");
+                        showPrompt(getString(R.string.server_exception));
                 }
                 break;
         }

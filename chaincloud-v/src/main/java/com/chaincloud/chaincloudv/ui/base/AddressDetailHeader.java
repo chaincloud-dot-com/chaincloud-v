@@ -59,7 +59,7 @@ public class AddressDetailHeader extends FrameLayout {
     void clickCopyAddress(){
         ClipboardUtil.copyString(user.getAddress());
 
-        showMsg("复制到粘贴板");
+        showMsg(getContext().getString(R.string.me_address_copied));
     }
 
     @Click(R.id.iv_qrcode)

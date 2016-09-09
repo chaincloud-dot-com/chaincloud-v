@@ -70,14 +70,13 @@ public class SettingFragment extends Fragment {
         final File logDir = getContext().getDir("log", Context.MODE_WORLD_READABLE);
 
         DialogAlert_.builder()
-                .msg("确认导出log到外存？")
-                .ok("确定")
+                .msg(getString(R.string.dialog_export_log_confirm))
                 .build()
                 .setRunnable(new Runnable() {
                     @Override
                     public void run() {
                         try {
-                            showMsg("日志导出至" + saveDir.getAbsolutePath());
+                            showMsg("export to dir " + saveDir.getAbsolutePath());
 
                             copyFile(logDir, saveDir);
                         } catch (Exception e) {

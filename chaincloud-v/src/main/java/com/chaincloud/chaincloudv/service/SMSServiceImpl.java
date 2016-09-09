@@ -89,7 +89,7 @@ public class SMSServiceImpl extends SMSServiceBase {
             String command = SMSCommandUtil.getH2CExchange(channel.qh, channel.channelId);
             SMSUtil.sendSMS(hcPhoneNo1, command, sendIntent, backIntent);
         }else {
-            String msg = "请先配置开放平台手机号";
+            String msg = "Please configure the phone number of open platform first";
 
             log.info(TAG, msg);
             showMsg(msg);
@@ -189,7 +189,7 @@ public class SMSServiceImpl extends SMSServiceBase {
             String msg = "channel is not exist";
 
             log.error(msg);
-            SMSUtil.sendSMS(vAdminPhoneNo, "create channel faild-- channel is not exist", null, null);
+            SMSUtil.sendSMS(vAdminPhoneNo, "create channel failed-- channel is not exist", null, null);
             showMsg(msg);
             return;
         }
@@ -342,7 +342,7 @@ public class SMSServiceImpl extends SMSServiceBase {
         public void hotAddressCheck(int index, AddressBatch.Type type){
             Channel okChannel = channelDao.getOkChannel();
             if (okChannel == null){
-                String msg = "短信通道未建立，请先建立短信通道...";
+                String msg = "SMS channel is not established, please first SMS channel...";
 
                 showMsg(msg);
                 log.info(msg);

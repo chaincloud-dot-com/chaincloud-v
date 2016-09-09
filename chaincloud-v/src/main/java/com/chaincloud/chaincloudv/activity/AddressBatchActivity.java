@@ -128,9 +128,9 @@ public class AddressBatchActivity extends FragmentActivity {
 
     private void initTitle() {
         if (type == AddressBatch.Type.Hot) {
-            tvTitle.setText("热发款地址");
+            tvTitle.setText(R.string.address_hot_send);
         }else {
-            tvTitle.setText("冷收款地址");
+            tvTitle.setText(R.string.address_cold_receive);
         }
     }
 

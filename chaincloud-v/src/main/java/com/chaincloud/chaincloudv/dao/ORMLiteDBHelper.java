@@ -21,7 +21,7 @@ public class ORMLiteDBHelper extends OrmLiteSqliteOpenHelper {
     private static final int DATABASE_VERSION = 3;
 
     /**
-     * 构造方法
+     * constructor
      * @param context
      */
     public ORMLiteDBHelper(Context context) {

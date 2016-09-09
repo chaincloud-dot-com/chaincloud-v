@@ -15,7 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:text="最新vc通道ID："/>
+            android:text="@string/message_newest_channelid"/>
 
         <TextView
             android:id="@+id/tv_channel_id"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="绑定服务"/>
+            android:text="@string/message_bund"/>
 
         <Button
             android:id="@+id/btn_unbind"
@@ -43,7 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="取消绑定"/>
+            android:text="@string/message_unbund"/>
     </LinearLayout>
 
     <LinearLayout
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="开始Loop"/>
+            android:text="@string/message_start_loop"/>
 
         <Button
             android:id="@+id/btn_work_stop"
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_margin="10dp"
-            android:text="结束Loop"/>
+            android:text="@string/message_stop_loop"/>
     </LinearLayout>
 
     <Button
@@ -72,7 +72,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="测试一条数据"/>
+        android:text="@string/message_test_once"/>
 
     <Button
         android:id="@+id/btn_ping"

@@ -38,7 +38,7 @@
                 android:shadowDx="1"
                 android:shadowDy="-1"
                 android:shadowRadius="0.5"
-                android:text="设置传输密码"
+                android:text="@string/setting_passwd"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -49,7 +49,7 @@
         android:id="@+id/et_passwd"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="传输密码"
+        android:hint="@string/setting_passwd_hint"
         android:inputType="textPassword"
         android:layout_marginTop="30dp"/>
 
@@ -57,5 +57,5 @@
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="保存"/>
+        android:text="@string/save"/>
 </LinearLayout>

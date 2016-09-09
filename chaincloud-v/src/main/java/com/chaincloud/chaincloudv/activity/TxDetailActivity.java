@@ -234,7 +234,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
         public void onClick(View v) {
             if (hash != null) {
                 ClipboardUtil.copyString(hash);
-                showPrompt("已经复制到粘贴板！");
+                showPrompt(getString(R.string.me_address_copied));
             }
         }
     };
@@ -244,7 +244,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
             @Override
             public void onClick(View v) {
                 ClipboardUtil.copyString(address);
-                showPrompt("已经复制到粘贴板！");
+                showPrompt(getString(R.string.me_address_copied));
             }
         });
 

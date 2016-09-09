@@ -75,7 +75,6 @@ public abstract class SMSServiceBase extends Service {
     public void onDestroy() {
         super.onDestroy();
 
-        //onDestroy函数中记得注销：
         getContentResolver().unregisterContentObserver(mSmsContentObserver);
 
         unregisterReceiver(sendReportReceiver);
@@ -144,7 +143,7 @@ public abstract class SMSServiceBase extends Service {
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(getApplicationContext(), 0, intent, 0);
 
-        /*** 定制每日00:00执行方法 ***/
+        /*** update channel in 00:00 ***/
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.HOUR_OF_DAY, 24);
         calendar.set(Calendar.MINUTE, 0);
@@ -189,7 +188,7 @@ public abstract class SMSServiceBase extends Service {
                 case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
                 case SmsManager.RESULT_ERROR_RADIO_OFF:
                 case SmsManager.RESULT_ERROR_NULL_PDU:
-                    log.error("send SMS faild");
+                    log.error("send SMS failed");
                     break;
             }
         }

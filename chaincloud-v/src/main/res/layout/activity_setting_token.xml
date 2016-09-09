@@ -38,7 +38,7 @@
                 android:shadowDx="1"
                 android:shadowDy="-1"
                 android:shadowRadius="0.5"
-                android:text="设置token"
+                android:text="@string/setting_token"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -49,27 +49,27 @@
         android:id="@+id/et_token_vtest"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="vtest的token"
+        android:hint="@string/setting_token_vtest"
         android:layout_marginTop="30dp"/>
 
     <EditText
         android:id="@+id/et_token_hot"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="热发款的token"
+        android:hint="@string/setting_token_hot"
         android:layout_marginTop="30dp"/>
 
     <EditText
         android:id="@+id/et_token_cold"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="冷收款的token"
+        android:hint="@string/setting_token_cold"
         android:layout_marginTop="30dp"/>
 
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="保存"/>
+        android:text="@string/save"/>
 
 </LinearLayout>

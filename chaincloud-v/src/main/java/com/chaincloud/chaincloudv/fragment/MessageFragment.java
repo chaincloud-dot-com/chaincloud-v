@@ -89,7 +89,7 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
                     conn, Service.BIND_AUTO_CREATE);
         }
 
-        showMsg("绑定服务");
+        showMsg("bunding server...");
     }
 
     @Click
@@ -102,7 +102,7 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
             binder = null;
         }
 
-        showMsg("解绑服务");
+        showMsg("unbunding server...");
     }
 
     @Click
@@ -110,16 +110,16 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
         if (binder != null) {
             binder.startLoop();
 
-            showMsg("开始loop");
+            showMsg("start loop...");
         }else {
-            showMsg("请先绑定服务");
+            showMsg("Please bund server first");
         }
     }
 
     @Click
     void btnWorkStop(){
         DialogAlert_.builder()
-                .msg("确定关闭Loop吗？")
+                .msg(getString(R.string.dialog_close_loop_confirm))
                 .build()
                 .setRunnable(new Runnable() {
                     @Override
@@ -128,7 +128,7 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
                             binder.stopLoop();
                         }
 
-                        showMsg("停止Loop");
+                        showMsg("stop Loop...");
                     }
                 })
                 .show(getFragmentManager());
@@ -139,9 +139,9 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
         if (binder != null) {
             binder.startOnceTest();
 
-            showMsg("测试一条数据");
+            showMsg("send once");
         }else {
-            showMsg("请先绑定服务");
+            showMsg("Please bund server first");
         }
     }
 
@@ -155,7 +155,7 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
                 }
             });
         }else {
-            showMsg("请先绑定服务");
+            showMsg("Please bund server first");
         }
     }
 

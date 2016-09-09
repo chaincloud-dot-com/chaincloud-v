@@ -163,8 +163,8 @@ public class WorkService extends Service {
                 if (txStatus == null){
                     sleep();
                 }else if( txStatus.hotWalletTxStatus == TxStatus.Status.Fail){
-                    log.info(TAG, "交易失败：" + txStatus.txInfo);
-                    showMsg("tx is faild");
+                    log.info(TAG, "transaction failed：" + txStatus.txInfo);
+                    showMsg("tx is failed");
                     break;
                 }else if (txStatus.hotWalletTxStatus == TxStatus.Status.OK){
                     showMsg("tx is ok");
@@ -245,7 +245,7 @@ public class WorkService extends Service {
                     if (txStatus == null){
                         return;
                     }else if( txStatus.hotWalletTxStatus == TxStatus.Status.Fail){
-                        String msg = "校验不通过";
+                        String msg = "ping failed";
 
                         showPingMsg(msg, listener);
                         showSmsMsg(msg, phoneNo);
@@ -262,7 +262,7 @@ public class WorkService extends Service {
                 }
             }
         }else {
-            String msg = "还没有建立vc通道，请先建立vc通道...";
+            String msg = "SMS channel is not established, please first SMS channel...";
 
             showPingMsg(msg, listener);
             showSmsMsg(msg, phoneNo);

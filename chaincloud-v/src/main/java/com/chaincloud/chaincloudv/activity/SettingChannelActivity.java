@@ -92,13 +92,13 @@ public class SettingChannelActivity extends FragmentActivity implements SMSServi
         String phoneNoAdmin = etPhoneNoAdmin.getText().toString();
 
         if(phoneNo1.equals("") && phoneNo1.equals("")){
-            Toast.makeText(this, "chaincloud至少填写一个手机号", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "chaincloud phone number is required", Toast.LENGTH_SHORT).show();
 
             return;
         }
 
         if(phoneNoAdmin.equals("")){
-            Toast.makeText(this, "管理员手机号不能为空", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "admin phone number is required", Toast.LENGTH_SHORT).show();
 
             return;
         }
@@ -110,7 +110,7 @@ public class SettingChannelActivity extends FragmentActivity implements SMSServi
                 .apply();
 
         binder.reloadPreference();
-        Toast.makeText(this, "保存成功", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "save successfully", Toast.LENGTH_SHORT).show();
     }
 
     @Click
@@ -120,8 +120,8 @@ public class SettingChannelActivity extends FragmentActivity implements SMSServi
             && !preference.vAdminPhoneNo().getOr("").equals("")){
 
             DialogAlert_.builder()
-                    .msg("请在 设置->应用 里手动打开 读短信 写短信 的权限！")
-                    .ok("已设置")
+                    .msg(getString(R.string.dialog_sms_permiss_confirm))
+                    .ok(getString(R.string.dialog_setted))
                     .build()
                     .setRunnable(new Runnable() {
                         @Override
@@ -129,12 +129,12 @@ public class SettingChannelActivity extends FragmentActivity implements SMSServi
                             binder.openSMSChannel();
 
                             binder.createChannel();
-                            showMsg("开始建立通道...");
+                            showMsg("Establishing channel...");
                         }
                     })
                     .show(getSupportFragmentManager());
         }else {
-            Toast.makeText(this, "请先完善手机号信息", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please improve the phone number information", Toast.LENGTH_SHORT).show();
         }
     }
 

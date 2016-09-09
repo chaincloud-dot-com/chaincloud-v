@@ -38,7 +38,7 @@
                 android:shadowDx="1"
                 android:shadowDy="-1"
                 android:shadowRadius="0.5"
-                android:text="设置手机号"
+                android:text="@string/setting_phone_number"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 android:textStyle="bold"/>
@@ -50,7 +50,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:hint="chaincloud手机号1"
+        android:hint="@string/setting_phone_number1_hint"
         android:lines="1"
         android:inputType="phone" />
 
@@ -59,7 +59,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:hint="chaincloud手机号2"
+        android:hint="@string/setting_phone_number2_hint"
         android:lines="1"
         android:inputType="phone" />
 
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:hint="管理员手机号"
+        android:hint="@string/setting_phone_admin_hint"
         android:lines="1"
         android:inputType="phone" />
 
@@ -77,12 +77,12 @@
         android:id="@+id/btn_ok"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="保存"/>
+        android:text="@string/save"/>
 
     <Button
         android:layout_marginTop="40dp"
         android:id="@+id/btn_create"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:text="建立通道"/>
+        android:text="@string/establish_channel"/>
 </LinearLayout>
