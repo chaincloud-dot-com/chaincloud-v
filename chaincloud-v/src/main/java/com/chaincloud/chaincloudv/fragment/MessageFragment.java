@@ -24,6 +24,7 @@ import com.chaincloud.chaincloudv.event.UpdateChannelState;
 import com.chaincloud.chaincloudv.model.Channel;
 import com.chaincloud.chaincloudv.service.WorkService;
 import com.chaincloud.chaincloudv.service.WorkService_;
+import com.chaincloud.chaincloudv.ui.base.dialog.DialogAlert_;
 import com.chaincloud.chaincloudv.util.DateTimeUtil;
 import com.chaincloud.chaincloudv.util.crypto.BitcoinUtils;
 import com.chaincloud.chaincloudv.util.crypto.ECKey;
@@ -117,11 +118,20 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
 
     @Click
     void btnWorkStop(){
-        if (binder != null) {
-            binder.stopLoop();
-        }
+        DialogAlert_.builder()
+                .msg("确定关闭Loop吗？")
+                .build()
+                .setRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (binder != null) {
+                            binder.stopLoop();
+                        }
 
-        showMsg("停止Loop");
+                        showMsg("停止Loop");
+                    }
+                })
+                .show(getFragmentManager());
     }
 
     @Click
