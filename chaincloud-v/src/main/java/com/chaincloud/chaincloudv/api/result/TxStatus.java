@@ -60,4 +60,12 @@ public class TxStatus {
     public Status hotWalletTxStatus;
     public String txInfo;
     public String txHash;
+
+    public TxStatus(){}
+
+    public TxStatus(TxRequest sendRequest, Status hotWalletTxStatus, String txInfo){
+        this.sendRequest = sendRequest;
+        this.hotWalletTxStatus = hotWalletTxStatus;
+        this.txInfo = txInfo;
+    }
 }

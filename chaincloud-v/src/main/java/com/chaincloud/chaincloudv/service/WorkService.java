@@ -432,6 +432,19 @@ public class WorkService extends Service {
             return  txStatus;
 
         }catch (RetrofitError error){
+            if (error.getKind() == RetrofitError.Kind.HTTP
+                    && error.getResponse().getStatus() == 400){
+
+                ApiError apiError = (ApiError) error.getBodyAs(ApiError.class);
+                if (apiError != null) {
+                    String msg = "error code" + apiError.code + ":" + apiError.message;
+                    log.error(msg);
+                    showMsg(msg);
+
+                    return new TxStatus(new TxRequest(userTxNo), TxStatus.Status.Fail, msg);
+                }
+            }
+
             log.error("get tx status from chaincloud is error");
             showMsg("get tx status from chaincloud is error");
         }

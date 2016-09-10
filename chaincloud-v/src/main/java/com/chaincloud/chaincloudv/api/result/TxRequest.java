@@ -8,4 +8,10 @@ public class TxRequest {
     public String userTxNo;
     public String outs;
     public int isDynamicFee;
+
+    public TxRequest(){}
+
+    public TxRequest(String userTxNo){
+        this.userTxNo = userTxNo;
+    }
 }
