@@ -74,17 +74,15 @@ public class AccountListFragment extends Fragment implements Refreshable,
     @Background
     void loadData(){
 
+        ChainCloudHotSendService bhss = Api.apiService(ChainCloudHotSendService.class);
+        ChainCloudColdReceiveService bcrs = Api.apiService(ChainCloudColdReceiveService.class);
+
+        List<String> groups = new ArrayList<>();
+        Map<Integer, List<User>> childs = new HashMap<>();
         try {
-            ChainCloudHotSendService bhss = Api.apiService(ChainCloudHotSendService.class);
-            ChainCloudColdReceiveService bcrs = Api.apiService(ChainCloudColdReceiveService.class);
-
             User hUser = bhss.currentUser();
-            User cUser = bcrs.currentUser();
 
-            List<String> groups = new ArrayList<>();
-            Map<Integer, List<User>> childs = new HashMap<>();
-
-            if (hUser != null){
+            if (hUser != null) {
                 groups.add(getString(R.string.account_hotsend));
 
                 List<User> users = new ArrayList<>();
@@ -92,8 +90,14 @@ public class AccountListFragment extends Fragment implements Refreshable,
 
                 childs.put(childs.size(), users);
             }
+        } catch (RetrofitError error) {
+            showNetError(error);
+        }
 
-            if (cUser != null){
+        try {
+            User cUser = bcrs.currentUser();
+
+            if (cUser != null) {
                 groups.add(getString(R.string.account_cold_receive));
 
                 List<User> users = new ArrayList<>();
@@ -102,13 +106,13 @@ public class AccountListFragment extends Fragment implements Refreshable,
                 childs.put(childs.size(), users);
             }
 
-            showData(groups, childs);
-        }catch (RetrofitError error){
+        } catch (RetrofitError error) {
             showNetError(error);
-            return;
-        }finally {
-            closeRefresh();
         }
+
+        showData(groups, childs);
+
+        closeRefresh();
     }
 
     @UiThread
