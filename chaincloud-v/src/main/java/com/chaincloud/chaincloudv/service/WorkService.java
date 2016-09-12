@@ -174,6 +174,10 @@ public class WorkService extends Service {
                 }
             }
 
+            if (!isLoopTxStatus){
+                return;
+            }
+
             //6.post tx status to vweb
             postStatus2VWeb(txStatus);
 
