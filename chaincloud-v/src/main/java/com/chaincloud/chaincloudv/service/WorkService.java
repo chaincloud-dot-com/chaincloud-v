@@ -65,6 +65,7 @@ public class WorkService extends Service {
 
     private boolean isLoopTx;
     private boolean isLoopTxStatus;
+    private boolean isPingLoop;
 
     private Gson gson = Api.gson;
 
@@ -235,7 +236,8 @@ public class WorkService extends Service {
             }
 
             if (b){
-                while (true){
+                isPingLoop = true;
+                while (isPingLoop){
                     TxStatus txStatus = null;
                     try {
                         txStatus = chainCloudHotSendService.getTxStatus(pingTxRequest.userTxNo);
@@ -293,6 +295,7 @@ public class WorkService extends Service {
     private void stopPullTxFromVWeb(){
         isLoopTxStatus = false;
         isLoopTx = false;
+        isPingLoop = false;
     }
 
     private void sleep(){
