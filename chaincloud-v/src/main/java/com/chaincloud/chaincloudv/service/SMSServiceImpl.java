@@ -41,8 +41,6 @@ public class SMSServiceImpl extends SMSServiceBase {
 
     private static final Logger log = LoggerFactory.getLogger(SMSServiceImpl.class);
 
-    private final String TAG = "SMSServiceImpl";
-
     private OnReceiveMsgListener onReceiveMsgListener;
 
     private SMSBinder binder = new SMSBinder();
@@ -82,7 +80,7 @@ public class SMSServiceImpl extends SMSServiceBase {
     @Override
     void createChannelSMS(){
         if (hcPhoneNo1 != null && !hcPhoneNo1.trim().equals("")) {
-            log.info(TAG, "create channel and send sms...");
+            log.info("create channel and send sms...");
 
             Channel channel = createChannel();
 
@@ -91,7 +89,7 @@ public class SMSServiceImpl extends SMSServiceBase {
         }else {
             String msg = "Please configure the phone number of open platform first";
 
-            log.info(TAG, msg);
+            log.info(msg);
             showMsg(msg);
         }
     }
@@ -159,7 +157,7 @@ public class SMSServiceImpl extends SMSServiceBase {
 
                             updateChannelSMS(qc, hIdInt, Integer.valueOf(cId));
 
-                            log.info(TAG, "handle sms channel ok and send...");
+                            log.info("handle sms channel ok and send...");
                             return true;
                         }catch (Exception e){
                             String msg = "channel update sms format is error";
@@ -178,7 +176,7 @@ public class SMSServiceImpl extends SMSServiceBase {
     }
 
     private void updateChannelSMS(String qc, Integer hId, Integer cId){
-        log.info(TAG, "update channel and send sms...");
+        log.info("update channel and send sms...");
 
         Channel channel = channelDao.queryForId(hId);
         Channel lastChannel = channelDao.getLastChannel();
@@ -240,7 +238,7 @@ public class SMSServiceImpl extends SMSServiceBase {
     }
 
     protected void showMsg(String msg) {
-        log.info(TAG, msg);
+        log.info(msg);
 
         if (onReceiveMsgListener != null){
             onReceiveMsgListener.onReceiveMsg(msg);
@@ -263,7 +261,7 @@ public class SMSServiceImpl extends SMSServiceBase {
 
             Channel channel = channelDao.getByCId(cId);
 
-            log.info(TAG, "address check result " + "...qv:" + channel.qc + "...publicKey:" + publicKey);
+            log.info("address check result " + "...qv:" + channel.qc + "...publicKey:" + publicKey);
 
             UpdateAddressBatchState uabs = new UpdateAddressBatchState();
             uabs.type = type.value();
@@ -319,7 +317,7 @@ public class SMSServiceImpl extends SMSServiceBase {
             return new AddressBatchDao(((Dao<AddressBatch, Integer>) ormLiteDBHelper
                     .getDao(AddressBatch.class)));
         } catch (SQLException e) {
-            log.error(TAG, "Could not create DAO", e);
+            log.error("Could not create DAO", e);
         }
 
         return null;

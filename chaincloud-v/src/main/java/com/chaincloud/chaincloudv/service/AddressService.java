@@ -18,16 +18,12 @@ import com.chaincloud.chaincloudv.event.AddressBatchResult;
 import com.chaincloud.chaincloudv.event.UpdateAddressBatchState;
 import com.chaincloud.chaincloudv.model.Address;
 import com.chaincloud.chaincloudv.model.AddressBatch;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EService;
 import org.androidannotations.annotations.OrmLiteDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 import de.greenrobot.event.EventBus;
 import retrofit.RetrofitError;
@@ -39,7 +35,6 @@ import retrofit.RetrofitError;
 public class AddressService extends Service {
 
     private static final Logger log = LoggerFactory.getLogger(AddressService.class);
-    private static final String TAG = "AddressService";
 
 
     private VWebService vWebService;
@@ -104,8 +99,6 @@ public class AddressService extends Service {
 
             //3.check address
             checkAddress(result);
-
-            return;
         }
     }
 
@@ -169,7 +162,7 @@ public class AddressService extends Service {
     }
 
     private void showMsg(String msg){
-        log.info(TAG, msg);
+        log.info(msg);
 
         if (msgListener != null){
             msgListener.onMsgReceive(msg);

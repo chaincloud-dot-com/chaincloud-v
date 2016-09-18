@@ -20,6 +20,7 @@ import com.chaincloud.chaincloudv.service.WorkService;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 
@@ -102,8 +103,8 @@ public class SettingVDomainActivity extends Activity implements WorkService.MsgL
         }
     }
 
-
-    private void showMsg(String msg){
+    @UiThread
+    void showMsg(String msg){
         Toast.makeText(SettingVDomainActivity.this, msg, Toast.LENGTH_SHORT).show();
     }
 

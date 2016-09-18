@@ -49,8 +49,6 @@ public class WorkService extends Service {
 
     private static final Logger log = LoggerFactory.getLogger(WorkService.class);
 
-    private static final String TAG = "WorkService";
-
     public interface MsgListener{
         void onMsgReceive(String msg);
     }
@@ -164,7 +162,7 @@ public class WorkService extends Service {
                 if (txStatus == null){
                     sleep();
                 }else if( txStatus.hotWalletTxStatus == TxStatus.Status.Fail){
-                    log.info(TAG, "transaction failed：" + txStatus.txInfo);
+                    log.info("transaction failed：" + txStatus.txInfo);
                     showMsg("tx is failed");
                     break;
                 }else if (txStatus.hotWalletTxStatus == TxStatus.Status.OK){
@@ -383,7 +381,7 @@ public class WorkService extends Service {
 
             txResult.sign = sign(txRequest, okChannel);
 
-            Log.i(TAG, gson.toJson(txRequest));
+            Log.d("WorkService", gson.toJson(txRequest));
 
             return true;
         }else {
@@ -476,7 +474,7 @@ public class WorkService extends Service {
     }
 
     private void showMsg(String msg){
-        log.info(TAG, msg);
+        log.info(msg);
 
         if (msgListener != null){
             msgListener.onMsgReceive(msg);

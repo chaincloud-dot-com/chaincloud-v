@@ -2,26 +2,19 @@ package com.chaincloud.chaincloudv.activity;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.MFragmentPagerAdapter;
-import com.chaincloud.chaincloudv.dao.AddressBatchDao;
-import com.chaincloud.chaincloudv.dao.AddressDao;
-import com.chaincloud.chaincloudv.dao.ORMLiteDBHelper;
 import com.chaincloud.chaincloudv.fragment.AccountListFragment_;
 import com.chaincloud.chaincloudv.fragment.MessageFragment_;
 import com.chaincloud.chaincloudv.fragment.SettingFragment_;
 import com.chaincloud.chaincloudv.ui.base.TabButton;
-import com.chaincloud.chaincloudv.util.crypto.EncryptedData;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.OrmLiteDao;
 import org.androidannotations.annotations.ViewById;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

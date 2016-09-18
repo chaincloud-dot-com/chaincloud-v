@@ -250,7 +250,7 @@ public abstract class SMSServiceBase extends Service {
                 values.put("read", "1");
                 cr.update(QUERY_URI, values, "_id=?", new String[]{ID});
 
-                log.info(TAG, "receive a msg, phone number is " + number + ", msg is " + body);
+                log.info("receive a msg, phone number is " + number + ", msg is " + body);
 
                 if (body != null && body.trim().length() > 0){
 
