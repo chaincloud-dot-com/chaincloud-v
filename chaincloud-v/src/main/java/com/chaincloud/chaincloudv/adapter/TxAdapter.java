@@ -6,10 +6,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.model.BitcoinUnit;
 import com.chaincloud.chaincloudv.model.Tx;
 import com.chaincloud.chaincloudv.ui.base.TintableImageView;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.chaincloud.chaincloudv.util.DateTimeUtil;
 import com.joanzapata.iconify.widget.IconTextView;
 
@@ -50,11 +52,11 @@ public class TxAdapter extends MBaseAdapter<Tx> {
                 holder.ivIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.menu_deposit));
                 holder.ivIcon.setColorFilter(context.getResources().getColorStateList(R.color.fab_color_pressed));
 
-                holder.tvValue.setText("{fa-btc} " + BitcoinUnit.BTC.format(tx.getValue()));
+                holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(tx.getValue()));
                 holder.tvValue.setTextColor(context.getResources().getColor(R.color.green));
                 holder.tvDirection.setText(R.string.receive_btc);
             } else {
-                holder.tvValue.setText("{fa-btc} " + BitcoinUnit.BTC.format(tx.getValue()));
+                holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(tx.getValue()));
                 holder.tvValue.setTextColor(context.getResources().getColor(R.color.red));
                 holder.tvDirection.setText(R.string.send_btc);
                 holder.ivIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.menu_withdraw));

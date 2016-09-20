@@ -23,12 +23,14 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.model.BitcoinUnit;
 import com.chaincloud.chaincloudv.model.User;
 import com.chaincloud.chaincloudv.ui.base.dialog.DialogSimpleQr_;
 import com.chaincloud.chaincloudv.util.BitcoinUtil;
 import com.chaincloud.chaincloudv.util.ClipboardUtil;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import org.androidannotations.annotations.Click;
@@ -77,7 +79,7 @@ public class AddressDetailHeader extends FrameLayout {
         tvAddress.setText(BitcoinUtil.formatHash(user.getAddress(), 4, 12));
         ivQrcode.setContent(user.getAddress());
 
-        btnBalance.setText("{fa-btc} " + BitcoinUnit.BTC.format(user.getBalance()));
+        btnBalance.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(user.getBalance()));
     }
 
 

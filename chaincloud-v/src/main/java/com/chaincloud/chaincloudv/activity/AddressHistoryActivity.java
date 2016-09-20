@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.AddressHistoryAdapter;
 import com.chaincloud.chaincloudv.api.Api;
@@ -131,10 +132,10 @@ public class AddressHistoryActivity extends AppCompatActivity implements SwipeRe
 
             if(isHot) {
                 jsonArray = new JSONArray(Api.apiService(ChainCloudHotSendService.class)
-                        .addressHistory(path.value(), null));
+                        .addressHistory(GlobalParams.coinCode, path.value(), null));
             }else {
                 jsonArray = new JSONArray(Api.apiService(ChainCloudColdReceiveService.class)
-                        .addressHistory(path.value(), null));
+                        .addressHistory(GlobalParams.coinCode, path.value(), null));
             }
 
             for (int i = 0; i<jsonArray.length(); i++) {
@@ -171,10 +172,10 @@ public class AddressHistoryActivity extends AppCompatActivity implements SwipeRe
 
             if(isHot) {
                 jsonArray = new JSONArray(Api.apiService(ChainCloudHotSendService.class)
-                        .addressHistory(path.value(), addresses.get(addresses.size() - 1)));
+                        .addressHistory(GlobalParams.coinCode, path.value(), addresses.get(addresses.size() - 1)));
             }else {
                 jsonArray = new JSONArray(Api.apiService(ChainCloudColdReceiveService.class)
-                        .addressHistory(path.value(), addresses.get(addresses.size() - 1)));
+                        .addressHistory(GlobalParams.coinCode, path.value(), addresses.get(addresses.size() - 1)));
             }
 
             for (int i = 0; i<jsonArray.length(); i++) {

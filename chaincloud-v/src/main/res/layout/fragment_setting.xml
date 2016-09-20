@@ -75,6 +75,21 @@
             android:background="@color/gray"/>
 
         <TextView
+            android:id="@+id/tv_switch"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:background="@color/white"
+            android:text="切换到LTC" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray"/>
+
+        <TextView
             android:id="@+id/tv_log_setting"
             android:layout_width="match_parent"
             android:layout_height="60dp"

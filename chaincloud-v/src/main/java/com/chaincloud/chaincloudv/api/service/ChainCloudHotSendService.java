@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.chaincloud.chaincloudv.api.result.BooleanResult;
 import com.chaincloud.chaincloudv.api.result.TxStatus;
-import com.chaincloud.chaincloudv.model.Address;
 import com.chaincloud.chaincloudv.model.Tx;
 import com.chaincloud.chaincloudv.model.User;
 
@@ -26,16 +25,33 @@ public interface ChainCloudHotSendService {
     @GET("/open/user")
     User currentUser();
 
+    @GET("/open/{coin}/user")
+    User currentUser(@Path("coin") String coin);
+
+    @GET("/open/tx")
+    List<Tx> getTxs(@Nullable @Query("tx_hash") String sinceTxHash,
+                    @Query("order") String order);
+
+    @GET("/open/{coin}/tx")
+    List<Tx> getTxs(@Path("coin") String coin,
+                    @Nullable @Query("tx_hash") String sinceTxHash,
+                    @Query("order") String order);
+
     @GET("/open/tx/detail/{tx_hash}")
     Tx getDetail(@NonNull @Path("tx_hash") String txHash);
+
+    @GET("/open/{coin}/tx/detail/{tx_hash}")
+    Tx getDetail(@Path("coin") String coin,
+                 @NonNull @Path("tx_hash") String txHash);
 
     @GET("/open/address/history/{path}")
     List<Object> addressHistory(@Path("path") int path,
                                 @Query("since_address") String sinceAddress);
 
-    @GET("/open/tx")
-    List<Tx> getTxs(@Nullable @Query("tx_hash") String sinceTxHash,
-                    @Query("order") String order );
+    @GET("/open/{coin}/address/history/{path}")
+    List<Object> addressHistory(@Path("coin") String coin,
+                                @Path("path") int path,
+                                @Query("since_address") String sinceAddress);
 
     @FormUrlEncoded
     @POST("/open/tx/request")
@@ -48,7 +64,4 @@ public interface ChainCloudHotSendService {
 
     @GET("/open/tx/{user_tx_no}")
     TxStatus getTxStatus(@Path("user_tx_no") String userTxNo);
-
-    @GET("/open/address/batch/{batch_index}")
-    List<Address> getAddressBatch(@Path("batch_index") Integer batchIndex);
 }

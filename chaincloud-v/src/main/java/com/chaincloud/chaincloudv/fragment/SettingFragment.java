@@ -7,12 +7,15 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.activity.SettingChannelActivity_;
 import com.chaincloud.chaincloudv.activity.SettingPasswdActivity_;
 import com.chaincloud.chaincloudv.activity.SettingTokenActivity_;
 import com.chaincloud.chaincloudv.activity.SettingVDomainActivity_;
+import com.chaincloud.chaincloudv.preference.Preference_;
 import com.chaincloud.chaincloudv.ui.base.dialog.DialogAlert_;
+import com.chaincloud.chaincloudv.util.Coin;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -28,12 +31,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 /**
  * Created by zhumingu on 16/6/20.
  */
 @EFragment(R.layout.fragment_setting)
 public class SettingFragment extends Fragment {
+
+    @ViewById
+    TextView tvSwitch;
 
     @ViewById(R.id.tv_version)
     TextView tvVersion;
@@ -62,6 +69,30 @@ public class SettingFragment extends Fragment {
     @Click
     void tvVwebdomainSetting(){
         SettingVDomainActivity_.intent(getContext()).start();
+    }
+
+    @Click
+    void tvSwitch(){
+        String coinCode;
+        if(GlobalParams.coinCode.equals(Coin.BTC.getCode())){
+            coinCode = Coin.LTC.getCode();
+        }else {
+            coinCode = Coin.BTC.getCode();
+        }
+
+        Preference_ preference = new Preference_(getActivity().getApplicationContext());
+        preference.edit().coinCode().put(coinCode).apply();
+        GlobalParams.coinCode = preference.coinCode().get();
+
+        tvSwitch.setText(Coin.fromValue(GlobalParams.coinCode).getSwitch());
+
+        List<Fragment> fragments = getActivity().getSupportFragmentManager().getFragments();
+        for (Fragment f : fragments){
+            if (f instanceof Refreshable){
+                Refreshable refreshable = (Refreshable)f;
+                refreshable.doRefresh();
+            }
+        }
     }
 
     @Click

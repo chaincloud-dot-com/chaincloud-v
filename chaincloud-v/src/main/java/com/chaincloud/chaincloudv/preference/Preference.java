@@ -30,4 +30,7 @@ public interface Preference {
 
     @DefaultString("http://192.168.1.222:5000")
     String vwebDomain();
+
+    @DefaultString("BTC")
+    String coinCode();
 }
