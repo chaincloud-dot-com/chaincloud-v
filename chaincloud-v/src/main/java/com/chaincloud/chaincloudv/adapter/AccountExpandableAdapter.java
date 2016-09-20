@@ -6,9 +6,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.model.BitcoinUnit;
 import com.chaincloud.chaincloudv.model.User;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.joanzapata.iconify.widget.IconTextView;
 
 import java.util.List;
@@ -78,7 +80,7 @@ public class AccountExpandableAdapter extends MBaseExpandableAdapter<String, Use
                 holder.tvUserId.setText(String.format("id:%1$s", user.getId()));
                 holder.tvUserName.setText(String.format("name:%1$s", user.getName()));
                 holder.tvBalance.setText(String.format("balance:%1$s",
-                        "{fa-btc} " + BitcoinUnit.BTC.format(user.getBalance())));
+                        Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(user.getBalance())));
             }
         }
 

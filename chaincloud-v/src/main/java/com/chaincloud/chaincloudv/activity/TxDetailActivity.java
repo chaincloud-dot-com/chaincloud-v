@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Pair;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.api.Api;
 import com.chaincloud.chaincloudv.api.service.ChainCloudColdReceiveService;
@@ -25,6 +27,7 @@ import com.chaincloud.chaincloudv.model.Tx;
 import com.chaincloud.chaincloudv.ui.base.DialogWithActions;
 import com.chaincloud.chaincloudv.util.BitcoinUtil;
 import com.chaincloud.chaincloudv.util.ClipboardUtil;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.chaincloud.chaincloudv.util.DateTimeUtil;
 import com.chaincloud.chaincloudv.util.UIUtil;
 
@@ -123,7 +126,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
             tvConfirmation.setText(confirmationCount);
         }
         if (String.valueOf(tx.getValue()) != null) {
-            tvValue.setText("{fa-btc} " + BitcoinUnit.BTC.format(tx.getValue()));
+            tvValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(tx.getValue()));
         }
         if (tx.getInputs() != null) {
             List<Tx.In> ins = tx.getInputs();
@@ -139,7 +142,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
                 FrameLayout flInputAddress = (FrameLayout) v.findViewById(R.id.fl_input_address);
                 copyAddress(inputAddress, flInputAddress);
                 TextView tvInputValue = (TextView) v.findViewById(R.id.tv_input_value);
-                tvInputValue.setText("{fa-btc} " + BitcoinUnit.BTC.format(input.getValue()));
+                tvInputValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(input.getValue()));
                 inputValue = inputValue + input.getValue();
             }
         }
@@ -157,13 +160,13 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
                 FrameLayout flOutputAddress = (FrameLayout) v.findViewById(R.id.fl_output_address);
                 copyAddress(outPutAddress, flOutputAddress);
                 TextView tvOutputValue = (TextView) v.findViewById(R.id.tv_output_value);
-                tvOutputValue.setText("{fa-btc} " + BitcoinUnit.BTC.format(output.getValue()));
+                tvOutputValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(output.getValue()));
                 outputValue = outputValue + output.getValue();
             }
         }
         if (inputValue != 0 && outputValue != 0) {
             fee = inputValue - outputValue;
-            tvFee.setText("{fa-btc} " + BitcoinUnit.BTC.format(fee));
+            tvFee.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(fee));
         }
     }
 
@@ -172,9 +175,9 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
         try {
             Tx detail = null;
             if (isHot) {
-                detail = Api.apiService(ChainCloudHotSendService.class).getDetail(tx.getTxHash());
+                detail = Api.apiService(ChainCloudHotSendService.class).getDetail(GlobalParams.coinCode, tx.getTxHash());
             }else {
-                detail = Api.apiService(ChainCloudColdReceiveService.class).getDetail(tx.getTxHash());
+                detail = Api.apiService(ChainCloudColdReceiveService.class).getDetail(GlobalParams.coinCode, tx.getTxHash());
             }
             tx = detail;
             showtx();
@@ -199,9 +202,11 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.action_settings) {
-            final String blockchainInfoTxUrl = "http://blockchain.info/tx/";
+            Pair<Integer, String> blockChainInfoPair = Coin.fromValue(GlobalParams.coinCode).getBlockChainInfo();
+
+            final String blockchainInfoTxUrl = blockChainInfoPair.second;
             ArrayList<DialogWithActions.Action> actions = new ArrayList<DialogWithActions.Action>();
-            actions.add(new DialogWithActions.Action(R.string.tx_detail_view_on_blockchain_tx, new Runnable() {
+            actions.add(new DialogWithActions.Action(blockChainInfoPair.first, new Runnable() {
                 @Override
                 public void run() {
                     UIUtil.gotoBrower(TxDetailActivity.this, blockchainInfoTxUrl +

@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.activity.AddressDetailActivity_;
 import com.chaincloud.chaincloudv.adapter.AccountExpandableAdapter;
@@ -13,6 +14,7 @@ import com.chaincloud.chaincloudv.api.Api;
 import com.chaincloud.chaincloudv.api.service.ChainCloudColdReceiveService;
 import com.chaincloud.chaincloudv.api.service.ChainCloudHotSendService;
 import com.chaincloud.chaincloudv.model.User;
+import com.chaincloud.chaincloudv.util.Coin;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -80,7 +82,7 @@ public class AccountListFragment extends Fragment implements Refreshable,
         List<String> groups = new ArrayList<>();
         Map<Integer, List<User>> childs = new HashMap<>();
         try {
-            User hUser = bhss.currentUser();
+            User hUser = bhss.currentUser(GlobalParams.coinCode);
 
             if (hUser != null) {
                 groups.add(getString(R.string.account_hotsend));
@@ -95,7 +97,7 @@ public class AccountListFragment extends Fragment implements Refreshable,
         }
 
         try {
-            User cUser = bcrs.currentUser();
+            User cUser = bcrs.currentUser(GlobalParams.coinCode);
 
             if (cUser != null) {
                 groups.add(getString(R.string.account_cold_receive));

@@ -44,6 +44,7 @@ public class ChainCloudVApplication extends Application {
     void initContext() {
         mContext = getApplicationContext();
 
+        initCoinType();
 
         initLog();
         initVWebDomain();
@@ -129,6 +130,11 @@ public class ChainCloudVApplication extends Application {
         PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyWakelockTag");
         wakeLock.acquire();
     }
+
+    public void initCoinType() {
+        GlobalParams.coinCode = new Preference_(mContext).coinCode().get();
+    }
+
 
     public File getLogDir() {
         final File logDir = mContext.getDir("log", Context.MODE_WORLD_READABLE);

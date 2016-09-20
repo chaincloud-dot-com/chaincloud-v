@@ -9,6 +9,7 @@ import android.widget.AbsListView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.TxAdapter;
 import com.chaincloud.chaincloudv.api.Api;
@@ -164,9 +165,9 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
             }
 
             if (isHot) {
-                txs = chainCloudHotSendService.getTxs(sinceTxHash, "desc");
+                txs = chainCloudHotSendService.getTxs(GlobalParams.coinCode, sinceTxHash, "desc");
             }else {
-                txs = chainCloudColdReceiveService.getTxs(sinceTxHash, "desc");
+                txs = chainCloudColdReceiveService.getTxs(GlobalParams.coinCode, sinceTxHash, "desc");
             }
 
             if(txs != null && txs.size() > 0){

@@ -8,9 +8,6 @@ import android.widget.Toast;
 
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.BatchAdapter;
-import com.chaincloud.chaincloudv.api.Api;
-import com.chaincloud.chaincloudv.api.service.ChainCloudColdReceiveService;
-import com.chaincloud.chaincloudv.api.service.ChainCloudHotSendService;
 import com.chaincloud.chaincloudv.dao.AddressBatchDao;
 import com.chaincloud.chaincloudv.dao.AddressDao;
 import com.chaincloud.chaincloudv.dao.ORMLiteDBHelper;
@@ -37,9 +34,6 @@ public class AddressBatchActivity extends FragmentActivity {
     private ProgressDialog pd;
     BatchAdapter mAdapter;
 
-    ChainCloudHotSendService chainCloudHotSendService;
-    ChainCloudColdReceiveService chainCloudColdReceiveService;
-
     @Extra
     AddressBatch.Type type;
 
@@ -58,12 +52,6 @@ public class AddressBatchActivity extends FragmentActivity {
 
     @AfterViews
     void init(){
-        if (type == AddressBatch.Type.Hot) {
-            chainCloudHotSendService = Api.apiService(ChainCloudHotSendService.class);
-        }else {
-            chainCloudColdReceiveService = Api.apiService(ChainCloudColdReceiveService.class);
-        }
-
         initTitle();
 
         initLv();

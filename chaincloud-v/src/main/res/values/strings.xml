@@ -32,7 +32,9 @@
     <string name="tx.fee">Fee</string>
     <string name="tx.input">Tx Inputs</string>
     <string name="tx.output">Tx Outputs</string>
-    <string name="tx_detail_view_on_blockchain_tx">View On blockchain.info</string>
+    <string name="tx_detail_view_on_blockchain_tx_btc">View On blockchain.info</string>
+    <string name="tx_detail_view_on_blockchain_tx_ltc">View On abe</string>
+    <string name="tx_detail_view_on_blockchain_tx_doge">View On dogechain.info</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">Tx Not Handled</string>
