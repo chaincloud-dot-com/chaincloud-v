@@ -114,8 +114,17 @@ public class AddressService extends Service {
             vWebService.postAddressBatchStatus(state.index, state.status, state.type);
 
             startLoopAddress();
-        }catch (RetrofitError retrofitError){
-            log.error("post address check status failed " + retrofitError.getResponse().getStatus());
+        }catch (RetrofitError error){
+            String msg = "";
+            switch (error.getKind()) {
+                case NETWORK:
+                    msg = "network not access";
+                    break;
+                case HTTP:
+                    msg = error.getResponse().getStatus() + "";
+                    break;
+            }
+            log.error("pull address batch from vweb error " + msg);
         }
     }
 
@@ -155,7 +164,16 @@ public class AddressService extends Service {
         try{
             return vWebService.getNextAddressBatch();
         }catch (RetrofitError error){
-            log.error("pull address batch from vweb error " + error.getResponse().getStatus());
+            String msg = "";
+            switch (error.getKind()) {
+                case NETWORK:
+                    msg = "network not access";
+                    break;
+                case HTTP:
+                    msg = error.getResponse().getStatus() + "";
+                    break;
+            }
+            log.error("pull address batch from vweb error " + msg);
         }
 
         return null;
