@@ -10,22 +10,29 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum Coin {
     @SerializedName("BTC")
-    BTC("BTC"),
+    BTC("BTC", 0x80, 0, 5, 0),
     @SerializedName("LTC")
-    LTC("LTC"),
+    LTC("LTC", 0xb0, 0x30, 5, 2),
     @SerializedName("DOGE")
-    DOGE("DOGE");
+    DOGE("DOGE", 0x9e, 0x1e, 0x16, 3);
 
     private String code;
+    private int wif;
+    private int address;
+    private int payToScript;
+    private int pathNumber;
 
-
-    Coin(String code) {
+    Coin(String code, int wif, int address, int payToScript, int pathNumber) {
         this.code = code;
+        this.wif = wif;
+        this.address = address;
+        this.payToScript = payToScript;
+        this.pathNumber = pathNumber;
     }
 
     public static Coin fromValue(String value) {
         for (Coin t : Coin.values()) {
-            if (t.code.equals(value)) {
+            if (t.code.equalsIgnoreCase(value)) {
                 return t;
             }
         }
@@ -70,4 +77,24 @@ public enum Coin {
     public String getCode() {
         return code;
     }
+
+    public int getWif() {
+        return wif;
+    }
+
+    public int getAddress() {
+        return address;
+    }
+
+    public int getPayToScript() {
+        return payToScript;
+    }
+
+    public int getPathNumber() {
+        return pathNumber;
+    }
+
+//    public int path(HDSeed.Path path) {
+//        return getPathNumber() * 2 + path.value();
+//    }
 }

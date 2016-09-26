@@ -50,4 +50,16 @@ public class Validator {
             return false;
         }
     }
+
+    public static final boolean validAddress(Coin coin, CharSequence str) {
+        int addressHeader = coin.getAddress();
+        int p2shHeader = coin.getPayToScript();
+        try {
+            byte[] tmp = Base58.decodeChecked(str.toString());
+            int header = tmp[0] & 0xFF;
+            return (header == p2shHeader || header == addressHeader);
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

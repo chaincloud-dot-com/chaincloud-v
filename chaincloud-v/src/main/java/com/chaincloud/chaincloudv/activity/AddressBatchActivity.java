@@ -6,12 +6,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.BatchAdapter;
 import com.chaincloud.chaincloudv.dao.AddressBatchDao;
 import com.chaincloud.chaincloudv.dao.AddressDao;
 import com.chaincloud.chaincloudv.dao.ORMLiteDBHelper;
 import com.chaincloud.chaincloudv.model.AddressBatch;
+import com.chaincloud.chaincloudv.util.Coin;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
@@ -77,7 +79,7 @@ public class AddressBatchActivity extends FragmentActivity {
         showProgress();
 
         try{
-            List<AddressBatch> addressBatches = addressBatchDao.getByType(type);
+            List<AddressBatch> addressBatches = addressBatchDao.getByType(type, Coin.fromValue(GlobalParams.coinCode));
 
             showData(addressBatches);
         }finally {

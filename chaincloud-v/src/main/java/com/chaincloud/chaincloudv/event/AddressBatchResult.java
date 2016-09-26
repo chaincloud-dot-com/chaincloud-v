@@ -10,7 +10,7 @@ import java.util.List;
 public class AddressBatchResult {
     public String batchNo;
     public List<Address> addressList;
-    public String coinType;
+    public String coinType = "BTC";
     public Integer status;
     public Integer addressType;
 }

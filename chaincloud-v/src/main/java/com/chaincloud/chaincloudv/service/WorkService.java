@@ -22,6 +22,7 @@ import com.chaincloud.chaincloudv.event.UpdateVWebService;
 import com.chaincloud.chaincloudv.event.UpdateWorkState;
 import com.chaincloud.chaincloudv.model.Channel;
 import com.chaincloud.chaincloudv.preference.Preference_;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.chaincloud.chaincloudv.util.SMSUtil;
 import com.chaincloud.chaincloudv.util.Validator;
 import com.chaincloud.chaincloudv.util.crypto.BitcoinUtils;
@@ -128,7 +129,7 @@ public class WorkService extends Service {
 
             showMsg("address valid...");
             //address valid
-            if(!isAddressValid(decryptTx.info.outs)){
+            if(!isAddressValid(decryptTx.info.outs, decryptTx.coinCode)){
                 String msg ="tx out invalid";
                 SMSUtil.sendSMS(preference.vAdminPhoneNo().get(), msg, null, null);
                 showMsg(msg);
@@ -157,7 +158,7 @@ public class WorkService extends Service {
             while (isLoopTxStatus){
                 showMsg("loop chaincloud tx status");
 
-                txStatus = getTxStatusFromChainCloud(decryptTx.vtestId);
+                txStatus = getTxStatusFromChainCloud(decryptTx.coinCode, decryptTx.vtestId);
 
                 if (txStatus == null){
                     sleep();
@@ -341,7 +342,7 @@ public class WorkService extends Service {
         return null;
     }
 
-    private boolean isAddressValid(String outs) {
+    private boolean isAddressValid(String outs, String coinCode) {
 
         if (outs != null && outs.length() > 0){
             String[] outsArr = outs.split(";");
@@ -350,7 +351,7 @@ public class WorkService extends Service {
                 String[] addressValue = out.split(",");
                 if (addressValue.length == 2){
                     try {
-                        if(!Validator.validBitcoinAddress(addressValue[0])
+                        if(!Validator.validAddress(Coin.fromValue(coinCode), addressValue[0])
                                 || Long.parseLong(addressValue[1]) <= 0){
                             return false;
                         }
@@ -376,7 +377,7 @@ public class WorkService extends Service {
             TxRequest txRequest = new TxRequest();
             txRequest.outs = txResult.info.outs;
             txRequest.isDynamicFee = txResult.info.dynamic;
-            txRequest.coinCode = txResult.coinCode = "BTC";
+            txRequest.coinCode = txResult.coinCode;
             txRequest.userTxNo = txResult.vtestId;
 
             txResult.sign = sign(txRequest, okChannel);
@@ -395,6 +396,7 @@ public class WorkService extends Service {
     private boolean postTxToChainCloud(TxResult txResult){
         try {
             BooleanResult result = chainCloudHotSendService.postTxs(
+                    txResult.coinCode,
                     txResult.coinCode,
                     txResult.vtestId,
                     txResult.info.outs,
@@ -430,9 +432,9 @@ public class WorkService extends Service {
         return false;
     }
 
-    private TxStatus getTxStatusFromChainCloud(String userTxNo){
+    private TxStatus getTxStatusFromChainCloud(String coinCode, String userTxNo){
         try {
-            TxStatus txStatus = chainCloudHotSendService.getTxStatus(userTxNo);
+            TxStatus txStatus = chainCloudHotSendService.getTxStatus(coinCode, userTxNo);
 
             return  txStatus;
 

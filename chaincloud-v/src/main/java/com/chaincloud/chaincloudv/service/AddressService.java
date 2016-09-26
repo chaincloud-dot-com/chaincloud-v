@@ -8,6 +8,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.api.Api;
 import com.chaincloud.chaincloudv.api.service.VWebService;
 import com.chaincloud.chaincloudv.dao.AddressBatchDao;
@@ -18,6 +19,7 @@ import com.chaincloud.chaincloudv.event.AddressBatchResult;
 import com.chaincloud.chaincloudv.event.UpdateAddressBatchState;
 import com.chaincloud.chaincloudv.model.Address;
 import com.chaincloud.chaincloudv.model.AddressBatch;
+import com.chaincloud.chaincloudv.util.Coin;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EService;
@@ -133,7 +135,7 @@ public class AddressService extends Service {
         AddressBatch.Type addressType = AddressBatch.Type.fromValue(data.addressType);
 
         //if exist delete
-        AddressBatch ab = addressBatchDao.getByIndex(batchNo, addressType);
+        AddressBatch ab = addressBatchDao.getByIndex(batchNo, addressType, Coin.fromValue(data.coinType));
         if (ab != null){
             addressDao.deleteByBatchId( ab.addressBatchId );
             addressBatchDao.delete(ab);
@@ -157,7 +159,8 @@ public class AddressService extends Service {
     private void checkAddress(AddressBatchResult addressBatchResult) {
         binder.hotAddressCheck(
                 Integer.parseInt(addressBatchResult.batchNo),
-                AddressBatch.Type.fromValue(addressBatchResult.addressType));
+                AddressBatch.Type.fromValue(addressBatchResult.addressType),
+                Coin.fromValue(addressBatchResult.coinType));
     }
 
     private AddressBatchResult pullAddress() {

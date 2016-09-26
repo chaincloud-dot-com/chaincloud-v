@@ -12,6 +12,7 @@ import com.chaincloud.chaincloudv.event.UpdateChannelState;
 import com.chaincloud.chaincloudv.model.Address;
 import com.chaincloud.chaincloudv.model.AddressBatch;
 import com.chaincloud.chaincloudv.model.Channel;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.chaincloud.chaincloudv.util.SMSCommandUtil;
 import com.chaincloud.chaincloudv.util.SMSUtil;
 import com.chaincloud.chaincloudv.util.crypto.BitcoinUtils;
@@ -96,7 +97,7 @@ public class SMSServiceImpl extends SMSServiceBase {
 
 
     private boolean handleSMSAddressCheck(String[] splits){
-        if(splits.length == 4){
+        if(splits.length == 5){
             if(splits[0].equals("HOT_ADDRESSES") || splits[0].equals("COLD_ADDRESSES")){
 
                 AddressBatch.Type type = null;
@@ -109,10 +110,11 @@ public class SMSServiceImpl extends SMSServiceBase {
 
                 String index = splits[1],
                         sign = splits[2],
-                        cId = splits[3];
+                        cId = splits[3],
+                        coinCode = splits[4];
 
                 try {
-                    checkAddress(Integer.parseInt(index), Integer.parseInt(cId), sign, type);
+                    checkAddress(Integer.parseInt(index), Integer.parseInt(cId), sign, type, Coin.fromValue(coinCode));
                     return true;
                 }catch (NumberFormatException e){
                     String msg = "address check sms format is error";
@@ -246,11 +248,11 @@ public class SMSServiceImpl extends SMSServiceBase {
     }
 
     //region address check
-    private void checkAddress(int index, int cId, String sign, AddressBatch.Type type){
+    private void checkAddress(int index, int cId, String sign, AddressBatch.Type type, Coin coin){
         AddressDao addressDao = getAddressDao();
         AddressBatchDao addressBatchDao = getAddressBatchDao();
 
-        AddressBatch addressBatch = addressBatchDao.getByIndex(index, type);
+        AddressBatch addressBatch = addressBatchDao.getByIndex(index, type, coin);
         List<Address> adresses = addressDao.getByBatchId(addressBatch.addressBatchId);
 
         try {
@@ -337,7 +339,7 @@ public class SMSServiceImpl extends SMSServiceBase {
             onReceiveMsgListener = listener;
         }
 
-        public void hotAddressCheck(int index, AddressBatch.Type type){
+        public void hotAddressCheck(int index, AddressBatch.Type type, Coin coin){
             Channel okChannel = channelDao.getOkChannel();
             if (okChannel == null){
                 String msg = "SMS channel is not established, please first SMS channel...";
@@ -348,9 +350,9 @@ public class SMSServiceImpl extends SMSServiceBase {
             }
 
             if (type == AddressBatch.Type.Hot){
-                SMSUtil.sendSMS(hcPhoneNo1, SMSCommandUtil.getHotAddressCheck(index), sendIntent, backIntent);
+                SMSUtil.sendSMS(hcPhoneNo1, SMSCommandUtil.getHotAddressCheck(index, coin.getCode()), sendIntent, backIntent);
             }else {
-                SMSUtil.sendSMS(hcPhoneNo1, SMSCommandUtil.getColdAddressCheck(index), sendIntent, backIntent);
+                SMSUtil.sendSMS(hcPhoneNo1, SMSCommandUtil.getColdAddressCheck(index, coin.getCode()), sendIntent, backIntent);
             }
         }
     }

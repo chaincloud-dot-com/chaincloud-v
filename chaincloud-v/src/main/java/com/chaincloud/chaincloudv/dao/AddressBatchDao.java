@@ -1,6 +1,7 @@
 package com.chaincloud.chaincloudv.dao;
 
 import com.chaincloud.chaincloudv.model.AddressBatch;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.RuntimeExceptionDao;
 
@@ -20,11 +21,11 @@ public class AddressBatchDao extends RuntimeExceptionDao<AddressBatch, Integer> 
         this.dao = dao;
     }
 
-    public List<AddressBatch> getByType(AddressBatch.Type type) {
+    public List<AddressBatch> getByType(AddressBatch.Type type, Coin coin) {
         try {
             return dao.queryBuilder()
                     .orderBy("index", true)
-                    .where().eq("type", type)
+                    .where().eq("type", type).and().eq("coin", coin)
                     .query();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,11 +34,11 @@ public class AddressBatchDao extends RuntimeExceptionDao<AddressBatch, Integer> 
         return null;
     }
 
-    public AddressBatch getByIndex(int index, AddressBatch.Type type){
+    public AddressBatch getByIndex(int index, AddressBatch.Type type, Coin coin){
         try {
             return dao.queryBuilder()
                     .where().eq("index", index)
-                        .and().eq("type", type)
+                        .and().eq("type", type).and().eq("coin", coin)
                     .queryForFirst();
         } catch (SQLException e) {
             e.printStackTrace();

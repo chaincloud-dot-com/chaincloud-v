@@ -1,6 +1,7 @@
 package com.chaincloud.chaincloudv.model;
 
 import com.chaincloud.chaincloudv.R;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.google.gson.annotations.SerializedName;
 import com.j256.ormlite.field.DatabaseField;
 
@@ -18,6 +19,8 @@ public class AddressBatch implements Serializable {
     public Status status;
     @DatabaseField
     public Type type;
+    @DatabaseField
+    public Coin coin;
 
 
     public enum Type {

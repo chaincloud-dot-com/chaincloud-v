@@ -62,6 +62,20 @@ public interface ChainCloudHotSendService {
                           @Nullable @Field("is_dynamic_fee") Integer isDynamicFee,
                           @Nullable @Field("c_id") Integer cId);
 
+    @FormUrlEncoded
+    @POST("/open/{coin}/tx/request")
+    BooleanResult postTxs(@Path("coin") String coin,
+                          @Field("coin_code") String coinCode,
+                          @Nullable @Field("user_tx_no") String userTxNo,
+                          @Nullable @Field("outs") String outs,
+                          @Nullable @Field("vc_code") String vcCode,
+                          @Nullable @Field("is_dynamic_fee") Integer isDynamicFee,
+                          @Nullable @Field("c_id") Integer cId);
+
     @GET("/open/tx/{user_tx_no}")
     TxStatus getTxStatus(@Path("user_tx_no") String userTxNo);
+
+    @GET("/open/{coin}/tx/{user_tx_no}")
+    TxStatus getTxStatus(@Path("coin") String coin,
+                         @Path("user_tx_no") String userTxNo);
 }
