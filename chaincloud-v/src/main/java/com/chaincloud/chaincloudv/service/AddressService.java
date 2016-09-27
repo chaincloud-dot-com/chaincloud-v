@@ -8,7 +8,6 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
-import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.api.Api;
 import com.chaincloud.chaincloudv.api.service.VWebService;
 import com.chaincloud.chaincloudv.dao.AddressBatchDao;
@@ -146,6 +145,7 @@ public class AddressService extends Service {
         addressBatch.index = batchNo;
         addressBatch.status = AddressBatch.Status.NULL;
         addressBatch.type = addressType;
+        addressBatch.coin = Coin.fromValue(data.coinType);
 
         addressBatchDao.create(addressBatch);
 
