@@ -65,8 +65,8 @@ public enum Coin {
         switch (this){
             case BTC:
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_btc, "http://blockchain.info/tx/");
-            case LTC:
-                return new Pair(R.string.tx_detail_view_on_blockchain_tx_ltc, "http://explorer.litecoin.net/tx/");
+            case LTC:https://ltc.blockr.io/tx/info/
+                return new Pair(R.string.tx_detail_view_on_blockchain_tx_ltc, "https://ltc.blockr.io/tx/info/");
             case DOGE:
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_doge, "https://dogechain.info/tx/");
         }
