@@ -9,6 +9,7 @@ public class SMSCommandUtil {
     private static final String H2COK = "CC:CHANNEL_OK:%1$s:";
     private static final String HotAddressCheck = "CC:VERIFY_HOT_ADDRESSES:%1$s:%2$s:";
     private static final String ColdAddressCheck = "CC:VERIFY_COLD_ADDRESSES:%1$s:%2$s:";
+    private static final String HotTime = "CC:V:%1$s";
 
 
     public static String getH2CExchange(String qh, Integer hId){
@@ -25,5 +26,9 @@ public class SMSCommandUtil {
 
     public static String getColdAddressCheck(Integer index, String coinCode){
         return String.format(ColdAddressCheck, index, coinCode);
+    }
+
+    public static String getVTime(String time){
+        return String.format(HotTime, time);
     }
 }
