@@ -19,6 +19,7 @@ import com.chaincloud.chaincloudv.util.Coin;
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.IgnoredWhenDetached;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -73,6 +74,7 @@ public class AccountListFragment extends Fragment implements Refreshable,
         return false;
     }
 
+    @IgnoredWhenDetached
     @Background
     void loadData(){
 
