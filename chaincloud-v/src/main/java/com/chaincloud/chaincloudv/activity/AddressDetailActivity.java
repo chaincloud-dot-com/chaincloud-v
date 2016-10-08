@@ -77,6 +77,8 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
         initLv();
 
         isRefresh = true;
+
+        showProgress();
         loadTx();
     }
 
@@ -137,6 +139,8 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
     @Override
     public void onRefresh() {
         refresher.setRefreshing(true);
+
+        showProgress();
         loadTx();
     }
 
@@ -154,7 +158,6 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
 
     @Background
     void loadTx() {
-        showProgress();
         isLoding = true;
 
         try{
@@ -251,6 +254,7 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
                 if (firstVisibleItem + visibleItemCount >= totalItemCount - 6
                         && hasMore && !isLoding
                         && lastFirstVisibleItem < firstVisibleItem) {
+                    showProgress();
                     loadTx();
                 }
                 lastFirstVisibleItem = firstVisibleItem;
