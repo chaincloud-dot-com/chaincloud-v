@@ -21,6 +21,8 @@ import android.util.Log;
 import com.chaincloud.chaincloudv.event.SmsPing;
 import com.chaincloud.chaincloudv.event.UpdateWorkState;
 import com.chaincloud.chaincloudv.preference.Preference_;
+import com.chaincloud.chaincloudv.util.DateTimeUtil;
+import com.chaincloud.chaincloudv.util.SMSCommandUtil;
 import com.chaincloud.chaincloudv.util.SMSUtil;
 import com.chaincloud.chaincloudv.util.crypto.ECKey;
 
@@ -167,6 +169,11 @@ public abstract class SMSServiceBase extends Service {
                 EventBus.getDefault().post(new UpdateWorkState(UpdateWorkState.Type.StopLoop));
             }else if (splits[0].equals("PING")){
                 EventBus.getDefault().post(new SmsPing(phoneNo));
+            }else if (splits[0].equals("TIME")){
+                SMSUtil.sendSMS(
+                        phoneNo,
+                        SMSCommandUtil.getVTime(DateTimeUtil.getDateTimeString(new Date())),
+                        sendIntent, backIntent);
             }else {
                 String msg = "sms format is error";
 
