@@ -113,6 +113,8 @@ public class WorkService extends Service {
 
                 showMsg("tx is empty...");
                 if (isOnceTxTest){
+
+                    isLoopTx = false;
                     return;
                 }else {
                     continue;
@@ -124,6 +126,8 @@ public class WorkService extends Service {
             //2.decrypt
             TxResult decryptTx = decrypt(encryptTx);
             if (decryptTx == null){
+
+                isLoopTx = false;
                 return;
             }
 
@@ -134,6 +138,7 @@ public class WorkService extends Service {
                 SMSUtil.sendSMS(preference.vAdminPhoneNo().get(), msg, null, null);
                 showMsg(msg);
 
+                isLoopTx = false;
                 return;
             }
 
@@ -141,6 +146,8 @@ public class WorkService extends Service {
             //3.sign
             boolean isSuccess = setSignAndCId(decryptTx);
             if (!isSuccess){
+
+                isLoopTx = false;
                 return;
             }
 
@@ -175,6 +182,8 @@ public class WorkService extends Service {
             }
 
             if (!isLoopTxStatus){
+
+                isLoopTx = false;
                 return;
             }
 
@@ -188,6 +197,8 @@ public class WorkService extends Service {
                     .apply();
 
             if (isOnceTxTest){
+
+                isLoopTx = false;
                 return;
             }
         }
