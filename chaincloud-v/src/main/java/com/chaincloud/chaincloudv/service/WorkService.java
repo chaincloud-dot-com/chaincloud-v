@@ -451,7 +451,7 @@ public class WorkService extends Service {
 
         }catch (RetrofitError error){
             if (error.getKind() == RetrofitError.Kind.HTTP
-                    && error.getResponse().getStatus() == 400){
+                    && (error.getResponse().getStatus() == 400 || error.getResponse().getStatus() == 404)){
 
                 ApiError apiError = (ApiError) error.getBodyAs(ApiError.class);
                 if (apiError != null) {
