@@ -165,8 +165,12 @@ public abstract class SMSServiceBase extends Service {
         if (splits.length == 1){
             if (splits[0].equals("START_LOOP")){
                 EventBus.getDefault().post(new UpdateWorkState(UpdateWorkState.Type.StartLoop));
+
+                SMSUtil.sendSMS(phoneNo, "the loop is started", sendIntent, backIntent);
             }else if (splits[0].equals("STOP_LOOP")){
                 EventBus.getDefault().post(new UpdateWorkState(UpdateWorkState.Type.StopLoop));
+
+                SMSUtil.sendSMS(phoneNo, "the loop is stopped", sendIntent, backIntent);
             }else if (splits[0].equals("PING")){
                 EventBus.getDefault().post(new SmsPing(phoneNo));
             }else if (splits[0].equals("TIME")){
