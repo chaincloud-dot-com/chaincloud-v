@@ -183,7 +183,7 @@ public class SMSServiceImpl extends SMSServiceBase {
         Channel channel = channelDao.queryForId(hId);
         Channel lastChannel = channelDao.getLastChannel();
 
-        if(channel != null && lastChannel != null &&  lastChannel.channelId == hId){
+        if(channel != null && lastChannel != null &&  lastChannel.channelId.equals(hId)){
             updateChannel(channel, qc, cId);
         }else {
             String msg = "channel is not exist";

@@ -454,13 +454,18 @@ public class WorkService extends Service {
                     && (error.getResponse().getStatus() == 400 || error.getResponse().getStatus() == 404)){
 
                 ApiError apiError = (ApiError) error.getBodyAs(ApiError.class);
-                if (apiError != null) {
-                    String msg = "error code" + apiError.code + ":" + apiError.message;
-                    log.error(msg);
-                    showMsg(msg);
 
-                    return new TxStatus(new TxRequest(userTxNo), TxStatus.Status.Fail, msg);
+                String msg;
+                if (apiError != null) {
+                    msg = "error code" + apiError.code + ":" + apiError.message;
+                }else {
+                    msg = "error code 404";
                 }
+
+                log.error(msg);
+                showMsg(msg);
+
+                return new TxStatus(new TxRequest(userTxNo), TxStatus.Status.Fail, msg);
             }
 
             log.error("get tx status from chaincloud is error");
