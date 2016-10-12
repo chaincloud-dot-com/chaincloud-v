@@ -79,6 +79,7 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
         isRefresh = true;
 
         showProgress();
+        loadUser();
         loadTx();
     }
 
@@ -141,6 +142,8 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
         refresher.setRefreshing(true);
 
         showProgress();
+
+        loadUser();
         loadTx();
     }
 
@@ -191,6 +194,25 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
         }
     }
 
+    @Background
+    void loadUser() {
+        try{
+            if (isHot) {
+                user = chainCloudHotSendService.currentUser();
+            }else {
+                user = chainCloudColdReceiveService.currentUser();
+            }
+
+            showUser(user);
+        }catch (RetrofitError error){
+            showNetException(error);
+            return;
+        }finally {
+            closeRefresh();
+            closeProgress();
+        }
+    }
+
     @UiThread
     void showData(List<Tx> txs){
         List<Tx> data = mAdapter.getData();
@@ -203,6 +225,11 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
 
         mAdapter.updateData(data);
 
+    }
+
+    @UiThread
+    void showUser(User user){
+        headView.setUser(user);
     }
 
     @UiThread
