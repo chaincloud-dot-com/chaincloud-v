@@ -81,6 +81,8 @@
     <string name="setting_address_check_stop">Stop Address Check</string>
     <string name="setting_address_check_start">Start Address Check</string>
     <string name="setting_domain_vweb">VWeb Domain</string>
+    <string name="switch_to_ltc">Switch To LTC</string>
+    <string name="switch_to_btc">Switch To BTC</string>
 
 
 </resources>

@@ -81,6 +81,7 @@
     <string name="setting_address_check_stop">停止Loop地址校验</string>
     <string name="setting_address_check_start">开始Loop地址校验</string>
     <string name="setting_domain_vweb">VWeb域名</string>
-
+    <string name="switch_to_ltc">切换到LTC</string>
+    <string name="switch_to_btc">切换到BTC</string>
 
 </resources>

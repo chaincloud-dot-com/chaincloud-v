@@ -52,12 +52,12 @@ public enum Coin {
         return null;
     }
 
-    public String getSwitch() {
+    public int getSwitch() {
         switch (this){
             case BTC:
-                return "切换到LTC";
+                return R.string.switch_to_ltc;
             default: LTC:
-            return "切换到BTC";
+            return R.string.switch_to_btc;
         }
     }
 
