@@ -164,7 +164,7 @@ public class SMSServiceImpl extends SMSServiceBase {
                         }catch (Exception e){
                             String msg = "channel update sms format is error";
 
-                            log.error(msg);
+                            log.error(msg, e);
                             SMSUtil.sendSMS(vAdminPhoneNo, msg, null, null);
 
                             return true;

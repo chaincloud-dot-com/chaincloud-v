@@ -322,7 +322,7 @@ public class WorkService extends Service {
 
             return txResult;
         }catch (RetrofitError error){
-            log.error("pull tx from vweb error");
+            log.error("pull tx from vweb error", error);
             showMsg("pull tx from vweb error");
         }
 
@@ -345,7 +345,7 @@ public class WorkService extends Service {
 
             return encryptTx;
         }catch (Exception e){
-            log.error("decrypt error");
+            log.error("decrypt error", e);
             SMSUtil.sendSMS(preference.vAdminPhoneNo().get(), "AES decrypt error", null, null);
             showMsg("decrypt error");
         }
@@ -479,7 +479,7 @@ public class WorkService extends Service {
         try{
             BooleanResult result = vWebService.postStatus(txStatus.sendRequest.userTxNo, txStatus.txHash);
         }catch (RetrofitError error){
-            log.error("post tx status to vweb is error");
+            log.error("post tx status to vweb is error", error);
             showMsg("post tx status to vweb is error");
         }
     }
@@ -488,7 +488,7 @@ public class WorkService extends Service {
         ECKey ecKey = new ECKey(BitcoinUtils.hexStringToByteArray(okChannel.dh),
                 BitcoinUtils.hexStringToByteArray(okChannel.qh));
 
-        return ecKey.signMessage(gson.toJson(txRequest));
+        return ecKey.signMessage(txRequest.toString());
     }
 
     private void showMsg(String msg){
