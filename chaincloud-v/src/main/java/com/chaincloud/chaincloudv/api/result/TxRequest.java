@@ -14,4 +14,9 @@ public class TxRequest {
     public TxRequest(String userTxNo){
         this.userTxNo = userTxNo;
     }
+
+    @Override
+    public String toString() {
+        return "{\"coin_code\":\""+ coinCode +"\",\"is_dynamic_fee\":"+ isDynamicFee +",\"outs\":\""+ outs +"\",\"user_tx_no\":\""+ userTxNo +"\"}";
+    }
 }
