@@ -126,7 +126,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
             tvConfirmation.setText(confirmationCount);
         }
         if (String.valueOf(tx.getValue()) != null) {
-            tvValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(tx.getValue()));
+            tvValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(tx.getValue()));
         }
         if (tx.getInputs() != null) {
             List<Tx.In> ins = tx.getInputs();
@@ -142,7 +142,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
                 FrameLayout flInputAddress = (FrameLayout) v.findViewById(R.id.fl_input_address);
                 copyAddress(inputAddress, flInputAddress);
                 TextView tvInputValue = (TextView) v.findViewById(R.id.tv_input_value);
-                tvInputValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(input.getValue()));
+                tvInputValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(input.getValue()));
                 inputValue = inputValue + input.getValue();
             }
         }
@@ -160,13 +160,22 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
                 FrameLayout flOutputAddress = (FrameLayout) v.findViewById(R.id.fl_output_address);
                 copyAddress(outPutAddress, flOutputAddress);
                 TextView tvOutputValue = (TextView) v.findViewById(R.id.tv_output_value);
-                tvOutputValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(output.getValue()));
+                tvOutputValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(output.getValue()));
                 outputValue = outputValue + output.getValue();
             }
         }
         if (inputValue != 0 && outputValue != 0) {
-            fee = inputValue - outputValue;
-            tvFee.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(fee));
+            Coin coin = Coin.fromValue(GlobalParams.coinCode);
+            if (coin != Coin.ETH) {
+                fee = inputValue - outputValue;
+                tvFee.setText(coin.showMoney(fee));
+            }else {
+                tvFee.setText(String.format(
+                        getString(R.string.eth_fee),
+                        String.valueOf(tx.getGas()),
+                        coin.showMoney(tx.getGasPrice()),
+                        coin.showMoney(tx.getGasUsed() * tx.getGasPrice())));
+            }
         }
     }
 

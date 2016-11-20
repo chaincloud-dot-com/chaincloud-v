@@ -48,15 +48,14 @@ public class TxAdapter extends MBaseAdapter<Tx> {
         if(data != null && data.size() > 0) {
             Tx tx = data.get(position);
 
+            holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(tx.getValue()));
             if (tx.getValue() > 0) {
                 holder.ivIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.menu_deposit));
                 holder.ivIcon.setColorFilter(context.getResources().getColorStateList(R.color.fab_color_pressed));
 
-                holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(tx.getValue()));
                 holder.tvValue.setTextColor(context.getResources().getColor(R.color.green));
                 holder.tvDirection.setText(R.string.receive_btc);
             } else {
-                holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(tx.getValue()));
                 holder.tvValue.setTextColor(context.getResources().getColor(R.color.red));
                 holder.tvDirection.setText(R.string.send_btc);
                 holder.ivIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.menu_withdraw));

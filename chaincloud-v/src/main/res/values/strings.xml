@@ -34,6 +34,7 @@
     <string name="tx.output">Tx Outputs</string>
     <string name="tx_detail_view_on_blockchain_tx_btc">View On blockchain.info</string>
     <string name="tx_detail_view_on_blockchain_tx_ltc">View On blockr.io</string>
+    <string name="tx_detail_view_on_blockchain_tx_eth">View On etherscan.io</string>
     <string name="tx_detail_view_on_blockchain_tx_doge">View On dogechain.info</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
@@ -81,8 +82,6 @@
     <string name="setting_address_check_stop">Stop Address Check</string>
     <string name="setting_address_check_start">Start Address Check</string>
     <string name="setting_domain_vweb">VWeb Domain</string>
-    <string name="switch_to_ltc">Switch To LTC</string>
-    <string name="switch_to_btc">Switch To BTC</string>
-
-
+    <string name="switch_coin">switch coin(%1s)</string>
+    <string name="eth_fee">gas: %1$s \ngasPrice: %2$s \ngasUsed: %3$s</string>
 </resources>

@@ -52,14 +52,18 @@ public class Validator {
     }
 
     public static final boolean validAddress(Coin coin, CharSequence str) {
-        int addressHeader = coin.getAddress();
-        int p2shHeader = coin.getPayToScript();
-        try {
-            byte[] tmp = Base58.decodeChecked(str.toString());
-            int header = tmp[0] & 0xFF;
-            return (header == p2shHeader || header == addressHeader);
-        } catch (Exception e) {
-            return false;
+        if (coin != Coin.ETH) {
+            int addressHeader = coin.getAddress();
+            int p2shHeader = coin.getPayToScript();
+            try {
+                byte[] tmp = Base58.decodeChecked(str.toString());
+                int header = tmp[0] & 0xFF;
+                return (header == p2shHeader || header == addressHeader);
+            } catch (Exception e) {
+                return false;
+            }
+        }else {
+            return str.toString().matches("[0-9a-fA-FXx]{42}");
         }
     }
 }

@@ -79,7 +79,7 @@ public class AddressDetailHeader extends FrameLayout {
         tvAddress.setText(BitcoinUtil.formatHash(user.getAddress(), 4, 12));
         ivQrcode.setContent(user.getAddress());
 
-        btnBalance.setText(Coin.fromValue(GlobalParams.coinCode).getSymbol() + BitcoinUnit.BTC.format(user.getBalance()));
+        btnBalance.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(user.getBalance()));
     }
 
 

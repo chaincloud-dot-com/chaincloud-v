@@ -17,6 +17,10 @@ public class Tx implements Serializable{
     private Date confirmAt;
     private int confirmation;
     private long value;
+    private long gas;
+    private long gasPrice;
+    private long gasUsed;
+
 
     private List<In> inputs;
     private List<Out> outputs;
@@ -43,6 +47,30 @@ public class Tx implements Serializable{
 
     public long getValue() {
         return value;
+    }
+
+    public long getGas() {
+        return gas;
+    }
+
+    public void setGas(long gas) {
+        this.gas = gas;
+    }
+
+    public long getGasPrice() {
+        return gasPrice;
+    }
+
+    public void setGasPrice(long gasPrice) {
+        this.gasPrice = gasPrice;
+    }
+
+    public long getGasUsed() {
+        return gasUsed;
+    }
+
+    public void setGasUsed(long gasUsed) {
+        this.gasUsed = gasUsed;
     }
 
     public List<In> getInputs() {

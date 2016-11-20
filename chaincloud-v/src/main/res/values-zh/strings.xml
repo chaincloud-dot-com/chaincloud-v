@@ -15,8 +15,8 @@
     <string name="tx_out_status_unspent_name">未花费</string>
     <string name="tx_out_status_spent_name">已花费</string>
     <string name="just_now">刚刚</string>
-    <string name="receive_btc">来自比特币地址</string>
-    <string name="send_btc">去向比特币地址</string>
+    <string name="receive_btc">收币</string>
+    <string name="send_btc">发币</string>
     <string name="close">关闭</string>
     <string name="address_history_receive">收款历史地址</string>
     <string name="address_history_change">找零历史地址</string>
@@ -34,6 +34,7 @@
     <string name="tx.output">交易Outputs</string>
     <string name="tx_detail_view_on_blockchain_tx_btc">在blockchain.info查看</string>
     <string name="tx_detail_view_on_blockchain_tx_ltc">在blockr.io查看</string>
+    <string name="tx_detail_view_on_blockchain_tx_eth">在etherscan.io查看</string>
     <string name="tx_detail_view_on_blockchain_tx_doge">在dogechain.info查看</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
@@ -81,7 +82,6 @@
     <string name="setting_address_check_stop">停止Loop地址校验</string>
     <string name="setting_address_check_start">开始Loop地址校验</string>
     <string name="setting_domain_vweb">VWeb域名</string>
-    <string name="switch_to_ltc">切换到LTC</string>
-    <string name="switch_to_btc">切换到BTC</string>
+    <string name="switch_coin">切换币种(%1s)</string>
 
 </resources>

@@ -1,8 +1,10 @@
 package com.chaincloud.chaincloudv.fragment;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -49,6 +51,8 @@ public class SettingFragment extends Fragment {
     @AfterViews
     void init(){
         initVersion();
+
+        tvSwitch.setText(String.format(getString(R.string.switch_coin), GlobalParams.coinCode));
     }
 
     @Click
@@ -72,27 +76,41 @@ public class SettingFragment extends Fragment {
     }
 
     @Click
-    void tvSwitch(){
-        String coinCode;
-        if(GlobalParams.coinCode.equals(Coin.BTC.getCode())){
-            coinCode = Coin.LTC.getCode();
-        }else {
-            coinCode = Coin.BTC.getCode();
+    void tvSwitch() {
+        final Coin[] coins = Coin.values();
+        String[] items = new String[coins.length];
+        for (int i = 0; i < coins.length; i++) {
+            items[i] = coins[i].getCode();
+
         }
 
-        Preference_ preference = new Preference_(getActivity().getApplicationContext());
-        preference.edit().coinCode().put(coinCode).apply();
-        GlobalParams.coinCode = preference.coinCode().get();
+        final int currIndex = Coin.fromValue(GlobalParams.coinCode).ordinal();
 
-        tvSwitch.setText(Coin.fromValue(GlobalParams.coinCode).getSwitch());
+        new AlertDialog.Builder(getContext())
+                .setSingleChoiceItems(items, currIndex, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (currIndex != which) {
+                            Coin coin = coins[which];
+                            GlobalParams.coinCode = coin.getCode();
 
-        List<Fragment> fragments = getActivity().getSupportFragmentManager().getFragments();
-        for (Fragment f : fragments){
-            if (f instanceof Refreshable){
-                Refreshable refreshable = (Refreshable)f;
-                refreshable.doRefresh();
-            }
-        }
+                            new Preference_(getActivity().getApplicationContext())
+                                    .edit().coinCode().put(GlobalParams.coinCode).apply();
+
+                            tvSwitch.setText(String.format(getString(R.string.switch_coin), GlobalParams.coinCode));
+
+                            List<Fragment> fragments = getActivity().getSupportFragmentManager().getFragments();
+                            for (Fragment f : fragments) {
+                                if (f instanceof Refreshable) {
+                                    Refreshable refreshable = (Refreshable) f;
+                                    refreshable.doRefresh();
+                                }
+                            }
+                        }
+
+                        dialog.dismiss();
+                    }
+                }).show();
     }
 
     @Click

@@ -140,6 +140,8 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
     @Override
     public void onRefresh() {
         refresher.setRefreshing(true);
+        
+        isRefresh = true;
 
         showProgress();
 
@@ -198,9 +200,9 @@ public class AddressDetailActivity extends FragmentActivity implements SwipeRefr
     void loadUser() {
         try{
             if (isHot) {
-                user = chainCloudHotSendService.currentUser();
+                user = chainCloudHotSendService.currentUser(GlobalParams.coinCode);
             }else {
-                user = chainCloudColdReceiveService.currentUser();
+                user = chainCloudColdReceiveService.currentUser(GlobalParams.coinCode);
             }
 
             showUser(user);
