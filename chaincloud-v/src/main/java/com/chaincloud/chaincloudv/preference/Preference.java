@@ -1,5 +1,6 @@
 package com.chaincloud.chaincloudv.preference;
 
+import org.androidannotations.annotations.sharedpreferences.DefaultInt;
 import org.androidannotations.annotations.sharedpreferences.DefaultString;
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
@@ -33,4 +34,7 @@ public interface Preference {
 
     @DefaultString("BTC")
     String coinCode();
+
+    @DefaultInt(1)
+    int smsObserverType(); //1->observer db; 2->broadcast
 }

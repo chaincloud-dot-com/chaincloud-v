@@ -15,7 +15,9 @@ import com.chaincloud.chaincloudv.activity.SettingChannelActivity_;
 import com.chaincloud.chaincloudv.activity.SettingPasswdActivity_;
 import com.chaincloud.chaincloudv.activity.SettingTokenActivity_;
 import com.chaincloud.chaincloudv.activity.SettingVDomainActivity_;
+import com.chaincloud.chaincloudv.event.SwitchSmsObserverType;
 import com.chaincloud.chaincloudv.preference.Preference_;
+import com.chaincloud.chaincloudv.ui.base.dialog.DialogAlert;
 import com.chaincloud.chaincloudv.ui.base.dialog.DialogAlert_;
 import com.chaincloud.chaincloudv.util.Coin;
 
@@ -35,14 +37,19 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
+import de.greenrobot.event.EventBus;
+
 /**
  * Created by zhumingu on 16/6/20.
  */
 @EFragment(R.layout.fragment_setting)
 public class SettingFragment extends Fragment {
 
+    private int smsObserverType;
+
+
     @ViewById
-    TextView tvSwitch;
+    TextView tvSwitch, tvChangeSmsObserverType;
 
     @ViewById(R.id.tv_version)
     TextView tvVersion;
@@ -53,6 +60,10 @@ public class SettingFragment extends Fragment {
         initVersion();
 
         tvSwitch.setText(String.format(getString(R.string.switch_coin), GlobalParams.coinCode));
+
+        smsObserverType = new Preference_(getContext()).smsObserverType().get();
+        tvChangeSmsObserverType.setText(String.format(getString(R.string.setting_sms_observer_type),
+                smsObserverType + ""));
     }
 
     @Click
@@ -111,6 +122,27 @@ public class SettingFragment extends Fragment {
                         dialog.dismiss();
                     }
                 }).show();
+    }
+
+    @Click
+    void tvChangeSmsObserverType(){
+        DialogAlert dialogAlert = DialogAlert_.builder()
+                .msgRes(R.string.setting_sms_observer_prompt)
+                .build();
+
+        dialogAlert.setRunnable(new Runnable() {
+            @Override
+            public void run() {
+                smsObserverType = 3 - smsObserverType;
+
+                tvChangeSmsObserverType.setText(String.format(getString(R.string.setting_sms_observer_type),
+                        smsObserverType + ""));
+
+                EventBus.getDefault().post(new SwitchSmsObserverType(smsObserverType));
+            }
+        });
+
+        dialogAlert.show(getFragmentManager());
     }
 
     @Click

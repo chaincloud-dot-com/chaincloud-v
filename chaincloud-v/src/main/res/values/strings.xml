@@ -66,6 +66,7 @@
     <string name="establish_channel">Establish Channel</string>
     <string name="setting_passwd">Setting Passwd</string>
     <string name="setting_passwd_hint">Tx Passwd</string>
+    <string name="setting_sms_observer_type">Change sms observer type(%1s)</string>
     <string name="setting_export_log">Export Log</string>
     <string name="setting_vweb_domain">VWEB Domain</string>
     <string name="setting_channel">Setting Channel</string>
@@ -84,4 +85,6 @@
     <string name="setting_domain_vweb">VWeb Domain</string>
     <string name="switch_coin">switch coin(%1s)</string>
     <string name="eth_fee">gas: %1$s \ngasPrice: %2$s \ngasUsed: %3$s</string>
+
+    <string name="setting_sms_observer_prompt">In order to be able to use normal, please switch when the normal type not work. Switch now?</string>
 </resources>

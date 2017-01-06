@@ -14,23 +14,23 @@ import android.database.ContentObserver;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
+import android.telephony.SmsMessage;
 import android.util.Log;
 
 import com.chaincloud.chaincloudv.event.SmsPing;
+import com.chaincloud.chaincloudv.event.SwitchSmsObserverType;
 import com.chaincloud.chaincloudv.event.UpdateWorkState;
 import com.chaincloud.chaincloudv.preference.Preference_;
 import com.chaincloud.chaincloudv.util.DateTimeUtil;
 import com.chaincloud.chaincloudv.util.SMSCommandUtil;
 import com.chaincloud.chaincloudv.util.SMSUtil;
-import com.chaincloud.chaincloudv.util.crypto.ECKey;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -45,13 +45,29 @@ public abstract class SMSServiceBase extends Service {
 
     private final String TAG = "SMSServiceBase";
 
+    public static final String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+
     private final String SENT_SMS_ACTION = "SENT_SMS_ACTION";
     private final String DELIVERED_SMS_ACTION = "DELIVERED_SMS_ACTION";
     private final String ALARM = "com.chaincloud.chaincloudv.service.alarm";
     private final Uri OBSERVER_URI = Uri.parse("content://sms/");
     private final Uri QUERY_URI = Uri.parse("content://sms/inbox");
+    private final String[] PROJECTION = new String[]{
+            Telephony.Sms._ID,
+            Telephony.Sms.ADDRESS,
+            Telephony.Sms.BODY
+//            Telephony.Sms.DATE,
+//            Telephony.Sms.TYPE,
+//            Telephony.Sms.STATUS,
+//            Telephony.Sms.READ
+    };
 
     private boolean isKeepChannelOpen = false;
+    private Integer smsObserverType;
+
+    private BroadcastReceiver smsReceiver;
+    private ContentObserver mSmsContentObserver;
+
 
     protected PendingIntent sendIntent, backIntent;
 
@@ -71,17 +87,28 @@ public abstract class SMSServiceBase extends Service {
         initSMSObserver();
 
         startUpdateChannelTask();
+
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
 
-        getContentResolver().unregisterContentObserver(mSmsContentObserver);
+        destroySmsObserver();
 
         unregisterReceiver(sendReportReceiver);
         unregisterReceiver(deliverReportReceiver);
         unregisterReceiver(alarmReceiver);
+
+        EventBus.getDefault().unregister(this);
+    }
+
+    public void onEventBackgroundThread(SwitchSmsObserverType switchSmsObserverType){
+        smsObserverType = switchSmsObserverType.smsObserverType;
+
+        destroySmsObserver();
+        initSMSObserver();
     }
 
 
@@ -91,8 +118,34 @@ public abstract class SMSServiceBase extends Service {
 
 
     private void initSMSObserver() {
-        getContentResolver()
-                .registerContentObserver(OBSERVER_URI, true, mSmsContentObserver);
+        if (smsObserverType == null) {
+            smsObserverType = new Preference_(getApplicationContext()).smsObserverType().get();
+        }else {
+            new Preference_(getApplicationContext()).edit().smsObserverType().put(smsObserverType).apply();
+        }
+
+        if (smsObserverType == 1){// db observer
+            createSMSObserver();
+
+            getContentResolver()
+                    .registerContentObserver(OBSERVER_URI, true, mSmsContentObserver);
+        }else{// broadcast receiver
+            createSMSReceiver();
+
+            IntentFilter intentFilter = new IntentFilter(SMS_RECEIVED);
+            intentFilter.setPriority(Integer.MAX_VALUE);
+            registerReceiver(smsReceiver, intentFilter);
+        }
+    }
+
+    private void destroySmsObserver(){
+        if (smsObserverType == 1){// broadcast receiver
+            unregisterReceiver(smsReceiver);
+            smsReceiver = null;
+        }else{// db observer
+            getContentResolver().unregisterContentObserver(mSmsContentObserver);
+            mSmsContentObserver = null;
+        }
     }
 
     protected void initBroadcastReceiver() {
@@ -187,6 +240,92 @@ public abstract class SMSServiceBase extends Service {
         }
     }
 
+    private void dispatchHandleSms(String sms, String fromNumber){
+        if (sms != null && sms.trim().length() > 0){
+
+            if (sms.startsWith("CC:")) {
+
+                sms = sms.substring(3);
+
+                if(fromNumber.contains(vAdminPhoneNo)){
+                    handleSMSAdmin(fromNumber, sms);
+                }else {
+                    handleSMS(fromNumber, sms);
+                }
+            }else {
+                String msg = "sms format is error";
+
+                log.error(msg);
+                SMSUtil.sendSMS(fromNumber, msg, null, null);
+            }
+        }
+    }
+
+
+    //region smsReceiver listener received sms
+    private void createSMSReceiver(){
+        smsReceiver = new BroadcastReceiver() {
+
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                Bundle bundle = intent.getExtras();
+
+                if (null != bundle) {
+                    Object[] smsObj = (Object[]) bundle.get("pdus");
+                    for (Object object : smsObj) {
+                        SmsMessage msg = SmsMessage.createFromPdu((byte[]) object);
+
+                        final String fromNumber = msg.getOriginatingAddress();
+                        final String body = msg.getMessageBody();
+
+                        log.info("receive a msg and fromNumber:" + fromNumber + "...msg:" + body);
+
+                        dispatchHandleSms(body, fromNumber);
+                    }
+                }
+            }
+
+        };
+    }
+    //endregion
+
+    //region SMSObserver
+    private void createSMSObserver(){
+        mSmsContentObserver = new ContentObserver(null) {
+            @Override
+            public void onChange(boolean selfChange) {
+                super.onChange(selfChange);
+
+                ContentResolver cr = getContentResolver();
+                String where = " (address ='+86" + hcPhoneNo1
+                        + "' or address ='+86" + hcPhoneNo2
+                        + "' or address ='+86" + vAdminPhoneNo + "') AND read = 0";
+
+                Cursor cur = cr.query(QUERY_URI, PROJECTION, where, null, "date asc");
+                if (null == cur)
+                    return;
+                if (cur.moveToNext()) {
+                    String ID = cur.getString(cur.getColumnIndex(Telephony.Sms._ID));//id
+                    String number = cur.getString(cur.getColumnIndex(Telephony.Sms.ADDRESS));//手机号
+                    String body = cur.getString(cur.getColumnIndex(Telephony.Sms.BODY));
+//                String data = cur.getString(cur.getColumnIndex(Telephony.Sms.DATE));
+//                String type = cur.getString(cur.getColumnIndex(Telephony.Sms.TYPE));
+//                String status = cur.getString(cur.getColumnIndex(Telephony.Sms.STATUS));
+//                String read = cur.getString(cur.getColumnIndex(Telephony.Sms.READ));
+
+                    ContentValues values = new ContentValues();
+                    values.put("read", "1");
+                    cr.update(QUERY_URI, values, "_id=?", new String[]{ID});
+
+                    log.info("receive a msg, phone number is " + number + ", msg is " + body);
+
+                    dispatchHandleSms(body, number);
+                }
+            }
+        };
+    }
+    //endregion
 
 
     //region sendReportReceiver
@@ -222,67 +361,6 @@ public abstract class SMSServiceBase extends Service {
         public void onReceive(Context _context, Intent _intent) {
             createChannelSMS();
             Log.i(TAG, "update channel task start..." + new Date().getMinutes());
-        }
-    };
-    //endregion
-
-    //region SMSObserver
-    private static final String[] PROJECTION = new String[]{
-            Telephony.Sms._ID,
-            Telephony.Sms.ADDRESS,
-            Telephony.Sms.BODY
-//            Telephony.Sms.DATE,
-//            Telephony.Sms.TYPE,
-//            Telephony.Sms.STATUS,
-//            Telephony.Sms.READ
-    };
-    ContentObserver mSmsContentObserver = new ContentObserver(null) {
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-
-            ContentResolver cr = getContentResolver();
-            String where = " (address ='+86" + hcPhoneNo1
-                    + "' or address ='+86" + hcPhoneNo2
-                    + "' or address ='+86" + vAdminPhoneNo + "') AND read = 0";
-
-            Cursor cur = cr.query(QUERY_URI, PROJECTION, where, null, "date asc");
-            if (null == cur)
-                return;
-            if (cur.moveToNext()) {
-                String ID = cur.getString(cur.getColumnIndex(Telephony.Sms._ID));//id
-                String number = cur.getString(cur.getColumnIndex(Telephony.Sms.ADDRESS));//手机号
-                String body = cur.getString(cur.getColumnIndex(Telephony.Sms.BODY));
-//                String data = cur.getString(cur.getColumnIndex(Telephony.Sms.DATE));
-//                String type = cur.getString(cur.getColumnIndex(Telephony.Sms.TYPE));
-//                String status = cur.getString(cur.getColumnIndex(Telephony.Sms.STATUS));
-//                String read = cur.getString(cur.getColumnIndex(Telephony.Sms.READ));
-
-                ContentValues values = new ContentValues();
-                values.put("read", "1");
-                cr.update(QUERY_URI, values, "_id=?", new String[]{ID});
-
-                log.info("receive a msg, phone number is " + number + ", msg is " + body);
-
-                if (body != null && body.trim().length() > 0){
-
-                    if (body.startsWith("CC:")) {
-
-                        body = body.substring(3);
-
-                        if(number.contains(vAdminPhoneNo)){
-                            handleSMSAdmin(number, body);
-                        }else {
-                            handleSMS(number, body);
-                        }
-                    }else {
-                        String msg = "sms format is error";
-
-                        log.error(msg);
-                        SMSUtil.sendSMS(number, msg, null, null);
-                    }
-                }
-            }
         }
     };
     //endregion

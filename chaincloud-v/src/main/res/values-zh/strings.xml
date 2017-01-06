@@ -66,6 +66,7 @@
     <string name="establish_channel">建立通道</string>
     <string name="setting_passwd">设置传输密码</string>
     <string name="setting_passwd_hint">传输密码</string>
+    <string name="setting_sms_observer_type">改变短信监听方式(%1s)</string>
     <string name="setting_export_log">导出日志</string>
     <string name="setting_vweb_domain">VWEB域名</string>
     <string name="setting_channel">设置channel</string>
@@ -84,4 +85,5 @@
     <string name="setting_domain_vweb">VWeb域名</string>
     <string name="switch_coin">切换币种(%1s)</string>
 
+    <string name="setting_sms_observer_prompt">为了能够正常使用，请在默认短信监听方式有问题的情况下进行切换。确定切换吗？</string>
 </resources>
