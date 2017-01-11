@@ -84,6 +84,7 @@
     <string name="setting_address_check_start">开始Loop地址校验</string>
     <string name="setting_domain_vweb">VWeb域名</string>
     <string name="switch_coin">切换币种(%1s)</string>
+    <string name="eth_fee">gas: %1$s \ngasPrice: %2$s \ngasUsed: %3$s</string>
 
     <string name="setting_sms_observer_prompt">为了能够正常使用，请在默认短信监听方式有问题的情况下进行切换。确定切换吗？</string>
 </resources>
