@@ -3,6 +3,7 @@ package com.chaincloud.chaincloudv.util;
 import android.util.Pair;
 
 import com.chaincloud.chaincloudv.R;
+import com.chaincloud.chaincloudv.preference.Preference_;
 import com.google.gson.annotations.SerializedName;
 
 import java.math.BigDecimal;
@@ -60,6 +61,49 @@ public enum Coin {
         }
 
         return null;
+    }
+
+    public long getBalance(Preference_ preference){
+        switch (this){
+            case BTC:
+                return preference.balanceBtc().get();
+            case LTC:
+                return preference.balanceLtc().get();
+//            case ETH:
+//                return preference.balanceEth().get();
+//            case DOGE:
+//                return preference.balanceDoge().get();
+        }
+
+        return 0;
+    }
+
+    public void setBalance(Preference_ preference, long balance){
+        switch (this){
+            case BTC:
+                preference.edit().balanceBtc().put(balance).apply();
+            case LTC:
+                preference.edit().balanceLtc().put(balance).apply();
+//            case ETH:
+//                preference.edit().balanceEth().put(balance).apply();
+//            case DOGE:
+//                preference.balanceDoge().get();
+        }
+    }
+
+    public long getBalanceThreshold(Preference_ preference){
+        switch (this){
+            case BTC:
+                return preference.balanceThresholdBtc().get();
+            case LTC:
+                return preference.balanceThresholdLtc().get();
+//            case ETH:
+//                return preference.balanceThresholdEth().get();
+//            case DOGE:
+//                return preference.balanceThresholdDoge().get();
+        }
+
+        return 0;
     }
 
     public String showMoney(long money){

@@ -90,6 +90,21 @@
             android:background="@color/gray"/>
 
         <TextView
+            android:id="@+id/tv_balance_threshold_setting"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:textSize="18sp"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:background="@color/white"
+            android:text="@string/setting_balance_threshold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/gray"/>
+
+        <TextView
             android:id="@+id/tv_change_sms_observer_type"
             android:layout_width="match_parent"
             android:layout_height="60dp"

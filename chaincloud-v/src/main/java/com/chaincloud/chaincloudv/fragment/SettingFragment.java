@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
+import com.chaincloud.chaincloudv.activity.SettingBalanceThresholdActivity_;
 import com.chaincloud.chaincloudv.activity.SettingChannelActivity_;
 import com.chaincloud.chaincloudv.activity.SettingPasswdActivity_;
 import com.chaincloud.chaincloudv.activity.SettingTokenActivity_;
@@ -143,6 +144,11 @@ public class SettingFragment extends Fragment {
         });
 
         dialogAlert.show(getFragmentManager());
+    }
+
+    @Click
+    void tvBalanceThresholdSetting(){
+        SettingBalanceThresholdActivity_.intent(getContext()).start();
     }
 
     @Click

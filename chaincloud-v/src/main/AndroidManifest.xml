@@ -66,6 +66,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.chaincloud.chaincloudv.activity.SettingBalanceThresholdActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.chaincloud.chaincloudv.activity.AddressBatchActivity_"
             android:screenOrientation="portrait" />
 

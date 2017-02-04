@@ -132,7 +132,7 @@ public class WorkService extends Service {
             }
 
             showMsg("address valid...");
-            //address valid
+            //address valid and account send value
             if(!isAddressValid(decryptTx.info.outs, decryptTx.coinCode)){
                 String msg ="tx out invalid";
                 SMSUtil.sendSMS(preference.vAdminPhoneNo().get(), msg, null, null);
@@ -140,6 +140,35 @@ public class WorkService extends Service {
 
                 isLoopTx = false;
                 return;
+            }
+
+            //balance check
+            Coin coin = Coin.fromValue(encryptTx.coinCode);
+            long balanceThreshold = coin.getBalanceThreshold(preference);
+            if (balanceThreshold >= 0 && coin.getBalance(preference) - amount <= balanceThreshold){
+                long balance = getBalance(coin.getCode());
+                if (balance > 0){
+                    if (balance - amount <= balanceThreshold){
+                        if (balance - amount < 0){
+                            String msg = "balance is not enough and loop is stop";
+                            showMsg(msg);
+                            if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
+                                showSmsMsg(msg, preference.vAdminPhoneNo().get());
+                            }
+
+                            isLoopTx = false;
+                            return;
+                        }else {
+                            String msg = "Balance has reached the minimum limit, please recharge as soon as possible";
+                            showMsg(msg);
+                            if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
+                                showSmsMsg(msg, preference.vAdminPhoneNo().get());
+                            }
+                        }
+                    }else {
+                        coin.setBalance(preference, balance);
+                    }
+                }
             }
 
             showMsg("sign data...");
@@ -194,6 +223,7 @@ public class WorkService extends Service {
 
             preference.edit()
                     .lastUserTxNo().put(null)
+//                    .balance().put(preference.balance().get() - amount)
                     .apply();
 
             if (isOnceTxTest){
@@ -353,11 +383,13 @@ public class WorkService extends Service {
         return null;
     }
 
+    private long amount;
     private boolean isAddressValid(String outs, String coinCode) {
 
         if (outs != null && outs.length() > 0){
             String[] outsArr = outs.split(";");
 
+            amount = 0;
             for (String out : outsArr){
                 String[] addressValue = out.split(",");
                 if (addressValue.length == 2){
@@ -366,6 +398,8 @@ public class WorkService extends Service {
                                 || Long.parseLong(addressValue[1]) <= 0){
                             return false;
                         }
+
+                        amount += Long.parseLong(addressValue[1]);
                     }catch (Exception e){
                         return false;
                     }
@@ -489,6 +523,14 @@ public class WorkService extends Service {
                 BitcoinUtils.hexStringToByteArray(okChannel.qh));
 
         return ecKey.signMessage(txRequest.toString());
+    }
+
+    private long getBalance(String coin){
+        try {
+            return chainCloudHotSendService.currentUser(coin).getBalance();
+        }catch (RetrofitError error){
+            return -1;
+        }
     }
 
     private void showMsg(String msg){

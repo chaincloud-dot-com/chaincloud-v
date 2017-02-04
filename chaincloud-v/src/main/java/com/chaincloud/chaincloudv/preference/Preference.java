@@ -1,6 +1,7 @@
 package com.chaincloud.chaincloudv.preference;
 
 import org.androidannotations.annotations.sharedpreferences.DefaultInt;
+import org.androidannotations.annotations.sharedpreferences.DefaultLong;
 import org.androidannotations.annotations.sharedpreferences.DefaultString;
 import org.androidannotations.annotations.sharedpreferences.SharedPref;
 
@@ -37,4 +38,22 @@ public interface Preference {
 
     @DefaultInt(1)
     int smsObserverType(); //1->observer db; 2->broadcast
+
+    @DefaultLong(0)
+    long balanceBtc();
+
+    @DefaultLong(0)
+    long balanceLtc();
+
+    @DefaultLong(0)
+    long balanceDoge();
+
+    @DefaultLong(-1)
+    long balanceThresholdBtc();
+
+    @DefaultLong(-1)
+    long balanceThresholdLtc();
+
+    @DefaultLong(-1)
+    long balanceThresholdDoge();
 }
