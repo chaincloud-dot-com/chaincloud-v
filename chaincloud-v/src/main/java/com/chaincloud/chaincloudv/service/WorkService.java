@@ -142,33 +142,12 @@ public class WorkService extends Service {
                 return;
             }
 
+            showMsg("balance check...");
             //balance check
-            Coin coin = Coin.fromValue(encryptTx.coinCode);
-            long balanceThreshold = coin.getBalanceThreshold(preference);
-            if (balanceThreshold >= 0 && coin.getBalance(preference) - amount <= balanceThreshold){
-                long balance = getBalance(coin.getCode());
-                if (balance > 0){
-                    if (balance - amount <= balanceThreshold){
-                        if (balance - amount < 0){
-                            String msg = "balance is not enough and loop is stop";
-                            showMsg(msg);
-                            if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
-                                showSmsMsg(msg, preference.vAdminPhoneNo().get());
-                            }
+            if (!isBalanceEnough(encryptTx.coinCode)){
 
-                            isLoopTx = false;
-                            return;
-                        }else {
-                            String msg = "Balance has reached the minimum limit, please recharge as soon as possible";
-                            showMsg(msg);
-                            if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
-                                showSmsMsg(msg, preference.vAdminPhoneNo().get());
-                            }
-                        }
-                    }else {
-                        coin.setBalance(preference, balance);
-                    }
-                }
+                isLoopTx = false;
+                return;
             }
 
             showMsg("sign data...");
@@ -526,11 +505,46 @@ public class WorkService extends Service {
     }
 
     private long getBalance(String coin){
+        showMsg(coin + " get balance... ");
+
         try {
             return chainCloudHotSendService.currentUser(coin).getBalance();
         }catch (RetrofitError error){
+            error.printStackTrace();
+            showMsg(coin + " get balance error " + error.getKind().name());
             return -1;
         }
+    }
+
+    private boolean isBalanceEnough(String coinCode){
+        Coin coin = Coin.fromValue(coinCode);
+        long balanceThreshold = coin.getBalanceThreshold(preference);
+        if (balanceThreshold >= 0 && coin.getBalance(preference) - amount <= balanceThreshold){
+            long balance = getBalance(coin.getCode());
+            if (balance > 0){
+                if (balance - amount <= balanceThreshold){
+                    if (balance - amount < 0){
+                        String msg = "balance is not enough and loop is stop";
+                        showMsg(msg);
+                        if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
+                            showSmsMsg(msg, preference.vAdminPhoneNo().get());
+                        }
+
+                        return false;
+                    }else {
+                        String msg = "Balance has reached the minimum limit, please recharge as soon as possible";
+                        showMsg(msg);
+                        if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
+                            showSmsMsg(msg, preference.vAdminPhoneNo().get());
+                        }
+                    }
+                }else {
+                    coin.setBalance(preference, balance);
+                }
+            }
+        }
+
+        return true;
     }
 
     private void showMsg(String msg){
