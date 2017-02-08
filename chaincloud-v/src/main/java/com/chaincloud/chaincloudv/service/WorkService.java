@@ -196,14 +196,16 @@ public class WorkService extends Service {
             }
 
             //6.post tx status to vweb
-            postStatus2VWeb(txStatus);
+            if (postStatus2VWeb(txStatus)) {
 
-            showMsg("update tx status is ok");
+                showMsg("update tx status is ok");
 
-            preference.edit()
-                    .lastUserTxNo().put(null)
-//                    .balance().put(preference.balance().get() - amount)
-                    .apply();
+                preference.edit()
+                        .lastUserTxNo().put(null)
+                        .apply();
+            }else {
+                showMsg("update tx status is error");
+            }
 
             if (isOnceTxTest){
 
@@ -488,12 +490,16 @@ public class WorkService extends Service {
         return null;
     }
 
-    private void postStatus2VWeb(TxStatus txStatus){
+    private boolean postStatus2VWeb(TxStatus txStatus){
         try{
             BooleanResult result = vWebService.postStatus(txStatus.sendRequest.userTxNo, txStatus.txHash);
+
+            return result.result();
         }catch (RetrofitError error){
             log.error("post tx status to vweb is error", error);
             showMsg("post tx status to vweb is error");
+
+            return false;
         }
     }
 
