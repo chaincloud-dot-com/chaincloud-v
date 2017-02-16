@@ -87,9 +87,9 @@ public class SettingChannelActivity extends FragmentActivity implements SMSServi
 
     @Click
     void btnOk(){
-        String phoneNo1 = etPhoneNo1.getText().toString();
-        String phoneNo2 = etPhoneNo2.getText().toString();
-        String phoneNoAdmin = etPhoneNoAdmin.getText().toString();
+        final String phoneNo1 = etPhoneNo1.getText().toString();
+        final String phoneNo2 = etPhoneNo2.getText().toString();
+        final String phoneNoAdmin = etPhoneNoAdmin.getText().toString();
 
         if(phoneNo1.equals("") && phoneNo1.equals("")){
             Toast.makeText(this, "chaincloud phone number is required", Toast.LENGTH_SHORT).show();
@@ -103,14 +103,24 @@ public class SettingChannelActivity extends FragmentActivity implements SMSServi
             return;
         }
 
-        preference.edit()
-                .chaincloudPhoneNo1().put(phoneNo1)
-                .chaincloudPhoneNo2().put(phoneNo2)
-                .vAdminPhoneNo().put(phoneNoAdmin)
-                .apply();
+        DialogAlert_.builder()
+                .msg(getString(R.string.dialog_admin_phone_confirm))
+                .ok(getString(R.string.dialog_prompt_ok))
+                .build()
+                .setRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        preference.edit()
+                                .chaincloudPhoneNo1().put(phoneNo1)
+                                .chaincloudPhoneNo2().put(phoneNo2)
+                                .vAdminPhoneNo().put(phoneNoAdmin)
+                                .apply();
 
-        binder.reloadPreference();
-        Toast.makeText(this, "save successfully", Toast.LENGTH_SHORT).show();
+                        binder.reloadPreference();
+                        Toast.makeText(getApplicationContext(), "save successfully", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .show(getSupportFragmentManager());
     }
 
     @Click

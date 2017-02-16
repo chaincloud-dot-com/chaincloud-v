@@ -52,7 +52,9 @@
     <string name="user_not_found">User Not Found</string>
     <string name="server_exception">Server Exception</string>
     <string name="dialog_setted">Setted</string>
+    <string name="dialog_prompt_ok">I know it</string>
     <string name="dialog_sms_permiss_confirm"><![CDATA[Please open access to read and write sms in Setting->Application]]></string>
+    <string name="dialog_admin_phone_confirm">Please must not set the administrator phone number to local machine number!</string>
     <string name="dialog_close_loop_confirm">Stop Loop?</string>
     <string name="dialog_export_log_confirm">Export Log?</string>
 

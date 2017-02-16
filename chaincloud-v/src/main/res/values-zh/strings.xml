@@ -52,7 +52,9 @@
     <string name="user_not_found">此用户id不存在！</string>
     <string name="server_exception">服务器异常</string>
     <string name="dialog_setted">已设置</string>
+    <string name="dialog_prompt_ok">我知道</string>
     <string name="dialog_sms_permiss_confirm"><![CDATA[请在 设置->应用 里手动打开 读短信 写短信 的权限！]]></string>
+    <string name="dialog_admin_phone_confirm">请务必不要把管理员手机号设置成本机号码</string>
     <string name="dialog_close_loop_confirm">确定关闭Loop吗？</string>
     <string name="dialog_export_log_confirm">确认导出log到外存？</string>
 
