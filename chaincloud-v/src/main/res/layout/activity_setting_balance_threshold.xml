@@ -128,7 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:layout_gravity="center_horizontal"
-        android:text="当设置的值小于零时，则为关闭提醒！"/>
+        android:text="@string/balance_threshold_hint"/>
 
     <Button
         android:id="@+id/btn_save"
