@@ -5,7 +5,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.chaincloud.chaincloudv.R;
+import com.chaincloud.chaincloudv.model.BitcoinUnit;
 import com.chaincloud.chaincloudv.preference.Preference_;
+import com.chaincloud.chaincloudv.util.BitcoinUtil;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Click;
@@ -28,9 +30,17 @@ public class SettingBalanceThresholdActivity extends Activity {
 
     @AfterViews
     void init(){
-        etBalanceThresholdBtc.setText(String.valueOf(preference.balanceThresholdBtc().get()));
-        etBalanceThresholdLtc.setText(String.valueOf(preference.balanceThresholdLtc().get()));
-        etBalanceThresholdDoge.setText(String.valueOf(preference.balanceThresholdDoge().get()));
+        Long btc = preference.balanceThresholdBtc().get();
+//        Long ltc = preference.balanceThresholdLtc().get();
+//        Long doge = preference.balanceThresholdDoge().get();
+
+        etBalanceThresholdBtc.setText(String.valueOf(btc < 0? btc : BitcoinUnit.BTC.format(btc)));
+
+//        int precisionLtc = (int) Math.floor(Math.log10(ltc));
+//        etBalanceThresholdLtc.setText(String.valueOf(ltc < 0? ltc : BitcoinUtil.formatValue(ltc, precisionLtc, 8 - precisionLtc)));
+
+//        int precisionDoge = (int) Math.floor(Math.log10(doge));
+//        etBalanceThresholdDoge.setText(String.valueOf(doge < 0? doge : BitcoinUtil.formatValue(doge, precisionDoge, 8 - precisionDoge)));
     }
 
     @Click
@@ -40,12 +50,19 @@ public class SettingBalanceThresholdActivity extends Activity {
 
     @Click
     void btnSave(){
-        preference.edit()
-                .balanceThresholdBtc().put(Long.parseLong(etBalanceThresholdBtc.getText().toString()))
-                .balanceThresholdLtc().put(Long.parseLong(etBalanceThresholdLtc.getText().toString()))
-                .balanceThresholdDoge().put(Long.parseLong(etBalanceThresholdDoge.getText().toString()))
-                .apply();
+        try {
+            double value = Double.parseDouble(etBalanceThresholdBtc.getText().toString());
 
-        Toast.makeText(this, "setting balance threshold is ok", Toast.LENGTH_SHORT).show();
+            preference.edit()
+                    .balanceThresholdBtc().put(value < 0 ? (long) value : (long)(value * Math.pow(10, 8)))
+//                .balanceThresholdLtc().put(Long.parseLong(etBalanceThresholdLtc.getText().toString()))
+//                .balanceThresholdDoge().put(Long.parseLong(etBalanceThresholdDoge.getText().toString()))
+            .apply();
+
+            Toast.makeText(this, "setting balance threshold is ok", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(this, "format is error", Toast.LENGTH_SHORT).show();
+            return;
+        }
     }
 }

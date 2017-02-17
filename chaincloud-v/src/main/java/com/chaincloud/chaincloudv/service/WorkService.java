@@ -510,7 +510,7 @@ public class WorkService extends Service {
         return ecKey.signMessage(txRequest.toString());
     }
 
-    private long getBalance(String coin){
+    private long getBalanceFromNet(String coin){
         showMsg(coin + " get balance... ");
 
         try {
@@ -526,8 +526,8 @@ public class WorkService extends Service {
         Coin coin = Coin.fromValue(coinCode);
         long balanceThreshold = coin.getBalanceThreshold(preference);
         if (balanceThreshold >= 0 && coin.getBalance(preference) - amount <= balanceThreshold){
-            long balance = getBalance(coin.getCode());
-            if (balance > 0){
+            long balance = getBalanceFromNet(coin.getCode());
+            if (balance >= 0){
                 if (balance - amount <= balanceThreshold){
                     if (balance - amount < 0){
                         String msg = "balance is not enough and loop is stop";
@@ -536,6 +536,8 @@ public class WorkService extends Service {
                             showSmsMsg(msg, preference.vAdminPhoneNo().get());
                         }
 
+                        coin.setBalance(preference, balance);
+
                         return false;
                     }else {
                         String msg = "Balance has reached the minimum limit, please recharge as soon as possible";
@@ -543,9 +545,9 @@ public class WorkService extends Service {
                         if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {
                             showSmsMsg(msg, preference.vAdminPhoneNo().get());
                         }
+
+                        coin.setBalance(preference, balance);
                     }
-                }else {
-                    coin.setBalance(preference, balance);
                 }
             }
         }

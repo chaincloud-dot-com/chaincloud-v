@@ -61,15 +61,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0"
-            android:inputType="number"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="satoshi"/>
+            android:text="BTC"/>
     </LinearLayout>
 
     <LinearLayout
@@ -88,15 +87,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0"
-            android:inputType="number"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="satoshi"/>
+            android:text="LTC"/>
     </LinearLayout>
 
     <LinearLayout
@@ -115,16 +113,22 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="0"
-            android:inputType="number"
+            android:inputType="numberDecimal|numberSigned"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="satoshi"/>
+            android:text="DOGE"/>
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_gravity="center_horizontal"
+        android:text="当设置的值小于零时，则为关闭提醒！"/>
 
     <Button
         android:id="@+id/btn_save"
