@@ -52,7 +52,7 @@ public class Validator {
     }
 
     public static final boolean validAddress(Coin coin, CharSequence str) {
-        if (coin != Coin.ETH) {
+//        if (coin != Coin.ETH) {
             int addressHeader = coin.getAddress();
             int p2shHeader = coin.getPayToScript();
             try {
@@ -62,8 +62,8 @@ public class Validator {
             } catch (Exception e) {
                 return false;
             }
-        }else {
-            return str.toString().matches("[0-9a-fA-FXx]{42}");
-        }
+//        }else {
+//            return str.toString().matches("[0-9a-fA-FXx]{42}");
+//        }
     }
 }

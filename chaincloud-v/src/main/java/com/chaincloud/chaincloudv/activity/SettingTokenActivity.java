@@ -28,6 +28,12 @@ public class SettingTokenActivity extends Activity {
     @ViewById
     EditText etTokenCold;
 
+    @ViewById
+    EditText etTokenHotAlt;
+
+    @ViewById
+    EditText etTokenColdAlt;
+
     @Pref
     Preference_ preference;
 
@@ -37,6 +43,8 @@ public class SettingTokenActivity extends Activity {
         etTokenVtest.setText(preference.tokenVTest().get());
         etTokenHot.setText(preference.tokenChainCloudHotSend().get());
         etTokenCold.setText(preference.tokenChainCloudColdReceive().get());
+        etTokenHotAlt.setText(preference.tokenChainCloudHotSendAlt().get());
+        etTokenColdAlt.setText(preference.tokenChainCloudColdReceiveAlt().get());
     }
 
     @Click
@@ -49,6 +57,8 @@ public class SettingTokenActivity extends Activity {
         String vTestToken = etTokenVtest.getText().toString();
         String hotToken = etTokenHot.getText().toString();
         String coldToken = etTokenCold.getText().toString();
+        String hotTokenAlt = etTokenHotAlt.getText().toString();
+        String coldTokenAlt = etTokenColdAlt.getText().toString();
 
 //        if(!vTestToken.equals("") && !hotToken.equals("")
 //                && !coldToken.equals("")) {
@@ -57,6 +67,8 @@ public class SettingTokenActivity extends Activity {
                     .tokenVTest().put(vTestToken)
                     .tokenChainCloudHotSend().put(hotToken)
                     .tokenChainCloudColdReceive().put(coldToken)
+                    .tokenChainCloudHotSendAlt().put(hotTokenAlt)
+                    .tokenChainCloudColdReceiveAlt().put(coldTokenAlt)
                     .apply();
 
             Toast.makeText(SettingTokenActivity.this, "save successful", Toast.LENGTH_SHORT).show();

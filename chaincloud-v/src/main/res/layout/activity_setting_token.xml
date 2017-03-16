@@ -66,6 +66,20 @@
         android:hint="@string/setting_token_cold"
         android:layout_marginTop="30dp"/>
 
+    <EditText
+        android:id="@+id/et_token_hot_alt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/setting_token_hot_alt"
+        android:layout_marginTop="30dp"/>
+
+    <EditText
+        android:id="@+id/et_token_cold_alt"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="@string/setting_token_cold_alt"
+        android:layout_marginTop="30dp"/>
+
     <Button
         android:id="@+id/btn_save"
         android:layout_width="match_parent"

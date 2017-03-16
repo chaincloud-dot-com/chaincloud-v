@@ -82,6 +82,8 @@
     <string name="message_newest_channelid">Newest VC Channel ID: </string>
     <string name="setting_token_cold">Cold Token</string>
     <string name="setting_token_hot">Hot Token</string>
+    <string name="setting_token_cold_alt">Alt Cold Token</string>
+    <string name="setting_token_hot_alt">Alt Hot Token</string>
     <string name="setting_token_vtest">VWEB Token</string>
     <string name="setting_address_check_stop">Stop Address Check</string>
     <string name="setting_address_check_start">Start Address Check</string>

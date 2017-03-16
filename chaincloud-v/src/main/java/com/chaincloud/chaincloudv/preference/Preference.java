@@ -10,6 +10,10 @@ import org.androidannotations.annotations.sharedpreferences.SharedPref;
  */
 @SharedPref(SharedPref.Scope.APPLICATION_DEFAULT)
 public interface Preference {
+    String tokenChainCloudColdReceiveAlt();
+
+    String tokenChainCloudHotSendAlt();
+
     String tokenChainCloudHotSend();
 
     String tokenChainCloudColdReceive();

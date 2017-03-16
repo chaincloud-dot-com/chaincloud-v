@@ -57,6 +57,7 @@ public class WorkService extends Service {
 
     private VWebService vWebService;
     private ChainCloudHotSendService chainCloudHotSendService;
+    private ChainCloudHotSendService chainCloudHotSendAltService;
 
     private WorkBinder workBinder = new WorkBinder();
 
@@ -79,8 +80,9 @@ public class WorkService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        vWebService = Api.apiService(VWebService.class);
-        chainCloudHotSendService = Api.apiService(ChainCloudHotSendService.class);
+        vWebService = Api.apiServiceAlt(VWebService.class, false);
+        chainCloudHotSendService = Api.apiServiceAlt(ChainCloudHotSendService.class, false);
+        chainCloudHotSendAltService = Api.apiServiceAlt(ChainCloudHotSendService.class, true);
 
         EventBus.getDefault().register(this);
     }
@@ -421,14 +423,26 @@ public class WorkService extends Service {
 
     private boolean postTxToChainCloud(TxResult txResult){
         try {
-            BooleanResult result = chainCloudHotSendService.postTxs(
-                    txResult.coinCode,
-                    txResult.coinCode,
-                    txResult.vtestId,
-                    txResult.info.outs,
-                    txResult.sign,
-                    txResult.info.dynamic,
-                    txResult.cId);
+            BooleanResult result;
+            if (txResult.coinCode.equals(Coin.BTC.getCode())){
+                result = chainCloudHotSendService.postTxs(
+                        txResult.coinCode,
+                        txResult.coinCode,
+                        txResult.vtestId,
+                        txResult.info.outs,
+                        txResult.sign,
+                        txResult.info.dynamic,
+                        txResult.cId);
+            }else {
+                result = chainCloudHotSendAltService.postTxs(
+                        txResult.coinCode,
+                        txResult.coinCode,
+                        txResult.vtestId,
+                        txResult.info.outs,
+                        txResult.sign,
+                        txResult.info.dynamic,
+                        txResult.cId);
+            }
 
             if (result.result()){
                 preference.edit()
@@ -460,7 +474,12 @@ public class WorkService extends Service {
 
     private TxStatus getTxStatusFromChainCloud(String coinCode, String userTxNo){
         try {
-            TxStatus txStatus = chainCloudHotSendService.getTxStatus(coinCode, userTxNo);
+            TxStatus txStatus;
+            if (coinCode.equals(Coin.BTC.getCode())) {
+                txStatus = chainCloudHotSendService.getTxStatus(coinCode, userTxNo);
+            }else {
+                txStatus = chainCloudHotSendAltService.getTxStatus(coinCode, userTxNo);
+            }
 
             return  txStatus;
 

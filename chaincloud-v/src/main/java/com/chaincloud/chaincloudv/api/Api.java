@@ -1,20 +1,18 @@
 package com.chaincloud.chaincloudv.api;
 
-import android.util.Log;
-
-import com.chaincloud.chaincloudv.ChainCloudVApplication_;
 import com.chaincloud.chaincloudv.BuildConfig;
+import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.api.service.ChainCloudColdReceiveService;
 import com.chaincloud.chaincloudv.api.service.ChainCloudHotSendService;
 import com.chaincloud.chaincloudv.api.service.VWebService;
 import com.chaincloud.chaincloudv.api.type.DateTypeAdapter;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.Date;
-import java.util.Hashtable;
 
 import retrofit.RestAdapter;
 import retrofit.android.AndroidLog;
@@ -37,18 +35,6 @@ public class Api {
             return value;
         }
 
-        public RestAdapter adapter() {
-            switch (this) {
-                case ChainCloudHotSend:
-                    return ChainCloudHotSendApiAdapter;
-                case ChainCloudColdReceive:
-                    return ChainCloudColdReceiveApiAdapter;
-                case VTest:
-                    return VTestApiAdapter;
-            }
-            return ChainCloudHotSendApiAdapter;
-        }
-
         public int nameRes(){
             switch (this){
                 case ChainCloudHotSend:
@@ -62,81 +48,126 @@ public class Api {
         }
     }
 
-    public static final String ChainCloudHotSendDomain = "https://chaincloud-api.getcai.com";
-    public static final String ChainCloudColdReceiveDomain = "https://chaincloud-api.getcai.com";
-//    public static final String ChainCloudHotSendDomain = "http://192.168.1.222:5000";
-//    public static final String ChainCloudColdReceiveDomain = "http://192.168.1.222:5000";
+//    public static final String ChainCloudHotSendDomain = "https://chaincloud-api.getcai.com";
+//    public static final String ChainCloudColdReceiveDomain = "https://chaincloud-api.getcai.com";
+    public static final String ChainCloudHotSendDomain = "http://192.168.1.161:5000";
+    public static final String ChainCloudColdReceiveDomain = "http://192.168.1.161:5000";
+    public static final String ChainCloudHotSendAltDomain = "http://192.168.1.161:5000";
+    public static final String ChainCloudColdReceiveAltDomain = "http://192.168.1.161:5000";
     public static final String ChainCloudHotSendApiRootPath = "/api/v1/";
     public static final String ChainCloudColdReiceveApiRootPath = "/api/v1/";
+    public static final String ChainCloudHotSendAltApiRootPath = "/api/v1/";
+    public static final String ChainCloudColdReiceveAltApiRootPath = "/api/v1/";
     public static final String ChainCloudHotSendApiEndpoint = ChainCloudHotSendDomain + ChainCloudHotSendApiRootPath;
     public static final String ChainCloudColdReceiveApiEndpoint = ChainCloudColdReceiveDomain + ChainCloudColdReiceveApiRootPath;
+    public static final String ChainCloudHotSendAltApiEndpoint = ChainCloudHotSendAltDomain + ChainCloudHotSendAltApiRootPath;
+    public static final String ChainCloudColdReceiveAltApiEndpoint = ChainCloudColdReceiveAltDomain + ChainCloudColdReiceveAltApiRootPath;
 
-//    public static String VTestDomain = "http://192.168.1.222:5000";
+//    public static String VTestDomain;
     public static final String VTestApiRootPath = "/api/v1/";
-//    public static String VTestApiEndpoint = VTestDomain + VTestApiRootPath;
+//    public static String VTestApiEndpoint;
 
     private static final String LogTag = "API";
     private static final RestAdapter.LogLevel LogLevel = BuildConfig.DEBUG ?
             RestAdapter.LogLevel.FULL : RestAdapter.LogLevel.NONE;
 
-    private static final Hashtable<Class, Object> ChainCloudHotSendApiServices = new Hashtable<Class, Object>();
-    private static final Hashtable<Class, Object> ChainCloudColdReceiveApiServices = new Hashtable<Class, Object>();
-    private static final Hashtable<Class, Object> VTestApiServices = new Hashtable<Class, Object>();
     public static final Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy
             .LOWER_CASE_WITH_UNDERSCORES).registerTypeAdapter(Date.class, new DateTypeAdapter())
             .create();
 
-    public static RestAdapter ChainCloudHotSendApiAdapter = getBaseBuilder()
-            .setEndpoint(ChainCloudHotSendApiEndpoint)
-            .setRequestInterceptor(ChainCloudHotSendApiInterceptor.instance())
-            .build();
-
-    public static RestAdapter ChainCloudColdReceiveApiAdapter = getBaseBuilder()
-            .setEndpoint(ChainCloudColdReceiveApiEndpoint)
-            .setRequestInterceptor(ChainCloudColdReceiveApiInterceptor.instance())
-            .build();
-
-    public static RestAdapter VTestApiAdapter;
+    public static ChainCloudHotSendService chainCloudHotSendService, chainCloudHotSendAltService;
+    public static ChainCloudColdReceiveService chainCloudColdReceiveService, chainCloudColdReceiveAltService;
+    public static VWebService vWebService;
 
     public static <T> T apiService(Class<T> service) {
-        ServerType serverType = currentServerType(service);
-        RestAdapter currentAdapter = serverType.adapter();
+        return apiServiceAlt(service, !GlobalParams.coinCode.equals(Coin.BTC.getCode()));
+    }
 
-        Hashtable<Class, Object> services = ChainCloudHotSendApiServices;
-        if (serverType == ServerType.ChainCloudColdReceive) {
-            services = ChainCloudColdReceiveApiServices;
-        }else if (serverType == ServerType.VTest) {
-            services = VTestApiServices;
+    public static <T> T apiServiceAlt(Class<T> service, boolean isAlt) {
+        if (service == VWebService.class){
+            return (T) vWebService;
         }
 
-        if (!services.containsKey(service)) {
-            Log.i(LogTag, "creating service for " + service.getSimpleName());
-            T result = currentAdapter.create(service);
-            services.put(service, result);
+        if (!isAlt){
+            if (service == ChainCloudHotSendService.class){
+                if (chainCloudHotSendService == null){
+                    chainCloudHotSendService = (ChainCloudHotSendService) constructService(service, isAlt);
+                }
+
+                return (T) chainCloudHotSendService;
+            }else if (service == ChainCloudColdReceiveService.class){
+                if (chainCloudColdReceiveService == null){
+                    chainCloudColdReceiveService = (ChainCloudColdReceiveService) constructService(service, isAlt);
+                }
+
+                return (T) chainCloudColdReceiveService;
+            }
+        }else {
+            if (service == ChainCloudHotSendService.class){
+                if (chainCloudHotSendAltService == null){
+                    chainCloudHotSendAltService = (ChainCloudHotSendService) constructService(service, isAlt);
+                }
+
+                return (T) chainCloudHotSendAltService;
+            }else if (service == ChainCloudColdReceiveService.class){
+                if (chainCloudColdReceiveAltService == null){
+                    chainCloudColdReceiveAltService = (ChainCloudColdReceiveService) constructService(service, isAlt);
+                }
+
+                return (T) chainCloudColdReceiveAltService;
+            }
         }
-        return (T) services.get(service);
+
+        return null;
     }
 
     public static void setVWebDomain(String domain){
-
         String VTestApiEndpoint = domain + VTestApiRootPath;
 
-        VTestApiAdapter = getBaseBuilder()
+        RestAdapter adapter = getBaseBuilder()
                 .setEndpoint(VTestApiEndpoint)
                 .setRequestInterceptor(VWebApiInterceptor.instance())
                 .build();
 
-        VTestApiServices.put(VWebService.class,
-                ServerType.VTest.adapter().create(VWebService.class));
+        vWebService = adapter.create(VWebService.class);
     }
 
-    private static ServerType currentServerType(Class service) {
+
+    private static <T> T constructService(Class<T> service, boolean isAlt){
         if (service == ChainCloudHotSendService.class){
-            return ServerType.ChainCloudHotSend;
+            RestAdapter adapter;
+            if (!isAlt){
+                adapter = getBaseBuilder()
+                        .setEndpoint(ChainCloudHotSendApiEndpoint)
+                        .setRequestInterceptor(ChainCloudHotSendApiInterceptor.instance())
+                        .build();
+            }else {
+                adapter = getBaseBuilder()
+                        .setEndpoint(ChainCloudHotSendAltApiEndpoint)
+                        .setRequestInterceptor(ChainCloudHotSendAltApiInterceptor.instance())
+                        .build();
+            }
+
+            return adapter.create(service);
         }else if (service == ChainCloudColdReceiveService.class){
-            return ServerType.ChainCloudColdReceive;
+            RestAdapter adapter;
+            if (!isAlt){
+                adapter = getBaseBuilder()
+                        .setEndpoint(ChainCloudColdReceiveApiEndpoint)
+                        .setRequestInterceptor(ChainCloudColdReceiveApiInterceptor.instance())
+                        .build();
+            }else {
+                adapter = getBaseBuilder()
+                        .setEndpoint(ChainCloudColdReceiveAltApiEndpoint)
+                        .setRequestInterceptor(ChainCloudColdReceiveAltApiInterceptor.instance())
+                        .build();
+            }
+
+            return adapter.create(service);
+        }else if (service == VWebService.class){
+            return (T) vWebService;
         }else {
-            return ServerType.VTest;
+            return null;
         }
     }
 

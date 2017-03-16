@@ -166,16 +166,16 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
         }
         if (inputValue != 0 && outputValue != 0) {
             Coin coin = Coin.fromValue(GlobalParams.coinCode);
-            if (coin != Coin.ETH) {
+//            if (coin != Coin.ETH) {
                 fee = inputValue - outputValue;
                 tvFee.setText(coin.showMoney(fee));
-            }else {
-                tvFee.setText(String.format(
-                        getString(R.string.eth_fee),
-                        String.valueOf(tx.getGas()),
-                        coin.showMoney(tx.getGasPrice()),
-                        coin.showMoney(tx.getGasUsed() * tx.getGasPrice())));
-            }
+//            }else {
+//                tvFee.setText(String.format(
+//                        getString(R.string.eth_fee),
+//                        String.valueOf(tx.getGas()),
+//                        coin.showMoney(tx.getGasPrice()),
+//                        coin.showMoney(tx.getGasUsed() * tx.getGasPrice())));
+//            }
         }
     }
 

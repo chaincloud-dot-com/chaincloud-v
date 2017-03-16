@@ -16,10 +16,10 @@ public enum Coin {
     BTC("BTC", 0x80, 0, 5, 0, 100000000),
     @SerializedName("LTC")
     LTC("LTC", 0xb0, 0x30, 5, 2, 100000000),
-    @SerializedName("ETH")
-    ETH("ETH", 0x9e, 0x1e, 0x16, 60, 1000000000000000000L);
-//    @SerializedName("DOGE")
-//    DOGE("DOGE", 0x9e, 0x1e, 0x16, 3);
+//    @SerializedName("ETH")
+//    ETH("ETH", 0x9e, 0x1e, 0x16, 60, 1000000000000000000L);
+    @SerializedName("DOGE")
+    DOGE("DOGE", 0x9e, 0x1e, 0x16, 3, 100000000);
 
     private String code;
     private int wif;
@@ -52,12 +52,10 @@ public enum Coin {
                 return "{fa-btc} ";
             case LTC:
                 return "Ł ";
-            case ETH:
-                return "Ξ ";
-//            case DOGE:
-//                return "Ð ";
-//            case DOGE:
-//                return "Ð ";
+//            case ETH:
+//                return "Ξ ";
+            case DOGE:
+                return "Ð ";
         }
 
         return null;
@@ -71,8 +69,8 @@ public enum Coin {
                 return preference.balanceLtc().get();
 //            case ETH:
 //                return preference.balanceEth().get();
-//            case DOGE:
-//                return preference.balanceDoge().get();
+            case DOGE:
+                return preference.balanceDoge().get();
         }
 
         return 0;
@@ -86,8 +84,8 @@ public enum Coin {
                 preference.edit().balanceLtc().put(balance).apply();
 //            case ETH:
 //                preference.edit().balanceEth().put(balance).apply();
-//            case DOGE:
-//                preference.balanceDoge().get();
+            case DOGE:
+                preference.balanceDoge().get();
         }
     }
 
@@ -99,8 +97,8 @@ public enum Coin {
                 return preference.balanceThresholdLtc().get();
 //            case ETH:
 //                return preference.balanceThresholdEth().get();
-//            case DOGE:
-//                return preference.balanceThresholdDoge().get();
+            case DOGE:
+                return preference.balanceThresholdDoge().get();
         }
 
         return 0;
@@ -120,10 +118,10 @@ public enum Coin {
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_btc, "http://blockchain.info/tx/");
             case LTC:https://ltc.blockr.io/tx/info/
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_ltc, "https://ltc.blockr.io/tx/info/");
-            case ETH:
-                return new Pair(R.string.tx_detail_view_on_blockchain_tx_eth, "https://etherscan.io/tx/");
-//            case DOGE:
-//                return new Pair(R.string.tx_detail_view_on_blockchain_tx_doge, "https://dogechain.info/tx/");
+//            case ETH:
+//                return new Pair(R.string.tx_detail_view_on_blockchain_tx_eth, "https://etherscan.io/tx/");
+            case DOGE:
+                return new Pair(R.string.tx_detail_view_on_blockchain_tx_doge, "https://dogechain.info/tx/");
         }
 
         return null;

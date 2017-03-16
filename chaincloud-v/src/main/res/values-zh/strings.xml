@@ -82,6 +82,8 @@
     <string name="message_newest_channelid">最新vc通道ID：</string>
     <string name="setting_token_cold">冷收款的token</string>
     <string name="setting_token_hot">热发款的token</string>
+    <string name="setting_token_cold_alt">Alt冷收款的token</string>
+    <string name="setting_token_hot_alt">Alt热发款的token</string>
     <string name="setting_token_vtest">vtest的token</string>
     <string name="setting_address_check_stop">停止Loop地址校验</string>
     <string name="setting_address_check_start">开始Loop地址校验</string>
