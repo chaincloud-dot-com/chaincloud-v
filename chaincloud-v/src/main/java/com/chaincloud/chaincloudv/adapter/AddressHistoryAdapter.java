@@ -3,6 +3,7 @@ package com.chaincloud.chaincloudv.adapter;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
 
+import com.chaincloud.chaincloudv.api.result.AddressHistory;
 import com.chaincloud.chaincloudv.ui.base.EndlessRecyclerViewAdapter;
 import com.chaincloud.chaincloudv.ui.base.item.AddressHistoryListItem;
 import com.chaincloud.chaincloudv.ui.base.item.AddressHistoryListItem_;
@@ -13,9 +14,9 @@ import java.util.List;
  * Created by songchenwen on 16/4/6.
  */
 public class AddressHistoryAdapter extends EndlessRecyclerViewAdapter {
-    private List<String> addresses;
+    private List<AddressHistory> addresses;
 
-    public AddressHistoryAdapter(List<String> addresses) {
+    public AddressHistoryAdapter(List<AddressHistory> addresses) {
         this.addresses = addresses;
     }
 
@@ -27,7 +28,7 @@ public class AddressHistoryAdapter extends EndlessRecyclerViewAdapter {
     @Override
     public void onBindDataViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof VH) {
-            ((VH) holder).v().setData(addresses.get(position), position);
+            ((VH) holder).v().setData(addresses.get(position));
         }
     }
 

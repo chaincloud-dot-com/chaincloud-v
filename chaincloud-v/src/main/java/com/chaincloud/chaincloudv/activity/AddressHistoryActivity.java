@@ -11,6 +11,7 @@ import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.AddressHistoryAdapter;
 import com.chaincloud.chaincloudv.api.Api;
+import com.chaincloud.chaincloudv.api.result.AddressHistory;
 import com.chaincloud.chaincloudv.api.service.ChainCloudColdReceiveService;
 import com.chaincloud.chaincloudv.api.service.ChainCloudHotSendService;
 import com.chaincloud.chaincloudv.model.Path;
@@ -23,9 +24,6 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +54,7 @@ public class AddressHistoryActivity extends AppCompatActivity implements SwipeRe
     RecyclerView rv;
 
     private AddressHistoryAdapter adapter;
-    private ArrayList<String> addresses = new ArrayList<String>();
+    private List<AddressHistory> addresses = new ArrayList<>();
 
     @AfterViews
     void initViews() {
@@ -125,25 +123,17 @@ public class AddressHistoryActivity extends AppCompatActivity implements SwipeRe
     @Background
     public void onRefresh() {
         adapter.setLoading(true);
+        List<AddressHistory> addressHistories = null;
         try {
-            ArrayList<String> myAddress = new ArrayList<String>();
-            JSONObject jsonObject = null;
-            JSONArray jsonArray = null;
-
             if(isHot) {
-                jsonArray = new JSONArray(Api.apiService(ChainCloudHotSendService.class)
-                        .addressHistory(GlobalParams.coinCode, path.value(), null));
+                addressHistories = Api.apiService(ChainCloudHotSendService.class)
+                        .addressHistory(GlobalParams.coinCode, path.value(), null);
             }else {
-                jsonArray = new JSONArray(Api.apiService(ChainCloudColdReceiveService.class)
-                        .addressHistory(GlobalParams.coinCode, path.value(), null));
+                addressHistories = Api.apiService(ChainCloudColdReceiveService.class)
+                        .addressHistory(GlobalParams.coinCode, path.value(), null);
             }
 
-            for (int i = 0; i<jsonArray.length(); i++) {
-                jsonObject = jsonArray.getJSONObject(i);
-                String address = jsonObject.getString("address");
-                myAddress.add(address);
-            }
-            apiDataListGot(true, myAddress);
+            apiDataListGot(true, addressHistories);
         } catch (RetrofitError e) {
             apiDataListGot(true, null);
             refresher.post(new Runnable() {
@@ -153,8 +143,6 @@ public class AddressHistoryActivity extends AppCompatActivity implements SwipeRe
                     refresher.setRefreshing(false);
                 }
             });
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
@@ -165,35 +153,25 @@ public class AddressHistoryActivity extends AppCompatActivity implements SwipeRe
             apiDataListGot(false, null);
             return;
         }
+        List<AddressHistory> addressHistories = null;
         try {
-            ArrayList<String> newAddresses = new ArrayList<String>();
-            JSONObject jsonObject = null;
-            JSONArray jsonArray = null;
-
             if(isHot) {
-                jsonArray = new JSONArray(Api.apiService(ChainCloudHotSendService.class)
-                        .addressHistory(GlobalParams.coinCode, path.value(), addresses.get(addresses.size() - 1)));
+                addressHistories = Api.apiService(ChainCloudHotSendService.class)
+                        .addressHistory(GlobalParams.coinCode, path.value(), addresses.get(addresses.size() - 1).address);
             }else {
-                jsonArray = new JSONArray(Api.apiService(ChainCloudColdReceiveService.class)
-                        .addressHistory(GlobalParams.coinCode, path.value(), addresses.get(addresses.size() - 1)));
+                addressHistories = Api.apiService(ChainCloudColdReceiveService.class)
+                        .addressHistory(GlobalParams.coinCode, path.value(), addresses.get(addresses.size() - 1).address);
             }
 
-            for (int i = 0; i<jsonArray.length(); i++) {
-                jsonObject = jsonArray.getJSONObject(i);
-                String address = jsonObject.getString("address");
-                newAddresses.add(address);
-            }
-            apiDataListGot(false, newAddresses);
+            apiDataListGot(false, addressHistories);
         } catch (RetrofitError e) {
             e.printStackTrace();
             apiDataListGot(false, null);
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
     @UiThread
-    void apiDataListGot(boolean replace, List<String> deltaAddresses) {
+    void apiDataListGot(boolean replace, List<AddressHistory> deltaAddresses) {
         if (refresher.isRefreshing() && !replace) {
             return;
         }

@@ -3,6 +3,7 @@ package com.chaincloud.chaincloudv.api.service;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import com.chaincloud.chaincloudv.api.result.AddressHistory;
 import com.chaincloud.chaincloudv.api.result.BooleanResult;
 import com.chaincloud.chaincloudv.api.result.TxStatus;
 import com.chaincloud.chaincloudv.model.Tx;
@@ -49,9 +50,9 @@ public interface ChainCloudHotSendService {
                                 @Query("since_address") String sinceAddress);
 
     @GET("/open/{coin}/address/history/{path}")
-    List<Object> addressHistory(@Path("coin") String coin,
-                                @Path("path") int path,
-                                @Query("since_address") String sinceAddress);
+    List<AddressHistory> addressHistory(@Path("coin") String coin,
+                                        @Path("path") int path,
+                                        @Query("since_address") String sinceAddress);
 
     @FormUrlEncoded
     @POST("/open/tx/request")

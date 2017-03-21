@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaincloud.chaincloudv.R;
+import com.chaincloud.chaincloudv.api.result.AddressHistory;
 import com.chaincloud.chaincloudv.util.BitcoinUtil;
 import com.chaincloud.chaincloudv.util.ClipboardUtil;
 
@@ -27,7 +28,7 @@ public class AddressHistoryListItem extends FrameLayout {
     @ViewById
     TextView tvIndex;
 
-    private String address;
+    private AddressHistory address;
 
     public AddressHistoryListItem(Context context) {
         super(context);
@@ -47,16 +48,16 @@ public class AddressHistoryListItem extends FrameLayout {
         super(context, attrs, defStyleAttr, defStyleRes);
     }
 
-    public void setData(String address, int index) {
+    public void setData(AddressHistory address) {
         this.address = address;
-        tvAddress.setText(BitcoinUtil.formatHash(address, 4, 20));
-        tvIndex.setText(String.valueOf(index));
+        tvAddress.setText(BitcoinUtil.formatHash(address.address, 4, 20));
+        tvIndex.setText(String.valueOf(address.index));
     }
 
     @Click
     void flAddressClicked() {
         if (address != null) {
-            ClipboardUtil.copyString(address);
+            ClipboardUtil.copyString(address.address);
 
             Toast.makeText(getContext(), R.string.me_address_copied, Toast.LENGTH_SHORT).show();
         }
