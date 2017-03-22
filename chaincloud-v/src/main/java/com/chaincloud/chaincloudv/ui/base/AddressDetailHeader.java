@@ -42,8 +42,8 @@ public class AddressDetailHeader extends FrameLayout {
 
     User user;
 
-    @ViewById(R.id.tv_address)
-    TextView tvAddress;
+    @ViewById
+    TextView tvAddress, tvAddressIndex;
 
     @ViewById(R.id.btn_balance)
     IconTextView btnBalance;
@@ -77,6 +77,7 @@ public class AddressDetailHeader extends FrameLayout {
         this.user = user;
 
         tvAddress.setText(BitcoinUtil.formatHash(user.getAddress(), 4, 12));
+        tvAddressIndex.setText("index: " + user.getReceivingIndex());
         ivQrcode.setContent(user.getAddress());
 
         btnBalance.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(user.getBalance()));

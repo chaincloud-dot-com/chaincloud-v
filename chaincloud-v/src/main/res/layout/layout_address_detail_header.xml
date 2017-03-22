@@ -18,36 +18,39 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp" >
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical" >
 
-                <LinearLayout
+                <FrameLayout
+                    android:id="@+id/fl_address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:orientation="vertical" >
+                    android:background="@drawable/ui_touchable_bg"
+                    android:focusable="true"
+                    android:foreground="@drawable/dropdown_ic_arrow_selector"
+                    android:foregroundGravity="bottom|right" >
 
-                    <FrameLayout
-                        android:id="@+id/fl_address"
+                    <TextView
+                        android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:background="@drawable/ui_touchable_bg"
-                        android:focusable="true"
-                        android:foreground="@drawable/dropdown_ic_arrow_selector"
-                        android:foregroundGravity="bottom|right" >
+                        android:layout_marginTop="10dp"
+                        android:textColor="@color/text_field_text_color"
+                        android:textSize="18sp" />
+                </FrameLayout>
 
-                        <TextView
-                            android:id="@+id/tv_address"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:textColor="@color/text_field_text_color"
-                            android:textSize="18sp" />
-                    </FrameLayout>
-                </LinearLayout>
-            </FrameLayout>
+                <TextView
+                    android:id="@+id/tv_address_index"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:textColor="@color/text_field_text_color"/>
+            </LinearLayout>
 
             <ImageView
                 android:layout_width="0dp"
