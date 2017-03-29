@@ -7,4 +7,5 @@ public class UpdateAddressBatchState {
     public int type;
     public int index;
     public int status;
+    public String coinType;
 }

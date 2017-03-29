@@ -112,7 +112,7 @@ public class AddressService extends Service {
 
     private void updateBatchCheckStatus(UpdateAddressBatchState state) {
         try {
-            vWebService.postAddressBatchStatus(state.index, state.status, state.type);
+            vWebService.postAddressBatchStatus(state.index, state.status, state.type, state.coinType);
 
             startLoopAddress();
         }catch (RetrofitError error){

@@ -31,5 +31,6 @@ public interface VWebService {
     @POST("/open/batch")
     BooleanResult postAddressBatchStatus(@NonNull @Field("batch_no") Integer batchNo,
                                          @Field("status") Integer status,
-                                         @Field("type") Integer type);
+                                         @Field("type") Integer type,
+                                         @Field("coin_type") String coinType);
 }

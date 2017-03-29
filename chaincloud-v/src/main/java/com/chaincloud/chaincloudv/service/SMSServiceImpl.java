@@ -268,6 +268,7 @@ public class SMSServiceImpl extends SMSServiceBase {
             UpdateAddressBatchState uabs = new UpdateAddressBatchState();
             uabs.type = type.value();
             uabs.index = index;
+            uabs.coinType = coin.getCode();
 
 
             if(publicKey.equals(channel.qc)) {
