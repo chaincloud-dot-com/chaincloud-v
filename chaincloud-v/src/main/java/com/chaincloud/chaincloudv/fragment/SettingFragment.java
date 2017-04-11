@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.chaincloud.chaincloudv.BuildConfig;
 import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.activity.SettingBalanceThresholdActivity_;
@@ -226,7 +227,7 @@ public class SettingFragment extends Fragment {
         try {
             tvVersion.setText(String.format(getString(R.string.setting_version),
                     getActivity().getPackageManager().getPackageInfo(getActivity()
-                            .getPackageName(), 0).versionName));
+                            .getPackageName(), 0).versionName, BuildConfig.DEBUG ? "DEBUG" : "RELEASE"));
 
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();

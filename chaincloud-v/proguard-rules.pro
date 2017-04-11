@@ -16,6 +16,8 @@
 #   public *;
 #}
 
+-keepattributes EnclosingMethod
+
 -keepclassmembers class ** {
     public void onEvent*(**);
 }
