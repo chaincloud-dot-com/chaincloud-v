@@ -6,7 +6,7 @@
     <string name="setting.network.vtest.name">客户服务器</string>
 
     <string name="app_name">ChainCloud-V</string>
-    <string name="setting_version">ChainCloud-V v%1$s %2$s</string>
+    <string name="setting_version">ChainCloud-V v%1$s build %2$d %3$s</string>
     <string name="tab_message">消息</string>
     <string name="tab_account">账户</string>
     <string name="tab_setting">设置</string>

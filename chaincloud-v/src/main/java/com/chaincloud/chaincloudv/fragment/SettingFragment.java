@@ -2,6 +2,7 @@ package com.chaincloud.chaincloudv.fragment;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.chaincloud.chaincloudv.BuildConfig;
+import com.chaincloud.chaincloudv.ChainCloudVApplication_;
 import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.activity.SettingBalanceThresholdActivity_;
@@ -224,13 +226,23 @@ public class SettingFragment extends Fragment {
 
 
     private void initVersion() {
+        String versionName = "";
+        int versionCode = 0;
         try {
-            tvVersion.setText(String.format(getString(R.string.setting_version),
-                    getActivity().getPackageManager().getPackageInfo(getActivity()
-                            .getPackageName(), 0).versionName, BuildConfig.DEBUG ? "DEBUG" : "RELEASE"));
-
-        } catch (PackageManager.NameNotFoundException e) {
+            // get the package info
+            Context context = ChainCloudVApplication_.getInstance().getApplicationContext();
+            PackageManager pm = context.getPackageManager();
+            PackageInfo pi = pm.getPackageInfo(context.getPackageName(), 0);
+            versionName = pi.versionName;
+            versionCode = pi.versionCode;
+            if (versionName == null || versionName.length() <= 0) {
+                return;
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+        tvVersion.setText(String.format(getString(R.string.setting_version),
+                versionName, versionCode, BuildConfig.DEBUG ? "DEBUG" : "RELEASE"));
     }
 }

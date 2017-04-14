@@ -6,7 +6,7 @@
     <string name="setting.network.vtest.name">VWeb Server</string>
 
     <string name="app_name">ChainCloud-V</string>
-    <string name="setting_version">ChainCloud-V v%1$s %2$s</string>
+    <string name="setting_version">ChainCloud-V v%1$s build %2$d %3$s</string>
     <string name="tab_message">Message</string>
     <string name="tab_account">Account</string>
     <string name="tab_setting">Setting</string>
