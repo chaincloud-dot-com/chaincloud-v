@@ -7,6 +7,8 @@ import com.chaincloud.chaincloudv.model.Address;
 import com.chaincloud.chaincloudv.model.AddressBatch;
 import com.chaincloud.chaincloudv.model.Channel;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
+import com.j256.ormlite.dao.Dao;
+import com.j256.ormlite.stmt.UpdateBuilder;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
@@ -18,7 +20,7 @@ import java.sql.SQLException;
 public class ORMLiteDBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "chaincloud-v.db";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     /**
      * constructor
@@ -43,13 +45,14 @@ public class ORMLiteDBHelper extends OrmLiteSqliteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
         try {
-            TableUtils.dropTable(connectionSource, Address.class, true);
-            TableUtils.dropTable(connectionSource, AddressBatch.class, true);
+            if (oldVersion == 3) {
+                Dao<AddressBatch, ?> dao = getDao(AddressBatch.class);
+                dao.executeRaw("ALTER TABLE `AddressBatch` ADD COLUMN coin STRING;");
 
-            TableUtils.createTable(connectionSource, AddressBatch.class);
-            TableUtils.createTable(connectionSource, Address.class);
-
-            onCreate(database, connectionSource);
+                UpdateBuilder builder = dao.updateBuilder();
+                builder.updateColumnValue("coin", "BTC");
+                builder.update();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
