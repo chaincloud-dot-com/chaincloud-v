@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.chaincloud.chaincloudv.model.Address;
 import com.chaincloud.chaincloudv.model.AddressBatch;
 import com.chaincloud.chaincloudv.model.Channel;
+import com.chaincloud.chaincloudv.util.Coin;
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.stmt.UpdateBuilder;
@@ -20,7 +21,7 @@ import java.sql.SQLException;
 public class ORMLiteDBHelper extends OrmLiteSqliteOpenHelper {
 
     private static final String DATABASE_NAME = "chaincloud-v.db";
-    private static final int DATABASE_VERSION = 4;
+    private static final int DATABASE_VERSION = 5;
 
     /**
      * constructor
@@ -44,17 +45,25 @@ public class ORMLiteDBHelper extends OrmLiteSqliteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase database, ConnectionSource connectionSource, int oldVersion, int newVersion) {
-        try {
-            if (oldVersion == 3) {
-                Dao<AddressBatch, ?> dao = getDao(AddressBatch.class);
-                dao.executeRaw("ALTER TABLE `AddressBatch` ADD COLUMN coin STRING;");
+        if (oldVersion == 3 || oldVersion == 4) {
 
-                UpdateBuilder builder = dao.updateBuilder();
-                builder.updateColumnValue("coin", "BTC");
-                builder.update();
+            Dao<AddressBatch, ?> dao = null;
+
+            try {
+                dao = getDao(AddressBatch.class);
+                dao.executeRaw("ALTER TABLE `AddressBatch` ADD COLUMN coin STRING;");
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+            try {
+                UpdateBuilder builder = dao.updateBuilder();
+                builder.updateColumnValue("coin", Coin.BTC);
+                builder.where().isNull("coin");
+                builder.update();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }
