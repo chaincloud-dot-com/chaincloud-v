@@ -18,7 +18,6 @@ import android.os.Bundle;
 import android.provider.Telephony;
 import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
-import android.util.Log;
 
 import com.chaincloud.chaincloudv.event.SmsPing;
 import com.chaincloud.chaincloudv.event.SwitchSmsObserverType;
@@ -334,7 +333,7 @@ public abstract class SMSServiceBase extends Service {
         public void onReceive(Context context, Intent intent) {
             switch (getResultCode()) {
                 case Activity.RESULT_OK:
-                    Log.i(TAG, "send SMS successful");
+                    log.info("send SMS successful");
                     break;
                 case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
                 case SmsManager.RESULT_ERROR_RADIO_OFF:
@@ -350,7 +349,7 @@ public abstract class SMSServiceBase extends Service {
     BroadcastReceiver deliverReportReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context _context, Intent _intent) {
-            Log.i(TAG, "deliver SMS success");
+            log.info(TAG, "deliver SMS success");
         }
     };
     //endregion
@@ -360,7 +359,7 @@ public abstract class SMSServiceBase extends Service {
         @Override
         public void onReceive(Context _context, Intent _intent) {
             createChannelSMS();
-            Log.i(TAG, "update channel task start..." + new Date().getMinutes());
+            log.info("update channel task start..." + new Date().getMinutes());
         }
     };
     //endregion
