@@ -33,6 +33,7 @@
     <string name="tx.input">交易Inputs</string>
     <string name="tx.output">交易Outputs</string>
     <string name="tx_detail_view_on_blockchain_tx_btc">在blockchain.info查看</string>
+    <string name="tx_detail_view_on_blockchain_tx_bcc">在blockdozer.com查看</string>
     <string name="tx_detail_view_on_blockchain_tx_ltc">在blockr.io查看</string>
     <string name="tx_detail_view_on_blockchain_tx_eth">在etherscan.io查看</string>
     <string name="tx_detail_view_on_blockchain_tx_doge">在dogechain.info查看</string>

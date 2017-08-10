@@ -14,6 +14,8 @@ import java.math.BigDecimal;
 public enum Coin {
     @SerializedName("BTC")
     BTC("BTC", 0x80, 0, 5, 0, 100000000),
+    @SerializedName("BCC")
+    BCC("BCC", 0x80, 0, 5, 145, 100000000),
     @SerializedName("LTC")
     LTC("LTC", 0xb0, 0x30, 5, 2, 100000000),
 //    @SerializedName("ETH")
@@ -50,6 +52,8 @@ public enum Coin {
         switch (this){
             case BTC:
                 return "{fa-btc} ";
+            case BCC:
+                return "฿ ";
             case LTC:
                 return "Ł ";
 //            case ETH:
@@ -65,6 +69,8 @@ public enum Coin {
         switch (this){
             case BTC:
                 return preference.balanceBtc().get();
+            case BCC:
+                return preference.balanceBcc().get();
             case LTC:
                 return preference.balanceLtc().get();
 //            case ETH:
@@ -80,6 +86,8 @@ public enum Coin {
         switch (this){
             case BTC:
                 preference.edit().balanceBtc().put(balance).apply();
+            case BCC:
+                preference.edit().balanceBcc().put(balance).apply();
             case LTC:
                 preference.edit().balanceLtc().put(balance).apply();
 //            case ETH:
@@ -93,6 +101,8 @@ public enum Coin {
         switch (this){
             case BTC:
                 return preference.balanceThresholdBtc().get();
+            case BCC:
+                return preference.balanceThresholdBcc().get();
             case LTC:
                 return preference.balanceThresholdLtc().get();
 //            case ETH:
@@ -116,6 +126,8 @@ public enum Coin {
         switch (this){
             case BTC:
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_btc, "http://blockchain.info/tx/");
+            case BCC:
+                return new Pair(R.string.tx_detail_view_on_blockchain_tx_bcc, "http://blockdozer.com/insight/tx/");
             case LTC:https://ltc.blockr.io/tx/info/
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_ltc, "https://ltc.blockr.io/tx/info/");
 //            case ETH:

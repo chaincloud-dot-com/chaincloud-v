@@ -252,10 +252,12 @@ public abstract class SMSServiceBase extends Service {
                     handleSMS(fromNumber, sms);
                 }
             }else {
-                String msg = "sms format is error";
+                if (!sms.toLowerCase().contains("sms format is error")){
+                    String msg = "sms format is error";
 
-                log.error(msg);
-                SMSUtil.sendSMS(fromNumber, msg, null, null);
+                    log.error(msg);
+                    SMSUtil.sendSMS(fromNumber, msg, null, null);
+                }
             }
         }
     }

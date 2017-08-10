@@ -93,4 +93,5 @@
 
     <string name="setting_sms_observer_prompt">In order to be able to use normal, please switch when the normal type not work. Switch now?</string>
     <string name="balance_threshold_hint">When the value is less than zero, we will close reminder function</string>
+    <string name="tx_detail_view_on_blockchain_tx_bcc">View On blockdozer.com</string>
 </resources>

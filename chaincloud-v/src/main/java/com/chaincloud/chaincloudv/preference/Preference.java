@@ -47,6 +47,9 @@ public interface Preference {
     long balanceBtc();
 
     @DefaultLong(0)
+    long balanceBcc();
+
+    @DefaultLong(0)
     long balanceLtc();
 
     @DefaultLong(0)
@@ -54,6 +57,9 @@ public interface Preference {
 
     @DefaultLong(-1)
     long balanceThresholdBtc();
+
+    @DefaultLong(-1)
+    long balanceThresholdBcc();
 
     @DefaultLong(-1)
     long balanceThresholdLtc();
