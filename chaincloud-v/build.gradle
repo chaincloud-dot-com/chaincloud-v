@@ -50,6 +50,7 @@ dependencies {
     compile "org.androidannotations:androidannotations-api:$AAVersion"
     compile "com.android.support:appcompat-v7:$SupportLibVersion"
     compile "com.android.support:design:$SupportLibVersion"
+    compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'

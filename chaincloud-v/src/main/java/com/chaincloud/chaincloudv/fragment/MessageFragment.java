@@ -36,6 +36,7 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EFragment;
+import org.androidannotations.annotations.IgnoredWhenDetached;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
@@ -165,6 +166,7 @@ public class MessageFragment extends Fragment implements WorkService.MsgListener
         writeLog(msg);
     }
 
+    @IgnoredWhenDetached
     @UiThread
     void showMsg(String msg){
         Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();
