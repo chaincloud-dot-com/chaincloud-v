@@ -3,6 +3,9 @@ package com.chaincloud.chaincloudv.util;
 import android.util.Log;
 
 import com.chaincloud.chaincloudv.util.crypto.Base58;
+import com.chaincloud.chaincloudv.util.crypto.BitcoinUtils;
+
+import java.util.Arrays;
 
 /**
  * Created by songchenwen on 15/8/6.
@@ -52,18 +55,22 @@ public class Validator {
     }
 
     public static final boolean validAddress(Coin coin, CharSequence str) {
-//        if (coin != Coin.ETH) {
-            int addressHeader = coin.getAddress();
-            int p2shHeader = coin.getPayToScript();
+        if (coin != Coin.ETH) {
+            String addressHeader = coin.getAddressPrefix();
+            String p2shHeader = coin.getPayToScriptPrefix();
             try {
                 byte[] tmp = Base58.decodeChecked(str.toString());
-                int header = tmp[0] & 0xFF;
-                return (header == p2shHeader || header == addressHeader);
+
+                byte[] addressHeaderTmp = Arrays.copyOfRange(tmp, 0, addressHeader.length() / 2);
+                byte[] p2shHeaderTmp = Arrays.copyOfRange(tmp, 0, p2shHeader.length() / 2);
+
+                return (BitcoinUtils.bytesToHexString(p2shHeaderTmp).equals(p2shHeader)
+                        || BitcoinUtils.bytesToHexString(addressHeaderTmp).equals(addressHeader));
             } catch (Exception e) {
                 return false;
             }
-//        }else {
-//            return str.toString().matches("[0-9a-fA-FXx]{42}");
-//        }
+        }else {
+            return str.toString().matches("[0-9a-fA-FXx]{42}");
+        }
     }
 }

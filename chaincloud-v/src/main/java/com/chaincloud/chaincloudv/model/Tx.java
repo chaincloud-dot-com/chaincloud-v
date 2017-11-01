@@ -5,6 +5,7 @@ import com.chaincloud.chaincloudv.R;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ public class Tx implements Serializable{
     private Date confirmAt;
     private int confirmation;
     private long value;
+    private BigInteger valueStr;
     private long gas;
     private long gasPrice;
     private long gasUsed;
@@ -47,6 +49,10 @@ public class Tx implements Serializable{
 
     public long getValue() {
         return value;
+    }
+
+    public BigInteger getValueStr() {
+        return valueStr;
     }
 
     public long getGas() {

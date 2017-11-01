@@ -37,6 +37,7 @@ import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.math.BigInteger;
 import java.util.UUID;
 
 import de.greenrobot.event.EventBus;
@@ -366,23 +367,24 @@ public class WorkService extends Service {
         return null;
     }
 
-    private long amount;
+    private BigInteger amount;
     private boolean isAddressValid(String outs, String coinCode) {
 
         if (outs != null && outs.length() > 0){
             String[] outsArr = outs.split(";");
 
-            amount = 0;
+            amount = BigInteger.ZERO;
             for (String out : outsArr){
                 String[] addressValue = out.split(",");
                 if (addressValue.length == 2){
                     try {
+                        BigInteger value = new BigInteger(addressValue[1]);
                         if(!Validator.validAddress(Coin.fromValue(coinCode), addressValue[0])
-                                || Long.parseLong(addressValue[1]) <= 0){
+                                || value.signum() <= 0){
                             return false;
                         }
 
-                        amount += Long.parseLong(addressValue[1]);
+                        amount = amount.add(value);
                     }catch (Exception e){
                         return false;
                     }
@@ -544,11 +546,11 @@ public class WorkService extends Service {
     private boolean isBalanceEnough(String coinCode){
         Coin coin = Coin.fromValue(coinCode);
         long balanceThreshold = coin.getBalanceThreshold(preference);
-        if (balanceThreshold >= 0 && coin.getBalance(preference) - amount <= balanceThreshold){
+        if (balanceThreshold > 0 && new BigInteger((coin.getBalance(preference) - balanceThreshold) + "").compareTo(amount) <= 0){
             long balance = getBalanceFromNet(coin.getCode());
             if (balance >= 0){
-                if (balance - amount <= balanceThreshold){
-                    if (balance - amount < 0){
+                if (new BigInteger(balance - balanceThreshold + "").compareTo(amount) <= 0){
+                    if (amount.compareTo(new BigInteger(balance + "")) > 0){
                         String msg = "balance is not enough and loop is stop";
                         showMsg(msg);
                         if (!preference.vAdminPhoneNo().getOr("").isEmpty()) {

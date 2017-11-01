@@ -3,6 +3,7 @@ package com.chaincloud.chaincloudv.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 /**
  * Created by songchenwen on 15/7/24.
@@ -43,6 +44,7 @@ public class User implements Serializable {
     private String avatar;
     private String phone;
     private long balance;
+    private BigInteger balanceStr;
     private String address;
     private int receivingIndex = -1;
 
@@ -87,6 +89,10 @@ public class User implements Serializable {
 
     public long getBalance() {
         return balance;
+    }
+
+    public BigInteger getBalanceStr() {
+        return balanceStr;
     }
 
     public int getReceivingIndex() {

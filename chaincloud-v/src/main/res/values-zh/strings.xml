@@ -33,10 +33,13 @@
     <string name="tx.input">交易Inputs</string>
     <string name="tx.output">交易Outputs</string>
     <string name="tx_detail_view_on_blockchain_tx_btc">在blockchain.info查看</string>
-    <string name="tx_detail_view_on_blockchain_tx_bcc">在blockdozer.com查看</string>
-    <string name="tx_detail_view_on_blockchain_tx_ltc">在blockr.io查看</string>
-    <string name="tx_detail_view_on_blockchain_tx_eth">在etherscan.io查看</string>
+    <string name="tx_detail_view_on_blockdozer_tx_bcc">在blockdozer.com查看</string>
+    <string name="tx_detail_view_on_blockchain_tx_ltc">在okcoin.cn查看</string>
     <string name="tx_detail_view_on_blockchain_tx_doge">在dogechain.info查看</string>
+    <string name="tx_detail_view_on_etherscan_tx_eth">在etherscan.io查看</string>
+    <string name="tx_detail_view_on_qtuminfo_tx_qtum">在qtum.info查看</string>
+    <string name="tx_detail_view_on_explorer_zcha_in_tx_zec">在explorer.zcha.in查看</string>
+    <string name="tx_detail_view_on_gastracker_io_etc">在gastracker.io查看</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">交易还没被处理</string>

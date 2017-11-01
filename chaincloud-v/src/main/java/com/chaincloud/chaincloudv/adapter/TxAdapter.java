@@ -48,8 +48,8 @@ public class TxAdapter extends MBaseAdapter<Tx> {
         if(data != null && data.size() > 0) {
             Tx tx = data.get(position);
 
-            holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(tx.getValue()));
-            if (tx.getValue() > 0) {
+            holder.tvValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(tx.getValue(), tx.getValueStr()));
+            if (tx.getValue() > 0 || (tx.getValueStr() != null && tx.getValueStr().signum() > 0)) {
                 holder.ivIcon.setImageDrawable(context.getResources().getDrawable(R.drawable.menu_deposit));
                 holder.ivIcon.setColorFilter(context.getResources().getColorStateList(R.color.fab_color_pressed));
 

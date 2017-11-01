@@ -80,7 +80,7 @@ public class AccountExpandableAdapter extends MBaseExpandableAdapter<String, Use
                 holder.tvUserId.setText(String.format("id:%1$s", user.getId()));
                 holder.tvUserName.setText(String.format("name:%1$s", user.getName()));
                 holder.tvBalance.setText(String.format("balance:%1$s",
-                        Coin.fromValue(GlobalParams.coinCode).showMoney(user.getBalance())));
+                        Coin.fromValue(GlobalParams.coinCode).showMoney(user.getBalance(), user.getBalanceStr())));
             }
         }
 

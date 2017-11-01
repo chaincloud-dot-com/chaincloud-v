@@ -7,36 +7,57 @@ import com.chaincloud.chaincloudv.preference.Preference_;
 import com.google.gson.annotations.SerializedName;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 /**
  * Created by zhumingu on 16/9/19.
  */
 public enum Coin {
     @SerializedName("BTC")
-    BTC("BTC", 0x80, 0, 5, 0, 100000000),
+    BTC("BTC", 0x80, "00", "05", 0, new BigInteger("100000000"), "bitcoin"),
     @SerializedName("BCC")
-    BCC("BCC", 0x80, 0, 5, 145, 100000000),
+    BCC("BCC", 0x80, "00", "05", 145, new BigInteger("100000000"), "bcash"),
     @SerializedName("LTC")
-    LTC("LTC", 0xb0, 0x30, 5, 2, 100000000),
-//    @SerializedName("ETH")
-//    ETH("ETH", 0x9e, 0x1e, 0x16, 60, 1000000000000000000L);
+    LTC("LTC", 0xb0, "30", "05", 2, new BigInteger("100000000"), "litecoin"),
     @SerializedName("DOGE")
-    DOGE("DOGE", 0x9e, 0x1e, 0x16, 3, 100000000);
+    DOGE("DOGE", 0x9e, "1e", "16", 3, new BigInteger("100000000"), "dogecoin"),
+    @SerializedName("ETH")
+    ETH("ETH", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "Ethereum"),
+    @SerializedName("ZEC")
+    ZEC("ZEC", 0x80, "1cb8", "1cbd", 133, new BigInteger("100000000"), "zcash"),
+    @SerializedName("ETC")
+    ETC("ETC", 0x80, "1cb8", "1cbd", 61, new BigInteger("1000000000000000000"), "Ethereum Classic"),
+    //    @SerializedName("ETH-OMG")
+//    OMG("OMG", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "OmiseGo"),
+//    @SerializedName("ETH-PAY")
+//    PAY("PAY", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "TenXPay"),
+//    @SerializedName("ETH-EOS")
+//    EOS("EOS", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "EOS"),
+//    @SerializedName("ETH-BAT")
+//    BAT("BAT", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "BAT"),
+//    @SerializedName("ETH-SNT")
+//    SNT("SNT", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "StatusNetwork"),
+//    @SerializedName("ETH-1ST")
+//    FST("1ST", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "FirstBlood"),
+    @SerializedName("QTUM")
+    QTUM("QTUM", 0x80, "3a", "32", 65535, new BigInteger("100000000"), "quantum");
 
     private String code;
     private int wif;
-    private int address;
-    private int payToScript;
+    private String address;
+    private String payToScript;
     private int pathNumber;
-    private long unit;
+    private BigInteger unit;
+    private String name;
 
-    Coin(String code, int wif, int address, int payToScript, int pathNumber, long unit) {
+    Coin(String code, int wif, String address, String payToScript, int pathNumber, BigInteger unit, String name) {
         this.code = code;
         this.wif = wif;
         this.address = address;
         this.payToScript = payToScript;
         this.pathNumber = pathNumber;
         this.unit = unit;
+        this.name = name;
     }
 
     public static Coin fromValue(String value) {
@@ -52,14 +73,20 @@ public enum Coin {
         switch (this){
             case BTC:
                 return "{fa-btc} ";
-            case BCC:
-                return "฿ ";
             case LTC:
                 return "Ł ";
-//            case ETH:
-//                return "Ξ ";
+            case ETH:
+                return "Ξ ";
+            case ETC:
+                return "⟠ ";
             case DOGE:
                 return "Ð ";
+            case BCC:
+                return "฿ ";
+            case ZEC:
+                return "Z ";
+            case QTUM:
+                return "Q ";
         }
 
         return null;
@@ -114,26 +141,40 @@ public enum Coin {
         return 0;
     }
 
-    public String showMoney(long money){
-        return getSymbol() + new BigDecimal(money).divide(BigDecimal.valueOf(unit)).toPlainString();
-    }
-
-    public String showMoneyNoSymbol(long money){
-        return new BigDecimal(money).divide(BigDecimal.valueOf(unit)).toPlainString();
+    public String showMoney(long money, BigInteger moneyStr){
+        if (this == Coin.ETH || this == Coin.ETC){
+            return getSymbol() + new BigDecimal(moneyStr).divide(new BigDecimal(unit)).toPlainString();
+        }else {
+            return getSymbol() + new BigDecimal(money).divide(new BigDecimal(unit)).toPlainString();
+        }
     }
 
     public Pair<Integer, String> getBlockChainInfo(){
-        switch (this){
+        switch (this) {
             case BTC:
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_btc, "http://blockchain.info/tx/");
             case BCC:
-                return new Pair(R.string.tx_detail_view_on_blockchain_tx_bcc, "http://blockdozer.com/insight/tx/");
-            case LTC:https://ltc.blockr.io/tx/info/
-                return new Pair(R.string.tx_detail_view_on_blockchain_tx_ltc, "https://ltc.blockr.io/tx/info/");
-//            case ETH:
-//                return new Pair(R.string.tx_detail_view_on_blockchain_tx_eth, "https://etherscan.io/tx/");
+                return new Pair(R.string.tx_detail_view_on_blockdozer_tx_bcc, "http://blockdozer.com/insight/tx/");
+            case LTC:
+                return new Pair(R.string.tx_detail_view_on_blockchain_tx_ltc, "http://block.okcoin.cn/ltc/tx/");
             case DOGE:
                 return new Pair(R.string.tx_detail_view_on_blockchain_tx_doge, "https://dogechain.info/tx/");
+            case ETH:
+                return new Pair(R.string.tx_detail_view_on_etherscan_tx_eth, "https://etherscan.io/tx/");
+            case ZEC:
+                return new Pair(R.string.tx_detail_view_on_explorer_zcha_in_tx_zec, "https://explorer.zcha.in/transactions/");
+            case ETC:
+                return new Pair(R.string.tx_detail_view_on_gastracker_io_etc, "https://gastracker.io/tx/");
+//            case OMG:
+//            case PAY:
+//            case EOS:
+//            case BAT:
+//            case FST:
+//            case SNT:
+//                return new Pair(R.string.tx_detail_view_on_etherscan_tx_eth, "https://etherscan.io/tx/");
+            case QTUM:
+                return new Pair(R.string.tx_detail_view_on_qtuminfo_tx_qtum, "https://explorer.qtum.org/tx/");
+
         }
 
         return null;
@@ -147,11 +188,11 @@ public enum Coin {
         return wif;
     }
 
-    public int getAddress() {
+    public String getAddressPrefix() {
         return address;
     }
 
-    public int getPayToScript() {
+    public String getPayToScriptPrefix() {
         return payToScript;
     }
 

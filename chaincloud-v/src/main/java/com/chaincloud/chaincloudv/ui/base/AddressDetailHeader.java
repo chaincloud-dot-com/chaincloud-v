@@ -80,7 +80,7 @@ public class AddressDetailHeader extends FrameLayout {
         tvAddressIndex.setText("index: " + user.getReceivingIndex());
         ivQrcode.setContent(user.getAddress());
 
-        btnBalance.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(user.getBalance()));
+        btnBalance.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(user.getBalance(), user.getBalanceStr()));
     }
 
 

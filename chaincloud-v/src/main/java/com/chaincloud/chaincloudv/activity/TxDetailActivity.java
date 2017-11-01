@@ -38,6 +38,7 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.ViewById;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -126,7 +127,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
             tvConfirmation.setText(confirmationCount);
         }
         if (String.valueOf(tx.getValue()) != null) {
-            tvValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(tx.getValue()));
+            tvValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(tx.getValue(), tx.getValueStr()));
         }
         if (tx.getInputs() != null) {
             List<Tx.In> ins = tx.getInputs();
@@ -142,7 +143,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
                 FrameLayout flInputAddress = (FrameLayout) v.findViewById(R.id.fl_input_address);
                 copyAddress(inputAddress, flInputAddress);
                 TextView tvInputValue = (TextView) v.findViewById(R.id.tv_input_value);
-                tvInputValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(input.getValue()));
+                tvInputValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(input.getValue(), BigInteger.ZERO));
                 inputValue = inputValue + input.getValue();
             }
         }
@@ -160,7 +161,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
                 FrameLayout flOutputAddress = (FrameLayout) v.findViewById(R.id.fl_output_address);
                 copyAddress(outPutAddress, flOutputAddress);
                 TextView tvOutputValue = (TextView) v.findViewById(R.id.tv_output_value);
-                tvOutputValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(output.getValue()));
+                tvOutputValue.setText(Coin.fromValue(GlobalParams.coinCode).showMoney(output.getValue(), BigInteger.ZERO));
                 outputValue = outputValue + output.getValue();
             }
         }
@@ -168,7 +169,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
             Coin coin = Coin.fromValue(GlobalParams.coinCode);
 //            if (coin != Coin.ETH) {
                 fee = inputValue - outputValue;
-                tvFee.setText(coin.showMoney(fee));
+                tvFee.setText(coin.showMoney(fee, BigInteger.ZERO));
 //            }else {
 //                tvFee.setText(String.format(
 //                        getString(R.string.eth_fee),
