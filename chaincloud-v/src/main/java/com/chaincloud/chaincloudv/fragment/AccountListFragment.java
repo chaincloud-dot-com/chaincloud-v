@@ -86,7 +86,7 @@ public class AccountListFragment extends Fragment implements Refreshable,
         try {
             User hUser = bhss.currentUser(GlobalParams.coinCode);
 
-            if (hUser != null) {
+            if (hUser != null && hUser.getId() != 0) {
                 groups.add(getString(R.string.account_hotsend));
 
                 List<User> users = new ArrayList<>();
@@ -101,7 +101,7 @@ public class AccountListFragment extends Fragment implements Refreshable,
         try {
             User cUser = bcrs.currentUser(GlobalParams.coinCode);
 
-            if (cUser != null) {
+            if (cUser != null && cUser.getId() != 0) {
                 groups.add(getString(R.string.account_cold_receive));
 
                 List<User> users = new ArrayList<>();
