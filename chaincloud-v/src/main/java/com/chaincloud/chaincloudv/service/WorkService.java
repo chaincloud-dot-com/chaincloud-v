@@ -324,7 +324,7 @@ public class WorkService extends Service {
 
     private void sleep(){
         try {
-            Thread.currentThread().sleep(3000);
+            Thread.currentThread().sleep(6000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
