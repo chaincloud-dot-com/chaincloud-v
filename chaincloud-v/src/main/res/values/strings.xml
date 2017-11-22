@@ -38,6 +38,7 @@
     <string name="tx_detail_view_on_blockchain_tx_doge">View on dogechain.info</string>
     <string name="tx_detail_view_on_etherscan_tx_eth">View on etherscan.io</string>
     <string name="tx_detail_view_on_qtuminfo_tx_qtum">View on qtum.info</string>
+    <string name="tx_detail_view_on_btgexp_tx_qtum">View on btgexp.com</string>
     <string name="tx_detail_view_on_explorer_zcha_in_tx_zec">View on explorer.zcha.in</string>
     <string name="tx_detail_view_on_gastracker_io_etc">View on gastracker.io</string>
     <string name="data_ok">ok</string>

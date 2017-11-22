@@ -40,7 +40,9 @@ public enum Coin {
 //    @SerializedName("ETH-1ST")
 //    FST("1ST", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "FirstBlood"),
     @SerializedName("QTUM")
-    QTUM("QTUM", 0x80, "3a", "32", 65535, new BigInteger("100000000"), "quantum");
+    QTUM("QTUM", 0x80, "3a", "32", 65535, new BigInteger("100000000"), "quantum"),
+    @SerializedName("BTG")
+    BTG("BTG", 0x80, "26", "17", 156, new BigInteger("100000000"), "bitcoin gold");
 
     private String code;
     private int wif;
@@ -74,19 +76,21 @@ public enum Coin {
             case BTC:
                 return "{fa-btc} ";
             case LTC:
-                return "Ł ";
+                return "{fa-ltc} ";
             case ETH:
-                return "Ξ ";
+                return "{fa-eth} ";
             case ETC:
-                return "⟠ ";
+                return "{fa-etc} ";
             case DOGE:
-                return "Ð ";
+                return "{fa-doge} ";
             case BCC:
-                return "฿ ";
+                return "{fa-bcc} ";
             case ZEC:
-                return "Z ";
+                return "{fa-zec} ";
             case QTUM:
-                return "Q ";
+                return "{fa-qtum} ";
+            case BTG:
+                return "{fa-btg} ";
         }
 
         return null;
@@ -174,6 +178,8 @@ public enum Coin {
 //                return new Pair(R.string.tx_detail_view_on_etherscan_tx_eth, "https://etherscan.io/tx/");
             case QTUM:
                 return new Pair(R.string.tx_detail_view_on_qtuminfo_tx_qtum, "https://explorer.qtum.org/tx/");
+            case BTG:
+                return new Pair(R.string.tx_detail_view_on_btgexp_tx_qtum, "http://btgexp.com/tx/");
 
         }
 
