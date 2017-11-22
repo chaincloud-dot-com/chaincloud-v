@@ -10,6 +10,7 @@ import com.chaincloud.chaincloudv.service.AddressService;
 import com.chaincloud.chaincloudv.service.AddressService_;
 import com.chaincloud.chaincloudv.service.SMSServiceImpl_;
 import com.chaincloud.chaincloudv.service.WorkService_;
+import com.chaincloud.chaincloudv.ui.base.iconfont.BitpieIconFontDescriptor;
 import com.chaincloud.chaincloudv.util.UncaughtExceptionHandler;
 import com.chaincloud.chaincloudv.util.crypto.LinuxSecureRandom;
 import com.joanzapata.iconify.Iconify;
@@ -58,6 +59,7 @@ public class ChainCloudVApplication extends Application {
     @AfterInject
     void initIcons() {
         Iconify.with(new FontAwesomeModule());
+        Iconify.with(new BitpieIconFontDescriptor());
     }
 
     @AfterInject
