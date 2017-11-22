@@ -9,8 +9,8 @@ android {
         applicationId "com.chaincloud.chaincloudv"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 35
-        versionName "0.3.5"
+        versionCode 36
+        versionName "0.3.6"
     }
     buildTypes {
         release {
