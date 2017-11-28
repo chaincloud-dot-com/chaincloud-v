@@ -73,7 +73,9 @@
     <string name="establish_channel">Establish Channel</string>
     <string name="setting_passwd">Setting Passwd</string>
     <string name="setting_passwd_hint">Tx Passwd</string>
+    <string name="setting_loop_internal_hint">Loop Internal(s)</string>
     <string name="setting_sms_observer_type">Change sms observer type(%1s)</string>
+    <string name="setting_loop_internal">Setting loop internal(s)</string>
     <string name="setting_balance_threshold">Setting balance threshold</string>
     <string name="setting_export_log">Export Log</string>
     <string name="setting_vweb_domain">VWEB Domain</string>

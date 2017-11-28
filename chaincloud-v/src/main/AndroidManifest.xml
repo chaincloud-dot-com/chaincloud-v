@@ -70,6 +70,10 @@
             android:screenOrientation="portrait" />
 
         <activity
+            android:name="com.chaincloud.chaincloudv.activity.SettingLoopInternalActivity_"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name="com.chaincloud.chaincloudv.activity.AddressBatchActivity_"
             android:screenOrientation="portrait" />
 

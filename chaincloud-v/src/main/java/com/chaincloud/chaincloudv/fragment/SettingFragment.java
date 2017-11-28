@@ -16,6 +16,7 @@ import com.chaincloud.chaincloudv.GlobalParams;
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.activity.SettingBalanceThresholdActivity_;
 import com.chaincloud.chaincloudv.activity.SettingChannelActivity_;
+import com.chaincloud.chaincloudv.activity.SettingLoopInternalActivity_;
 import com.chaincloud.chaincloudv.activity.SettingPasswdActivity_;
 import com.chaincloud.chaincloudv.activity.SettingTokenActivity_;
 import com.chaincloud.chaincloudv.activity.SettingVDomainActivity_;
@@ -88,6 +89,11 @@ public class SettingFragment extends Fragment {
     @Click
     void tvVwebdomainSetting(){
         SettingVDomainActivity_.intent(getContext()).start();
+    }
+
+    @Click
+    void tvLoopInternal(){
+        SettingLoopInternalActivity_.intent(getContext()).start();
     }
 
     @Click

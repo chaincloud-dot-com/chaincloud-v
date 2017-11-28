@@ -73,7 +73,9 @@
     <string name="establish_channel">建立通道</string>
     <string name="setting_passwd">设置传输密码</string>
     <string name="setting_passwd_hint">传输密码</string>
+    <string name="setting_loop_internal_hint">轮询间隔(s)</string>
     <string name="setting_sms_observer_type">改变短信监听方式(%1s)</string>
+    <string name="setting_loop_internal">设置轮询间隔(s)</string>
     <string name="setting_balance_threshold">最小余额提醒</string>
     <string name="setting_export_log">导出日志</string>
     <string name="setting_vweb_domain">VWEB域名</string>

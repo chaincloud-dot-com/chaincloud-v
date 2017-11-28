@@ -105,9 +105,7 @@ public class WorkService extends Service {
         isLoopTx = true;
         isLoopTxStatus = true;
 
-        while (isLoopTx){
-            sleep();
-
+        do {
             showMsg("pull a tx from vweb...");
 
             //1.pull tx from vweb
@@ -215,7 +213,7 @@ public class WorkService extends Service {
                 isLoopTx = false;
                 return;
             }
-        }
+        }while(isLoopTx && sleep());
     }
 
     @Background
@@ -322,12 +320,14 @@ public class WorkService extends Service {
         isPingLoop = false;
     }
 
-    private void sleep(){
+    private boolean sleep(){
         try {
-            Thread.currentThread().sleep(6000);
+            Thread.currentThread().sleep(preference.loopInternal().getOr(6) * 1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        return true;
     }
 
     private TxResult getTxFromVWeb(){
