@@ -186,6 +186,14 @@ public enum Coin {
         return null;
     }
 
+    public boolean isEther() {
+        if (this == Coin.ETH || this == Coin.ETC){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public String getCode() {
         return code;
     }

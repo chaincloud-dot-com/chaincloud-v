@@ -55,7 +55,7 @@ public class Validator {
     }
 
     public static final boolean validAddress(Coin coin, CharSequence str) {
-        if (coin != Coin.ETH) {
+        if (!coin.isEther()) {
             String addressHeader = coin.getAddressPrefix();
             String p2shHeader = coin.getPayToScriptPrefix();
             try {
