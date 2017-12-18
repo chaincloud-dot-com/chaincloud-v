@@ -58,7 +58,7 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
     boolean isHot;
 
     @ViewById
-    TextView tvHash, tvConfirmation, tvDate, tvValue, tvFee;
+    TextView tvHash, tvConfirmation, tvDate, tvValue, tvFee, tvSize, tvVsize;
     @ViewById
     LinearLayout llInputs, llOutput;
     @ViewById
@@ -178,6 +178,9 @@ public class TxDetailActivity extends AppCompatActivity implements SwipeRefreshL
 //                        coin.showMoney(tx.getGasUsed() * tx.getGasPrice())));
 //            }
         }
+
+        tvSize.setText(tx.getTxSize() + " B");
+        tvVsize.setText(tx.getTxVsize() + " B");
     }
 
     @Background

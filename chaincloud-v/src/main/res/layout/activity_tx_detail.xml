@@ -175,31 +175,70 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginRight="18dp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="15dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tx.value"
-                                android:textColor="@color/gray"
-                                android:textStyle="bold" />
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_marginLeft="18dp"
+                                android:layout_marginRight="18dp"
+                                android:orientation="vertical">
 
-                            <com.joanzapata.iconify.widget.IconTextView
-                                android:id="@+id/tv_value"
-                                android:layout_width="match_parent"
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tx.value"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold" />
+
+                                <com.joanzapata.iconify.widget.IconTextView
+                                    android:id="@+id/tv_value"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="{fa-btc}" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="{fa-btc}" />
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_marginLeft="18dp"
+                                android:layout_marginRight="18dp"
+                                android:orientation="vertical">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="15dp" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
 
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tx.fee"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold" />
+
+                                <com.joanzapata.iconify.widget.IconTextView
+                                    android:id="@+id/tv_fee"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="{fa-btc}" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <View
@@ -210,39 +249,81 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="18dp"
-                            android:layout_marginRight="18dp"
-                            android:orientation="vertical">
+                            android:orientation="horizontal">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="15dp" />
-
-                            <TextView
-                                android:layout_width="match_parent"
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="@string/tx.fee"
-                                android:textColor="@color/gray"
-                                android:textStyle="bold" />
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_marginLeft="18dp"
+                                android:layout_marginRight="18dp"
+                                android:orientation="vertical">
 
-                            <com.joanzapata.iconify.widget.IconTextView
-                                android:id="@+id/tv_fee"
-                                android:layout_width="match_parent"
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tx.size"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tv_size"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:text="{fa-btc}" />
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_marginLeft="18dp"
+                                android:layout_marginRight="18dp"
+                                android:orientation="vertical">
 
-                            <View
-                                android:layout_width="match_parent"
-                                android:layout_height="15dp" />
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tx.vsize"
+                                    android:textColor="@color/gray"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/tv_vsize"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="" />
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="15dp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                         <View
                             android:layout_width="fill_parent"
                             android:layout_height="1px"
                             android:background="@color/transparent_dark" />
-
                     </LinearLayout>
 
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="15dp" />
 
                     <LinearLayout
                         android:layout_width="match_parent"

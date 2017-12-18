@@ -4,6 +4,7 @@ import android.util.Pair;
 
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.preference.Preference_;
+import com.chaincloud.chaincloudv.ui.base.iconfont.BitpieIcon;
 import com.google.gson.annotations.SerializedName;
 
 import java.math.BigDecimal;
@@ -42,7 +43,9 @@ public enum Coin {
     @SerializedName("QTUM")
     QTUM("QTUM", 0x80, "3a", "32", 65535, new BigInteger("100000000"), "quantum"),
     @SerializedName("BTG")
-    BTG("BTG", 0x80, "26", "17", 156, new BigInteger("100000000"), "bitcoin gold");
+    BTG("BTG", 0x80, "26", "17", 156, new BigInteger("100000000"), "bitcoin gold"),
+    @SerializedName("SBTC")
+    SBTC("SBTC", 0x80, "00", "05", 8888, new BigInteger("100000000"), "super bitcoin");
 
     private String code;
     private int wif;
@@ -91,6 +94,8 @@ public enum Coin {
                 return "{fa-qtum} ";
             case BTG:
                 return "{fa-btg} ";
+            case SBTC:
+                return "{fa-sbtc} ";
         }
 
         return null;

@@ -19,6 +19,8 @@ public class Tx implements Serializable{
     private int confirmation;
     private long value;
     private BigInteger valueStr;
+    private long txSize;
+    private long txVsize;
     private long gas;
     private long gasPrice;
     private long gasUsed;
@@ -85,6 +87,22 @@ public class Tx implements Serializable{
 
     public List<Out> getOutputs() {
         return outputs;
+    }
+
+    public long getTxSize() {
+        return txSize;
+    }
+
+    public void setTxSize(long txSize) {
+        this.txSize = txSize;
+    }
+
+    public long getTxVsize() {
+        return txVsize;
+    }
+
+    public void setTxVsize(long txVsize) {
+        this.txVsize = txVsize;
     }
 
     public static class In implements Serializable {

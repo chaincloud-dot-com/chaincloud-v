@@ -30,6 +30,8 @@
     <string name="tx.hash">Tx Hash</string>
     <string name="tx.value">Tx Value</string>
     <string name="tx.fee">Fee</string>
+    <string name="tx.size">Tx Size</string>
+    <string name="tx.vsize">Tx VSize</string>
     <string name="tx.input">Tx Inputs</string>
     <string name="tx.output">Tx Outputs</string>
     <string name="tx_detail_view_on_blockchain_tx_btc">View on blockchain.info</string>

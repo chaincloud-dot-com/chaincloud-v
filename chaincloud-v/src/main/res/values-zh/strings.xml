@@ -30,6 +30,8 @@
     <string name="tx.hash">交易哈希</string>
     <string name="tx.value">交易金额</string>
     <string name="tx.fee">手续费</string>
+    <string name="tx.size">交易大小</string>
+    <string name="tx.vsize">交易虚拟大小</string>
     <string name="tx.input">交易Inputs</string>
     <string name="tx.output">交易Outputs</string>
     <string name="tx_detail_view_on_blockchain_tx_btc">在blockchain.info查看</string>
