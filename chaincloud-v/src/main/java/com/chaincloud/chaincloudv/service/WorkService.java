@@ -434,6 +434,7 @@ public class WorkService extends Service {
                         txResult.info.outs,
                         txResult.sign,
                         txResult.info.dynamic,
+                        txResult.info.confirmed,
                         txResult.cId);
             }else {
                 result = chainCloudHotSendAltService.postTxs(
@@ -443,6 +444,7 @@ public class WorkService extends Service {
                         txResult.info.outs,
                         txResult.sign,
                         txResult.info.dynamic,
+                        txResult.info.confirmed,
                         txResult.cId);
             }
 

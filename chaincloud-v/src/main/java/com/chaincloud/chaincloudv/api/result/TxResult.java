@@ -18,5 +18,6 @@ public class TxResult {
     public final class Info{
         public String outs;
         public int dynamic;
+        public int confirmed;
     }
 }

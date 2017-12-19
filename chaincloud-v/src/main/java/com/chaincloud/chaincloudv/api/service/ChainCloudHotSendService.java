@@ -71,6 +71,7 @@ public interface ChainCloudHotSendService {
                           @Nullable @Field("outs") String outs,
                           @Nullable @Field("vc_code") String vcCode,
                           @Nullable @Field("is_dynamic_fee") Integer isDynamicFee,
+                          @Nullable @Field("only_confirmed") Integer onlyConfirmed,
                           @Nullable @Field("c_id") Integer cId);
 
     @GET("/open/tx/{user_tx_no}")
