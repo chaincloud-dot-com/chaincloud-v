@@ -45,7 +45,22 @@ public enum Coin {
     @SerializedName("BTG")
     BTG("BTG", 0x80, "26", "17", 156, new BigInteger("100000000"), "bitcoin gold"),
     @SerializedName("SBTC")
-    SBTC("SBTC", 0x80, "00", "05", 8888, new BigInteger("100000000"), "super bitcoin");
+    SBTC("SBTC", 0x80, "00", "05", 8888, new BigInteger("100000000"), "super bitcoin"),
+    @SerializedName("HSR")
+    HSR("HSR", 0x80, "28", "64", 171, new BigInteger("100000000"), "Hcash"),
+    @SerializedName("BCD")
+    BCD("BCD", 0x80, "00", "05", 999, new BigInteger("10000000"), "bitcoin diamond"),
+    @SerializedName("BTW")
+    BTW("BTW", 0x80, "49", "1f", 777, new BigInteger("10000"), "bitcoin world"),
+    @SerializedName("DASH")
+    DASH("DASH", 0xcc, "4c", "10", 5, new BigInteger("100000000"), "dashcoin"),
+    @SerializedName("BTF")
+    BTF("BTF", 0x80, "24", "28", 9888, new BigInteger("100000000"), "bitcoinfaith"),
+    @SerializedName("BTP")
+    BTP("BTP", 0x80, "38", "3a", 8999, new BigInteger("10000000"), "bitcoinpay"),
+    @SerializedName("BTN")
+    BTN("BTN", 0x80, "00", "05", 1000, new BigInteger("100000000"), "bitcoinnew");
+
 
     private String code;
     private int wif;
@@ -96,6 +111,20 @@ public enum Coin {
                 return "{fa-btg} ";
             case SBTC:
                 return "{fa-sbtc} ";
+            case BTW:
+                return "{fa-btw} ";
+            case HSR:
+                return "{fa-hsr} ";
+            case BCD:
+                return "{fa-bcd} ";
+            case DASH:
+                return "{fa-dash} ";
+            case BTF:
+                return "{fa-btf} ";
+            case BTP:
+                return "{fa-btp} ";
+            case BTN:
+                return "{fa-btn} ";
         }
 
         return null;
@@ -185,6 +214,14 @@ public enum Coin {
                 return new Pair(R.string.tx_detail_view_on_qtuminfo_tx_qtum, "https://explorer.qtum.org/tx/");
             case BTG:
                 return new Pair(R.string.tx_detail_view_on_btgexp_tx_qtum, "http://btgexp.com/tx/");
+            case SBTC:
+                return new Pair(R.string.tx_detail_view_on_superbtc_tx_sbtc, "http://block.superbtc.org/tx/");
+            case HSR:
+                return new Pair(R.string.tx_detail_view_on_h_cash_hsr, "http://explorer.h.cash/tx/");
+            case BCD:
+                return new Pair(R.string.tx_detail_view_on_btcd_tx_bcd, "http://explorer.btcd.io/#/TX?loading=true&TX=");
+            case DASH:
+                return new Pair(R.string.tx_detail_view_on_dash_tx_dash, "http://explorer.dash.org/tx/");
 
         }
 

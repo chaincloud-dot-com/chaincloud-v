@@ -41,8 +41,12 @@
     <string name="tx_detail_view_on_etherscan_tx_eth">View on etherscan.io</string>
     <string name="tx_detail_view_on_qtuminfo_tx_qtum">View on qtum.info</string>
     <string name="tx_detail_view_on_btgexp_tx_qtum">View on btgexp.com</string>
+    <string name="tx_detail_view_on_superbtc_tx_sbtc">View on superbtc.org</string>
+    <string name="tx_detail_view_on_btcd_tx_bcd">View on btcd.io</string>
     <string name="tx_detail_view_on_explorer_zcha_in_tx_zec">View on explorer.zcha.in</string>
     <string name="tx_detail_view_on_gastracker_io_etc">View on gastracker.io</string>
+    <string name="tx_detail_view_on_h_cash_hsr">View on h.cash</string>
+    <string name="tx_detail_view_on_dash_tx_dash">View on dash.org</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">Tx Not Handled</string>
