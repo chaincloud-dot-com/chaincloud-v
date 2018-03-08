@@ -26,5 +26,6 @@ public class VWebApiInterceptor implements RequestInterceptor {
         request.addHeader("Accept", "application/json");
         String token = new Preference_(ChainCloudVApplication_.getInstance()).tokenVTest().getOr("");
         request.addHeader("Token", token);
+        request.addHeader("Accept-Language", "zh_CN");
     }
 }
