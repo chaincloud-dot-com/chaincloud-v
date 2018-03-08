@@ -370,6 +370,12 @@ public class WorkService extends Service {
     private BigInteger amount;
     private boolean isAddressValid(String outs, String coinCode) {
 
+        if (!coinCode.equals("ETH") && !coinCode.equals("ETC")) {
+            if (coinCode.startsWith("ETH-") || coinCode.startsWith("ETC-")) {
+                coinCode = coinCode.split("-")[0];
+            }
+        }
+
         if (outs != null && outs.length() > 0){
             String[] outsArr = outs.split(";");
 
