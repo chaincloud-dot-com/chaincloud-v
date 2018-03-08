@@ -29,9 +29,15 @@ public enum  BitpieIcon implements Icon {
     fa_bcd('\ue62e'),
     fa_hsr('\ue630'),
     fa_dash('\ue632'),
+    fa_safe('\ue640'),
+    fa_lch('\ue641'),
     fa_btf('\ue635'),
     fa_btp('\ue634'),
     fa_btn('\ue631'),
+    fa_btv('\ue63d'),
+    fa_bpa('\ue63c'),
+    fa_cdy('\ue604'),
+    fa_bbc('\ue636'),
     fa_sbtc('\ue62a');
     char character;
 

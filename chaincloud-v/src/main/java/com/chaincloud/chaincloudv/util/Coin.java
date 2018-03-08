@@ -59,7 +59,17 @@ public enum Coin {
     @SerializedName("BTP")
     BTP("BTP", 0x80, "38", "3a", 8999, new BigInteger("10000000"), "bitcoinpay"),
     @SerializedName("BTN")
-    BTN("BTN", 0x80, "00", "05", 1000, new BigInteger("100000000"), "bitcoinnew");
+    BTN("BTN", 0x80, "00", "05", 1000, new BigInteger("100000000"), "bitcoinnew"),
+    @SerializedName("BPA")
+    BPA("BPA", 0x80, "37", "50", 6666, new BigInteger("100000000"), "bitcoinpizza"),
+    @SerializedName("BBC")
+    BBC("BBC", 0x80, "19", "55", 1111, new BigInteger("10000000"), "bigbitcoin"),
+    @SerializedName("CDY")
+    CDY("CDY", 0x80, "1c", "58", 1145, new BigInteger("100000"), "candy"),
+    @SerializedName("LCH")
+    LCH("LCH", 0xb0, "30", "05", 189, new BigInteger("100000000"), "litecoincash"),
+    @SerializedName("SAFE")
+    SAFE("SAFE", 0xcc, "4c", "10", 6688, new BigInteger("100000000"), "safe");
 
 
     private String code;
@@ -125,6 +135,16 @@ public enum Coin {
                 return "{fa-btp} ";
             case BTN:
                 return "{fa-btn} ";
+            case BPA:
+                return "{fa-bpa} ";
+            case BBC:
+                return "{fa-bbc} ";
+            case CDY:
+                return "{fa-cdy} ";
+            case LCH:
+                return "{fa-lch} ";
+            case SAFE:
+                return "{fa-safe} ";
         }
 
         return null;
