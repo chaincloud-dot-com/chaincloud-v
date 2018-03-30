@@ -28,18 +28,6 @@ public enum Coin {
     ZEC("ZEC", 0x80, "1cb8", "1cbd", 133, new BigInteger("100000000"), "zcash"),
     @SerializedName("ETC")
     ETC("ETC", 0x80, "1cb8", "1cbd", 61, new BigInteger("1000000000000000000"), "Ethereum Classic"),
-    //    @SerializedName("ETH-OMG")
-//    OMG("OMG", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "OmiseGo"),
-//    @SerializedName("ETH-PAY")
-//    PAY("PAY", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "TenXPay"),
-//    @SerializedName("ETH-EOS")
-//    EOS("EOS", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "EOS"),
-//    @SerializedName("ETH-BAT")
-//    BAT("BAT", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "BAT"),
-//    @SerializedName("ETH-SNT")
-//    SNT("SNT", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "StatusNetwork"),
-//    @SerializedName("ETH-1ST")
-//    FST("1ST", 0x9e, "1e", "16", 60, new BigInteger("1000000000000000000"), "FirstBlood"),
     @SerializedName("QTUM")
     QTUM("QTUM", 0x80, "3a", "32", 65535, new BigInteger("100000000"), "quantum"),
     @SerializedName("BTG")
@@ -58,8 +46,8 @@ public enum Coin {
     BTF("BTF", 0x80, "24", "28", 9888, new BigInteger("100000000"), "bitcoinfaith"),
     @SerializedName("BTP")
     BTP("BTP", 0x80, "38", "3a", 8999, new BigInteger("10000000"), "bitcoinpay"),
-    @SerializedName("BTN")
-    BTN("BTN", 0x80, "00", "05", 1000, new BigInteger("100000000"), "bitcoinnew"),
+    @SerializedName("BTN-NEW")
+    BTN("BTN-NEW", 0x80, "00", "05", 1000, new BigInteger("100000000"), "bitcoinnew"),
     @SerializedName("BPA")
     BPA("BPA", 0x80, "37", "50", 6666, new BigInteger("100000000"), "bitcoinpizza"),
     @SerializedName("BBC")
@@ -279,4 +267,9 @@ public enum Coin {
 //    public int path(HDSeed.Path path) {
 //        return getPathNumber() * 2 + path.value();
 //    }
+
+    @Override
+    public String toString() {
+        return getCode();
+    }
 }
