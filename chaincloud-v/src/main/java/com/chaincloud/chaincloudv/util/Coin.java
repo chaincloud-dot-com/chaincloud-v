@@ -52,6 +52,8 @@ public enum Coin {
     BPA("BPA", 0x80, "37", "50", 6666, new BigInteger("100000000"), "bitcoinpizza"),
     @SerializedName("BBC")
     BBC("BBC", 0x80, "19", "55", 1111, new BigInteger("10000000"), "bigbitcoin"),
+    @SerializedName("BTV-NEW")
+    BTV("BTV-NEW", 0x80, "00", "05", 7777, new BigInteger("100000000"), "bitvote"),
     @SerializedName("CDY")
     CDY("CDY", 0x80, "1c", "58", 1145, new BigInteger("100000"), "candy"),
     @SerializedName("LCH")
@@ -127,6 +129,8 @@ public enum Coin {
                 return "{fa-bpa} ";
             case BBC:
                 return "{fa-bbc} ";
+            case BTV:
+                return "{fa-btv} ";
             case CDY:
                 return "{fa-cdy} ";
             case LCH:
