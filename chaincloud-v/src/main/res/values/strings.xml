@@ -47,6 +47,16 @@
     <string name="tx_detail_view_on_gastracker_io_etc">View on gastracker.io</string>
     <string name="tx_detail_view_on_h_cash_hsr">View on h.cash</string>
     <string name="tx_detail_view_on_dash_tx_dash">View on dash.org</string>
+    <string name="tx_detail_view_on_dash_org">View on dash.org</string>
+    <string name="tx_detail_view_on_btp">View on exp.btceasypay.com</string>
+    <string name="tx_detail_view_on_safe">View on chain.anwang.com</string>
+    <string name="tx_detail_view_on_bbc">View on bigbitcoins.org</string>
+    <string name="tx_detail_view_on_cdy">View on block.cdy.one</string>
+    <string name="tx_detail_view_on_lch">View on litecoincash.tech</string>
+    <string name="tx_detail_view_on_btn">View on explorer.btn.org</string>
+    <string name="tx_detail_view_on_btv">View on block.bitvote.one</string>
+    <string name="tx_detail_view_on_bcx">View on bcx.info</string>
+    <string name="tx_detail_view_on_lbtc">View on explorer.lbtc.io</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">Tx Not Handled</string>

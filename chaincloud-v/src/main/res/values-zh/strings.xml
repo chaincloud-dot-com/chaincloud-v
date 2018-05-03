@@ -47,6 +47,16 @@
     <string name="tx_detail_view_on_gastracker_io_etc">在gastracker.io查看</string>
     <string name="tx_detail_view_on_h_cash_hsr">在h.cash查看</string>
     <string name="tx_detail_view_on_dash_tx_dash">在dash.org查看</string>
+    <string name="tx_detail_view_on_dash_org">在dash.org查看</string>
+    <string name="tx_detail_view_on_btp">在exp.btceasypay.com查看</string>
+    <string name="tx_detail_view_on_safe">在chain.anwang.com查看</string>
+    <string name="tx_detail_view_on_bbc">在bigbitcoins.org查看</string>
+    <string name="tx_detail_view_on_cdy">在block.cdy.one查看</string>
+    <string name="tx_detail_view_on_lch">在litecoincash.tech查看</string>
+    <string name="tx_detail_view_on_btn">在explorer.btn.org查看</string>
+    <string name="tx_detail_view_on_btv">在block.bitvote.one查看</string>
+    <string name="tx_detail_view_on_bcx">在bcx.info查看</string>
+    <string name="tx_detail_view_on_lbtc">在explorer.lbtc.io查看</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">交易还没被处理</string>

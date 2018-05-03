@@ -59,7 +59,11 @@ public enum Coin {
     @SerializedName("LCH")
     LCH("LCH", 0xb0, "30", "05", 189, new BigInteger("100000000"), "litecoincash"),
     @SerializedName("SAFE")
-    SAFE("SAFE", 0xcc, "4c", "10", 6688, new BigInteger("100000000"), "safe");
+    SAFE("SAFE", 0xcc, "4c", "10", 6688, new BigInteger("100000000"), "safe"),
+    @SerializedName("BCX")
+    BCX("BCX", 0x80, "4b", "3f", 1688, new BigInteger("10000"), "bitcoinx"),
+    @SerializedName("LBTC")
+    LBTC("LBTC", 0x80, "00", "05", 998, new BigInteger("100000000"), "lightningbitcoin");
 
 
     private String code;
@@ -137,6 +141,10 @@ public enum Coin {
                 return "{fa-lch} ";
             case SAFE:
                 return "{fa-safe} ";
+            case BCX:
+                return "{fa-bcx} ";
+            case LBTC:
+                return "{fa-lbtc} ";
         }
 
         return null;
@@ -234,6 +242,28 @@ public enum Coin {
                 return new Pair(R.string.tx_detail_view_on_btcd_tx_bcd, "http://explorer.btcd.io/#/TX?loading=true&TX=");
             case DASH:
                 return new Pair(R.string.tx_detail_view_on_dash_tx_dash, "http://explorer.dash.org/tx/");
+            case BTF:
+                return new Pair(R.string.tx_detail_view_on_dash_org, "http://exp.btceasypay.com/insight/tx/");
+            case BTP:
+                return new Pair(R.string.tx_detail_view_on_btp, "http://exp.btceasypay.com/insight/tx/");
+            case BTN:
+                return new Pair(R.string.tx_detail_view_on_btn, "http://explorer.btn.org/tx/");
+            case BTV:
+                return new Pair(R.string.tx_detail_view_on_btv, "https://block.bitvote.one/tx/");
+            case BPA:
+                return new Pair(R.string.tx_detail_view_on_dash_org, "https://explorer.dash.org/tx/");
+            case CDY:
+                return new Pair(R.string.tx_detail_view_on_cdy, "https://block.cdy.one/tx/");
+            case SAFE:
+                return new Pair(R.string.tx_detail_view_on_safe, "http://chain.anwang.com/tx/");
+            case LCH:
+                return new Pair(R.string.tx_detail_view_on_lch, "http://explorer.litecoincash.tech/tx/");
+            case BBC:
+                return new Pair(R.string.tx_detail_view_on_bbc, "http://blockchain.bigbitcoins.org/insight/tx/");
+            case BCX:
+                return new Pair(R.string.tx_detail_view_on_bcx, "https://bcx.info/tx/");
+            case LBTC:
+                return new Pair(R.string.tx_detail_view_on_lbtc, "http://explorer.lbtc.io/transinfo?param=");
 
         }
 
