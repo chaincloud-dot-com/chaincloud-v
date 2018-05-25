@@ -134,7 +134,7 @@ public class WorkService extends Service {
 
             showMsg("address valid...");
             //address valid and account send value
-            if(!isAddressValid(decryptTx.info.outs, decryptTx.coinCode)){
+            if(!isAddressValid(decryptTx.info.outs, decryptTx.info.coinCode)){
                 String msg ="tx out invalid";
                 SMSUtil.sendSMS(preference.vAdminPhoneNo().get(), msg, null, null);
                 showMsg(msg);
@@ -145,7 +145,7 @@ public class WorkService extends Service {
 
             showMsg("balance check...");
             //balance check
-            if (!isBalanceEnough(encryptTx.coinCode)){
+            if (!isBalanceEnough(encryptTx.info.coinCode)){
 
                 isLoopTx = false;
                 return;
@@ -174,7 +174,7 @@ public class WorkService extends Service {
             while (isLoopTxStatus){
                 showMsg("loop chaincloud tx status");
 
-                txStatus = getTxStatusFromChainCloud(decryptTx.coinCode, decryptTx.vtestId);
+                txStatus = getTxStatusFromChainCloud(decryptTx.info.coinCode, decryptTx.vtestId);
 
                 if (txStatus == null){
                     sleep();
@@ -413,7 +413,7 @@ public class WorkService extends Service {
             TxRequest txRequest = new TxRequest();
             txRequest.outs = txResult.info.outs;
             txRequest.isDynamicFee = txResult.info.dynamic;
-            txRequest.coinCode = txResult.coinCode;
+            txRequest.coinCode = txResult.info.coinCode;
             txRequest.userTxNo = txResult.vtestId;
 
             txResult.sign = sign(txRequest, okChannel);
@@ -432,10 +432,10 @@ public class WorkService extends Service {
     private boolean postTxToChainCloud(TxResult txResult){
         try {
             BooleanResult result;
-            if (txResult.coinCode.equals(Coin.BTC.getCode())){
+            if (txResult.info.coinCode.equals(Coin.BTC.getCode())){
                 result = chainCloudHotSendService.postTxs(
-                        txResult.coinCode,
-                        txResult.coinCode,
+                        txResult.info.coinCode,
+                        txResult.info.coinCode,
                         txResult.vtestId,
                         txResult.info.outs,
                         txResult.sign,
@@ -444,8 +444,8 @@ public class WorkService extends Service {
                         txResult.cId);
             }else {
                 result = chainCloudHotSendAltService.postTxs(
-                        txResult.coinCode,
-                        txResult.coinCode,
+                        txResult.info.coinCode,
+                        txResult.info.coinCode,
                         txResult.vtestId,
                         txResult.info.outs,
                         txResult.sign,

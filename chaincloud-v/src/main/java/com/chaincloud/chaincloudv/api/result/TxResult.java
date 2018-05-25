@@ -12,12 +12,12 @@ public class TxResult {
 
     public Info info;
     public String sign;
-    public String coinCode = "BTC";
     public Integer cId;
 
     public final class Info{
         public String outs;
         public int dynamic;
         public int confirmed;
+        public String coinCode = "BTC";
     }
 }
