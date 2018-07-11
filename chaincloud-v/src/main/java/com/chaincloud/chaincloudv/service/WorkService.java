@@ -356,6 +356,9 @@ public class WorkService extends Service {
                 decryptStr = encryptTx.vtestInfo;
             }
             encryptTx.info = gson.fromJson(decryptStr, TxResult.Info.class);
+            if (encryptTx.info.coinCode == null){
+                encryptTx.info.coinCode = "BTC";
+            }
 
             return encryptTx;
         }catch (Exception e){
