@@ -63,7 +63,9 @@ public enum Coin {
     @SerializedName("BCX")
     BCX("BCX", 0x80, "4b", "3f", 1688, new BigInteger("10000"), "bitcoinx"),
     @SerializedName("LBTC")
-    LBTC("LBTC", 0x80, "00", "05", 998, new BigInteger("100000000"), "lightningbitcoin");
+    LBTC("LBTC", 0x80, "00", "05", 998, new BigInteger("100000000"), "lightningbitcoin"),
+    @SerializedName("EOS-EOS")
+    EOS("EOS-EOS", 0x80, "", "", 194, new BigInteger("1000000"), "eos");
 
 
     private String code;
@@ -272,6 +274,14 @@ public enum Coin {
 
     public boolean isEther() {
         if (this == Coin.ETH || this == Coin.ETC){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean isEOS() {
+        if (this.getCode().startsWith("EOS")){
             return true;
         }else {
             return false;
