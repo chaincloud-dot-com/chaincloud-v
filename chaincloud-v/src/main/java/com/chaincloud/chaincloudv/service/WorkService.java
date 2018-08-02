@@ -376,6 +376,8 @@ public class WorkService extends Service {
         if (!coinCode.equals("ETH") && !coinCode.equals("ETC")) {
             if (coinCode.startsWith("ETH-") || coinCode.startsWith("ETC-")) {
                 coinCode = coinCode.split("-")[0];
+            } else if (coinCode.startsWith("EOS-")){
+                coinCode = "EOS-EOS";
             }
         }
 
