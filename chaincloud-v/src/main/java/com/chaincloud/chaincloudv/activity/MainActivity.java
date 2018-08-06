@@ -3,6 +3,7 @@ package com.chaincloud.chaincloudv.activity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.chaincloud.chaincloudv.R;
 import com.chaincloud.chaincloudv.adapter.MFragmentPagerAdapter;
@@ -40,6 +41,13 @@ public class MainActivity extends FragmentActivity {
     void init() {
         initTab();
         initViewPager();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 
     private void initViewPager() {

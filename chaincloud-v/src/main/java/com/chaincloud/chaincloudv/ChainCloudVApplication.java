@@ -41,6 +41,7 @@ public class ChainCloudVApplication extends Application {
     public static Context mContext;
 
 
+
     @AfterInject
     void initContext() {
         mContext = getApplicationContext();
@@ -49,7 +50,6 @@ public class ChainCloudVApplication extends Application {
 
         initLog();
         initVWebDomain();
-        initWakeLock();
 
         WorkService_.intent(getApplicationContext()).start();
         SMSServiceImpl_.intent(getApplicationContext()).start();
@@ -125,12 +125,6 @@ public class ChainCloudVApplication extends Application {
         String domain = new Preference_(mContext).vwebDomain().get();
 
         Api.setVWebDomain(domain);
-    }
-
-    private void initWakeLock() {
-        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-        PowerManager.WakeLock wakeLock = powerManager.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "MyWakelockTag");
-        wakeLock.acquire();
     }
 
     public void initCoinType() {
