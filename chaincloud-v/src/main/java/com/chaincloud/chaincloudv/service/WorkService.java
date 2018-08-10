@@ -378,6 +378,8 @@ public class WorkService extends Service {
                 coinCode = coinCode.split("-")[0];
             } else if (coinCode.startsWith("EOS-")){
                 coinCode = "EOS-EOS";
+            } else if (coinCode.startsWith("OMNI-")) {
+                coinCode = coinCode.split("-")[1];
             }
         }
 
