@@ -57,6 +57,9 @@ public class Validator {
     public static final boolean validAddress(Coin coin, CharSequence str) {
         if (coin.isEOS()) {
             return str.toString().matches("^[12345abcdefghijklmnopqrstuvwxyz.]{1,12}$");
+        }else if (coin.isBTM()){
+            return str != null && str.toString().startsWith("bm") &&
+                    str.toString().matches("[0-9a-z]{42}");
         }else if (!coin.isEther()) {
             String addressHeader = coin.getAddressPrefix();
             String p2shHeader = coin.getPayToScriptPrefix();
