@@ -18,10 +18,16 @@ public class TxRequest {
 
     @Override
     public String toString() {
-        return "{\"coin_code\":\""+ coinCode
+        String result =  "{\"coin_code\":\""+ coinCode
                 +"\",\"is_dynamic_fee\":"+ isDynamicFee
                 +",\"outs\":\""+ outs
-                +"\",\"user_tx_no\":\""+ userTxNo
-                +"\",\"outType\":" + outType + "}";
+                +"\",\"user_tx_no\":\""+ userTxNo +"\"";
+
+        if (outType != 0){
+            result += ",\"outType\":" + outType;
+        }
+        result += "}";
+
+        return result;
     }
 }
