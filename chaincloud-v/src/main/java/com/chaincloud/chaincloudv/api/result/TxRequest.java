@@ -8,6 +8,7 @@ public class TxRequest {
     public String userTxNo;
     public String outs;
     public int isDynamicFee;
+    public int outType;
 
     public TxRequest(){}
 
@@ -17,6 +18,10 @@ public class TxRequest {
 
     @Override
     public String toString() {
-        return "{\"coin_code\":\""+ coinCode +"\",\"is_dynamic_fee\":"+ isDynamicFee +",\"outs\":\""+ outs +"\",\"user_tx_no\":\""+ userTxNo +"\"}";
+        return "{\"coin_code\":\""+ coinCode
+                +"\",\"is_dynamic_fee\":"+ isDynamicFee
+                +",\"outs\":\""+ outs
+                +"\",\"user_tx_no\":\""+ userTxNo
+                +"\",\"outType\":" + outType + "}";
     }
 }

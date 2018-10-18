@@ -19,5 +19,6 @@ public class TxResult {
         public int dynamic;
         public int confirmed;
         public String coinCode = "BTC";
+        public int outType = 0;
     }
 }

@@ -422,6 +422,7 @@ public class WorkService extends Service {
             txRequest.isDynamicFee = txResult.info.dynamic;
             txRequest.coinCode = txResult.info.coinCode;
             txRequest.userTxNo = txResult.vtestId;
+            txRequest.outType = txResult.info.outType;
 
             txResult.sign = sign(txRequest, okChannel);
 
@@ -448,7 +449,8 @@ public class WorkService extends Service {
                         txResult.sign,
                         txResult.info.dynamic,
                         txResult.info.confirmed,
-                        txResult.cId);
+                        txResult.cId,
+                        txResult.info.outType);
             }else {
                 result = chainCloudHotSendAltService.postTxs(
                         txResult.info.coinCode,
@@ -458,7 +460,8 @@ public class WorkService extends Service {
                         txResult.sign,
                         txResult.info.dynamic,
                         txResult.info.confirmed,
-                        txResult.cId);
+                        txResult.cId,
+                        txResult.info.outType);
             }
 
             if (result.result()){
