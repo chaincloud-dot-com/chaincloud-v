@@ -134,7 +134,7 @@ public class WorkService extends Service {
 
             showMsg("address valid...");
             //address valid and account send value
-            if(!isAddressValid(decryptTx.info.outs, decryptTx.info.coinCode)){
+            if(decryptTx.info.outType != 8 &&  decryptTx.info.outType != 9 && !isAddressValid(decryptTx.info.outs, decryptTx.info.coinCode)){
                 String msg ="tx out invalid";
                 SMSUtil.sendSMS(preference.vAdminPhoneNo().get(), msg, null, null);
                 showMsg(msg);
