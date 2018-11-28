@@ -22,7 +22,7 @@ public enum  BitpieIcon implements Icon {
     fa_bat('\ue61f'),
     fa_1st('\ue61c'),
     fa_pok('\ue639'),
-    fa_usdt('\ue64a'),
+    fa_usdt('\ue607'),
     fa_scny('\ue64b'),
     fa_jpy_yen('\ue649'),
     fa_snt('\ue60f'),
@@ -44,7 +44,14 @@ public enum  BitpieIcon implements Icon {
     fa_bbc('\ue644'),
     fa_bcx('\ue64f'),
     fa_lbtc('\ue643'),
-    fa_sbtc('\ue62a');
+    fa_bifi('\ue652'),
+    fa_god('\ue645'),
+    fa_sbtc('\ue62a'),
+    fa_trx('\ue605'),
+    fa_usdt_omni('\ue606'),
+    fa_bytom('\ue654'),
+    fa_bchabc('\ue608'),
+    fa_bchsv('\ue609');
     char character;
 
     BitpieIcon(char character) {

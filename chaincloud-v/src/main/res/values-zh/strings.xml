@@ -57,6 +57,7 @@
     <string name="tx_detail_view_on_btv">在block.bitvote.one查看</string>
     <string name="tx_detail_view_on_bcx">在bcx.info查看</string>
     <string name="tx_detail_view_on_lbtc">在explorer.lbtc.io查看</string>
+    <string name="tx_detail_view_on_bsv">在svblox.com查看</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">交易还没被处理</string>

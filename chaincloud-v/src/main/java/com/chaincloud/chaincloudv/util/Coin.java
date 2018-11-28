@@ -67,7 +67,9 @@ public enum Coin {
     @SerializedName("EOS-EOS")
     EOS("EOS-EOS", 0x80, "", "", 194, new BigInteger("1000000"), "eos"),
     @SerializedName("BTM-BTM")
-    BTM("BTM-BTM", 0x80, "", "", 153, new BigInteger("100000000"), "bytom");
+    BTM("BTM-BTM", 0x80, "", "", 153, new BigInteger("100000000"), "bytom"),
+    @SerializedName("BCHSV")
+    BCHSV("BCHSV", 0x80, "00", "05", 236, new BigInteger("100000000"), "bchsv");
 
 
     private String code;
@@ -149,6 +151,8 @@ public enum Coin {
                 return "{fa-bcx} ";
             case LBTC:
                 return "{fa-lbtc} ";
+            case BCHSV:
+                return "{fa-bchsv} ";
         }
 
         return null;
@@ -268,6 +272,8 @@ public enum Coin {
                 return new Pair(R.string.tx_detail_view_on_bcx, "https://bcx.info/tx/");
             case LBTC:
                 return new Pair(R.string.tx_detail_view_on_lbtc, "http://explorer.lbtc.io/transinfo?param=");
+            case BCHSV:
+                return new Pair(R.string.tx_detail_view_on_bsv, "https://www.svblox.com/tx/");
 
         }
 
