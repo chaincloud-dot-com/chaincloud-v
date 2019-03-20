@@ -282,7 +282,9 @@ public abstract class SMSServiceBase extends Service {
 
                         log.info("receive a msg and fromNumber:" + fromNumber + "...msg:" + body);
 
-                        dispatchHandleSms(body, fromNumber);
+                        if (fromNumber.contains(hcPhoneNo1) || fromNumber.contains(hcPhoneNo2) || fromNumber.contains(vAdminPhoneNo)) {
+                            dispatchHandleSms(body, fromNumber);
+                        }
                     }
                 }
             }
