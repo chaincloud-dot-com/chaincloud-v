@@ -9,6 +9,7 @@ public class TxRequest {
     public String outs;
     public int isDynamicFee;
     public int outType;
+    public String memo;
 
     public TxRequest(){}
 
@@ -25,6 +26,9 @@ public class TxRequest {
 
         if (outType != 0){
             result += ",\"outType\":" + outType;
+        }
+        if (memo != null){
+            result += ",\"memo\":\"" + memo + "\"";
         }
         result += "}";
 

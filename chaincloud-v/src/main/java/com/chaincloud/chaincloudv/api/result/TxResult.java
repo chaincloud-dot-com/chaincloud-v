@@ -20,5 +20,6 @@ public class TxResult {
         public int confirmed;
         public String coinCode = "BTC";
         public int outType = 0;
+        public String memo;
     }
 }

@@ -73,7 +73,8 @@ public interface ChainCloudHotSendService {
                           @Nullable @Field("is_dynamic_fee") Integer isDynamicFee,
                           @Nullable @Field("only_confirmed") Integer onlyConfirmed,
                           @Nullable @Field("c_id") Integer cId,
-                          @Nullable @Field("out_type") Integer outType);
+                          @Nullable @Field("out_type") Integer outType,
+                          @Nullable @Field("memo") String memo);
 
     @GET("/open/tx/{user_tx_no}")
     TxStatus getTxStatus(@Path("user_tx_no") String userTxNo);
