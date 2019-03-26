@@ -60,6 +60,8 @@ public class Validator {
         }else if (coin.isBTM()){
             return str != null && str.toString().startsWith("bm") &&
                     str.toString().matches("[0-9a-z]{42}");
+        }else if (coin == Coin.TRX){
+            return TrxUtils.decodeFromBase58Check(str.toString()) != null;
         }else if (!coin.isEther()) {
             String addressHeader = coin.getAddressPrefix();
             String p2shHeader = coin.getPayToScriptPrefix();

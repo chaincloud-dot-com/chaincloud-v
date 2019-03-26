@@ -69,7 +69,9 @@ public enum Coin {
     @SerializedName("BTM-BTM")
     BTM("BTM-BTM", 0x80, "", "", 153, new BigInteger("100000000"), "bytom"),
     @SerializedName("BCHSV")
-    BCHSV("BCHSV", 0x80, "00", "05", 236, new BigInteger("100000000"), "bchsv");
+    BCHSV("BCHSV", 0x80, "00", "05", 236, new BigInteger("100000000"), "bchsv"),
+    @SerializedName("TRX-TRX")
+    TRX("TRX-TRX", 0x80, "", "", 195, new BigInteger("1000000"), "trx");
 
 
     private String code;
