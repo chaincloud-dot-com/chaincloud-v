@@ -197,12 +197,16 @@ public abstract class SMSServiceBase extends Service {
         PendingIntent pendingIntent = PendingIntent
                 .getBroadcast(getApplicationContext(), 0, intent, 0);
 
-        /*** update channel in 00:00 ***/
+        /*** update channel in 03:00 ***/
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 24);
+        calendar.set(Calendar.HOUR_OF_DAY, 3);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
         calendar.set(Calendar.ZONE_OFFSET, 8 * 3600000);
+
+        if (calendar.before(Calendar.getInstance())) {
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+        }
 
         long firstime = calendar.getTimeInMillis();
         long period = 24 * 3600 * 1000;//a day
