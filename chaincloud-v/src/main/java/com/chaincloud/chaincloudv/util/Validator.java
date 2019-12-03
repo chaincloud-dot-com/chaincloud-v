@@ -3,6 +3,7 @@ package com.chaincloud.chaincloudv.util;
 import android.util.Log;
 
 import com.chaincloud.chaincloudv.util.crypto.Base58;
+import com.chaincloud.chaincloudv.util.crypto.Bech32;
 import com.chaincloud.chaincloudv.util.crypto.BitcoinUtils;
 
 import java.util.Arrays;
@@ -63,9 +64,15 @@ public class Validator {
         }else if (coin == Coin.TRX){
             return TrxUtils.decodeFromBase58Check(str.toString()) != null;
         }else if (!coin.isEther()) {
-            String addressHeader = coin.getAddressPrefix();
-            String p2shHeader = coin.getPayToScriptPrefix();
             try {
+                if (coin.equals(Coin.BTC) && str.toString().startsWith("bc")){
+                    Bech32.decode(str.toString());
+                    return true;
+                }
+
+                String addressHeader = coin.getAddressPrefix();
+                String p2shHeader = coin.getPayToScriptPrefix();
+
                 byte[] tmp = Base58.decodeChecked(str.toString());
 
                 byte[] addressHeaderTmp = Arrays.copyOfRange(tmp, 0, addressHeader.length() / 2);
