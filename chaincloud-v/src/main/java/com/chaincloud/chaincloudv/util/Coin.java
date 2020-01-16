@@ -19,7 +19,7 @@ public enum Coin {
     @SerializedName("BCC")
     BCC("BCC", 0x80, "00", "05", 145, new BigInteger("100000000"), "bcash"),
     @SerializedName("LTC")
-    LTC("LTC", 0xb0, "30", "05", 2, new BigInteger("100000000"), "litecoin"),
+    LTC("LTC", 0xb0, "30", "32", 2, new BigInteger("100000000"), "litecoin"),
     @SerializedName("DOGE")
     DOGE("DOGE", 0x9e, "1e", "16", 3, new BigInteger("100000000"), "dogecoin"),
     @SerializedName("ETH")
