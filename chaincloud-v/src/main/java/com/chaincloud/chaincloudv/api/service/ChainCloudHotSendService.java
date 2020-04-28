@@ -74,7 +74,8 @@ public interface ChainCloudHotSendService {
                           @Nullable @Field("only_confirmed") Integer onlyConfirmed,
                           @Nullable @Field("c_id") Integer cId,
                           @Nullable @Field("out_type") Integer outType,
-                          @Nullable @Field("memo") String memo);
+                          @Nullable @Field("memo") String memo,
+                          @Nullable @Field("nonce") Integer nonce);
 
     @GET("/open/tx/{user_tx_no}")
     TxStatus getTxStatus(@Path("user_tx_no") String userTxNo);

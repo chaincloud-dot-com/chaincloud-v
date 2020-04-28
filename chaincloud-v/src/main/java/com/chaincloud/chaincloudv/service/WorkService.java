@@ -145,7 +145,7 @@ public class WorkService extends Service {
 
             showMsg("balance check...");
             //balance check
-            if (!isBalanceEnough(encryptTx.info.coinCode)){
+            if (!isBalanceEnough(decryptTx.info.coinCode)){
 
                 isLoopTx = false;
                 return;
@@ -395,7 +395,7 @@ public class WorkService extends Service {
                     try {
                         BigInteger value = new BigInteger(addressValue[1]);
                         if(!Validator.validAddress(Coin.fromValue(coinCode), addressValue[0])
-                                || value.signum() <= 0){
+                                || value.signum() < 0){
                             return false;
                         }
 
@@ -454,7 +454,8 @@ public class WorkService extends Service {
                         txResult.info.confirmed,
                         txResult.cId,
                         txResult.info.outType,
-                        txResult.info.memo);
+                        txResult.info.memo,
+                        txResult.info.nonce);
             }else {
                 result = chainCloudHotSendAltService.postTxs(
                         txResult.info.coinCode,
@@ -466,7 +467,8 @@ public class WorkService extends Service {
                         txResult.info.confirmed,
                         txResult.cId,
                         txResult.info.outType,
-                        txResult.info.memo);
+                        txResult.info.memo,
+                        txResult.info.nonce);
             }
 
             if (result.result()){

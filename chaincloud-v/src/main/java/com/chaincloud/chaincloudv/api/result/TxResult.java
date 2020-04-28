@@ -21,5 +21,6 @@ public class TxResult {
         public String coinCode = "BTC";
         public int outType = 0;
         public String memo;
+        public Integer nonce;
     }
 }
