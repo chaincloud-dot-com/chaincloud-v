@@ -22,5 +22,6 @@ public class TxResult {
         public int outType = 0;
         public String memo;
         public Integer nonce;
+        public Long gasPrice;
     }
 }

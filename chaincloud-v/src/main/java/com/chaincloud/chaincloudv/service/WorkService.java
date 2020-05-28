@@ -455,7 +455,8 @@ public class WorkService extends Service {
                         txResult.cId,
                         txResult.info.outType,
                         txResult.info.memo,
-                        txResult.info.nonce);
+                        txResult.info.nonce,
+                        txResult.info.gasPrice);
             }else {
                 result = chainCloudHotSendAltService.postTxs(
                         txResult.info.coinCode,
@@ -468,7 +469,8 @@ public class WorkService extends Service {
                         txResult.cId,
                         txResult.info.outType,
                         txResult.info.memo,
-                        txResult.info.nonce);
+                        txResult.info.nonce,
+                        txResult.info.gasPrice);
             }
 
             if (result.result()){

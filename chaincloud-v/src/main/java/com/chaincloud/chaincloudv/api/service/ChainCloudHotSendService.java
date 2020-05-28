@@ -75,7 +75,8 @@ public interface ChainCloudHotSendService {
                           @Nullable @Field("c_id") Integer cId,
                           @Nullable @Field("out_type") Integer outType,
                           @Nullable @Field("memo") String memo,
-                          @Nullable @Field("nonce") Integer nonce);
+                          @Nullable @Field("nonce") Integer nonce,
+                          @Nullable @Field("gas_price") Long gasPrice);
 
     @GET("/open/tx/{user_tx_no}")
     TxStatus getTxStatus(@Path("user_tx_no") String userTxNo);
