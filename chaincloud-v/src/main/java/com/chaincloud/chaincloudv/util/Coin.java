@@ -70,6 +70,8 @@ public enum Coin {
     BTM("BTM-BTM", 0x80, "", "", 153, new BigInteger("100000000"), "bytom"),
     @SerializedName("BCHSV")
     BCHSV("BCHSV", 0x80, "00", "05", 236, new BigInteger("100000000"), "bchsv"),
+    @SerializedName("BCHA")
+    BCHA("BCHA", 0x80, "00", "05", 589, new BigInteger("100000000"), "bcha"),
     @SerializedName("TRX-TRX")
     TRX("TRX-TRX", 0x80, "", "", 195, new BigInteger("1000000"), "trx");
 
@@ -155,6 +157,8 @@ public enum Coin {
                 return "{fa-lbtc} ";
             case BCHSV:
                 return "{fa-bchsv} ";
+            case BCHA:
+                return "{fa-bcha} ";
         }
 
         return null;
@@ -276,6 +280,8 @@ public enum Coin {
                 return new Pair(R.string.tx_detail_view_on_lbtc, "http://explorer.lbtc.io/transinfo?param=");
             case BCHSV:
                 return new Pair(R.string.tx_detail_view_on_bsv, "https://www.svblox.com/tx/");
+            case BCHA:
+                return new Pair(R.string.tx_detail_view_on_bcha, "https://blockchair.com/bitcoin-abc/transaction/");
 
         }
 
