@@ -59,6 +59,8 @@
     <string name="tx_detail_view_on_lbtc">在explorer.lbtc.io查看</string>
     <string name="tx_detail_view_on_bsv">在svblox.com查看</string>
     <string name="tx_detail_view_on_bcha">在blockchair.com查看</string>
+    <string name="tx_detail_view_on_bscscan">在bscscan.com查看</string>
+    <string name="tx_detail_view_on_hecochain">在hecoinfo.com查看</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">交易还没被处理</string>

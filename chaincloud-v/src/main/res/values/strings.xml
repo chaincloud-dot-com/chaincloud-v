@@ -59,6 +59,8 @@
     <string name="tx_detail_view_on_lbtc">View on explorer.lbtc.io</string>
     <string name="tx_detail_view_on_bsv">View on svblox.com</string>
     <string name="tx_detail_view_on_bcha">View on blockchair.com</string>
+    <string name="tx_detail_view_on_bscscan">View on bscscan.com</string>
+    <string name="tx_detail_view_on_hecochain">View on hecoinfo.com</string>
     <string name="data_ok">ok</string>
     <string name="tx_ok">ok</string>
     <string name="tx_not">Tx Not Handled</string>

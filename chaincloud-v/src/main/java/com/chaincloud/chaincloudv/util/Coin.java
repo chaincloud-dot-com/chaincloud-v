@@ -16,6 +16,10 @@ import java.math.BigInteger;
 public enum Coin {
     @SerializedName("BTC")
     BTC("BTC", 0x80, "00", "05", 0, new BigInteger("100000000"), "bitcoin"),
+    @SerializedName("BTCTEST")
+    BTCTEST("BTCTEST", 0x80, "6f", "c4", 1, new BigInteger("100000000"), "bitcointest"),
+    @SerializedName("ETHKOVAN")
+    ETHKOVAN("ETHKOVAN", 0x80, "6f", "c4", 1, new BigInteger("1000000000000000000"), "ETHKOVAN"),
     @SerializedName("BCC")
     BCC("BCC", 0x80, "00", "05", 145, new BigInteger("100000000"), "bcash"),
     @SerializedName("LTC")
@@ -28,6 +32,10 @@ public enum Coin {
     ZEC("ZEC", 0x80, "1cb8", "1cbd", 133, new BigInteger("100000000"), "zcash"),
     @SerializedName("ETC")
     ETC("ETC", 0x80, "1cb8", "1cbd", 61, new BigInteger("1000000000000000000"), "Ethereum Classic"),
+    @SerializedName("BNB")
+    BNB("BNB", 0x9e, "1e", "16", 714, new BigInteger("1000000000000000000"), "BinanceSmartChain"),
+    @SerializedName("HT")
+    HT("HT", 0x9e, "1e", "16", 1010, new BigInteger("1000000000000000000"), "Heco"),
     @SerializedName("QTUM")
     QTUM("QTUM", 0x80, "3a", "32", 65535, new BigInteger("100000000"), "quantum"),
     @SerializedName("BTG")
@@ -214,7 +222,7 @@ public enum Coin {
     }
 
     public String showMoney(long money, BigInteger moneyStr){
-        if (this == Coin.ETH || this == Coin.ETC){
+        if (isEther()){
             return getSymbol() + new BigDecimal(moneyStr).divide(new BigDecimal(unit)).toPlainString();
         }else {
             return getSymbol() + new BigDecimal(money).divide(new BigDecimal(unit)).toPlainString();
@@ -282,6 +290,10 @@ public enum Coin {
                 return new Pair(R.string.tx_detail_view_on_bsv, "https://www.svblox.com/tx/");
             case BCHA:
                 return new Pair(R.string.tx_detail_view_on_bcha, "https://blockchair.com/bitcoin-abc/transaction/");
+            case BNB:
+                return new Pair(R.string.tx_detail_view_on_bscscan, "https://bscscan.com/tx/");
+            case HT:
+                return new Pair(R.string.tx_detail_view_on_hecochain, "https://hecoinfo.com/tx/");
 
         }
 
@@ -289,9 +301,10 @@ public enum Coin {
     }
 
     public boolean isEther() {
-        if (this == Coin.ETH || this == Coin.ETC){
+        if (getCode().startsWith("ETH") || getCode().startsWith("ETC")
+                || getCode().startsWith("BNB") || getCode().startsWith("HT")){
             return true;
-        }else {
+        } else {
             return false;
         }
     }
