@@ -301,8 +301,20 @@ public enum Coin {
     }
 
     public boolean isEther() {
-        if (getCode().startsWith("ETH") || getCode().startsWith("ETC")
-                || getCode().startsWith("BNB") || getCode().startsWith("HT")){
+        return isEtherCode(getCode()) || isEtherToken(getCode());
+    }
+
+    public static boolean isEtherCode(String coinCode){
+        if (coinCode.equals("ETH") || coinCode.equals("ETC") || coinCode.equals("BNB") || coinCode.equals("HT")){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static boolean isEtherToken(String coinCode){
+        if (coinCode.startsWith("ETH-") || coinCode.startsWith("ETC-")
+                || coinCode.startsWith("BNB-") || coinCode.startsWith("HT-")){
             return true;
         } else {
             return false;

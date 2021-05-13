@@ -373,16 +373,14 @@ public class WorkService extends Service {
     private BigInteger amount;
     private boolean isAddressValid(String outs, String coinCode) {
 
-        if (!coinCode.equals("ETH") && !coinCode.equals("ETC") && !coinCode.equals("ETHKOVAN")) {
-            if (coinCode.startsWith("ETH-") || coinCode.startsWith("ETC-") || coinCode.startsWith("ETHKOVAN-")) {
-                coinCode = coinCode.split("-")[0];
-            } else if (coinCode.startsWith("EOS-")){
-                coinCode = "EOS-EOS";
-            } else if (coinCode.startsWith("OMNI-")) {
-                coinCode = coinCode.split("-")[1];
-            } else if (coinCode.startsWith("TRX-")) {
-                coinCode = "TRX-TRX";
-            }
+        if (Coin.isEtherToken(coinCode)) {
+            coinCode = coinCode.split("-")[0];
+        } else if (coinCode.startsWith("EOS-")){
+            coinCode = "EOS-EOS";
+        } else if (coinCode.startsWith("OMNI-")) {
+            coinCode = coinCode.split("-")[1];
+        } else if (coinCode.startsWith("TRX-")) {
+            coinCode = "TRX-TRX";
         }
 
         if (outs != null && outs.length() > 0){
