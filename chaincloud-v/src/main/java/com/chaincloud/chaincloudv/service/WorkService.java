@@ -32,7 +32,7 @@ import com.google.gson.Gson;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EService;
-import org.androidannotations.annotations.OrmLiteDao;
+import org.androidannotations.ormlite.annotations.OrmLiteDao;
 import org.androidannotations.annotations.sharedpreferences.Pref;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

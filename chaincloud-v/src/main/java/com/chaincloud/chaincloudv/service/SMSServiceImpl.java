@@ -22,7 +22,7 @@ import com.j256.ormlite.dao.Dao;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EService;
-import org.androidannotations.annotations.OrmLiteDao;
+import org.androidannotations.ormlite.annotations.OrmLiteDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

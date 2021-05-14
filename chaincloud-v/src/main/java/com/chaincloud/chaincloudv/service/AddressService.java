@@ -22,7 +22,7 @@ import com.chaincloud.chaincloudv.util.Coin;
 
 import org.androidannotations.annotations.Background;
 import org.androidannotations.annotations.EService;
-import org.androidannotations.annotations.OrmLiteDao;
+import org.androidannotations.ormlite.annotations.OrmLiteDao;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

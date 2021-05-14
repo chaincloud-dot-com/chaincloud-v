@@ -133,7 +133,7 @@ public class ChainCloudVApplication extends Application {
 
 
     public File getLogDir() {
-        final File logDir = mContext.getDir("log", Context.MODE_WORLD_READABLE);
+        final File logDir = mContext.getDir("log", Context.MODE_PRIVATE);
         return logDir;
     }
 }

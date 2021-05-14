@@ -1,14 +1,12 @@
 apply plugin: 'com.android.application'
-apply plugin: 'android-apt'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 26
 
     defaultConfig {
         applicationId "com.chaincloud.chaincloudv"
-        minSdkVersion 14
-        targetSdkVersion 23
+        minSdkVersion 15
+        targetSdkVersion 26
         versionCode 64
         versionName "0.6.3"
     }
@@ -32,42 +30,36 @@ android {
     }
 }
 
-apt {
-    arguments {
-        androidManifestFile variant.outputs[0].processResources.manifestFile
-        trace 'true'
-    }
-}
-
-
-def AAVersion = '3.3.2'
-def SupportLibVersion = '23.3.0'
+def AAVersion = '4.8.0'
+def SupportLibVersion = '26.1.0'
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    testCompile 'junit:junit:4.12'
-    apt "org.androidannotations:androidannotations:$AAVersion"
-    compile "org.androidannotations:androidannotations-api:$AAVersion"
-    compile "com.android.support:appcompat-v7:$SupportLibVersion"
-    compile "com.android.support:design:$SupportLibVersion"
-    compile 'com.google.code.gson:gson:2.3.1'
-    compile 'com.squareup.retrofit:retrofit:1.9.0'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
-    compile 'de.greenrobot:eventbus:2.4.0'
-    compile 'com.github.rey5137:material:1.2.1'
-    compile 'com.nineoldandroids:library:2.4.0'
-    compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.0.4'
-    compile 'com.madgag.spongycastle:core:1.51.0.0'
-    compile 'com.google.zxing:core:3.1.0@jar'
-    compile 'com.lambdaworks:scrypt:1.4.0@jar'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation 'junit:junit:4.12'
+    annotationProcessor "org.androidannotations:androidannotations:$AAVersion"
+    api "org.androidannotations:androidannotations-api:$AAVersion"
+    implementation "org.androidannotations:ormlite-api:$AAVersion"
+    annotationProcessor "org.androidannotations:ormlite:$AAVersion"
+    implementation "com.android.support:appcompat-v7:$SupportLibVersion"
+    implementation "com.android.support:design:$SupportLibVersion"
+    implementation 'com.google.code.gson:gson:2.3.1'
+    implementation 'com.squareup.retrofit:retrofit:1.9.0'
+    implementation 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
+    implementation 'com.squareup.okhttp:okhttp:2.4.0'
+    implementation 'de.greenrobot:eventbus:2.4.0'
+    implementation 'com.github.rey5137:material:1.2.1'
+    implementation 'com.nineoldandroids:library:2.4.0'
+    implementation 'com.joanzapata.iconify:android-iconify-fontawesome:2.0.4'
+    implementation 'com.madgag.spongycastle:core:1.51.0.0'
+    implementation 'com.google.zxing:core:3.1.0@jar'
+    implementation 'com.lambdaworks:scrypt:1.4.0@jar'
 
-    compile 'com.j256.ormlite:ormlite-core:4.48'
-    compile 'com.j256.ormlite:ormlite-android:4.48'
+    implementation 'com.j256.ormlite:ormlite-core:4.48'
+    implementation 'com.j256.ormlite:ormlite-android:4.48'
 
-    compile 'org.slf4j:slf4j-api:1.7.7'
-    compile ('com.github.tony19:logback-android-classic:1.0.10-2@jar'){
-        // Work around for gradle 0.9 and 0.10
-        transitive = true
+    implementation 'org.slf4j:slf4j-api:1.7.7'
+    api('com.github.tony19:logback-android-classic:1.1.1-6') {
+        // workaround issue #73
+        exclude group: 'com.google.android', module: 'android'
     }
 }
